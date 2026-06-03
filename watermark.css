@@ -1,0 +1,127 @@
+/* ============================================================
+   LovePages — WATERMARK PROTECTION CSS
+   by Shahid Developer
+
+   KAISE USE KAREIN:
+   Apne har PREVIEW template ki HTML file mein
+   <head> ke andar yeh line daalo:
+
+   <link rel="stylesheet" href="watermark.css">
+
+   Ya directly <style> tag mein poora CSS paste karo.
+   ============================================================ */
+
+/* ── 1. DIAGONAL REPEAT WATERMARK (full page) ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 120px,
+      rgba(232, 67, 106, 0.055) 120px,
+      rgba(232, 67, 106, 0.055) 121px),
+    repeating-linear-gradient(45deg,
+      transparent,
+      transparent 120px,
+      rgba(232, 67, 106, 0.055) 120px,
+      rgba(232, 67, 106, 0.055) 121px);
+}
+
+/* ── 2. WATERMARK TEXT — diagonal SVG tile ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='15' font-weight='bold' fill='rgba(232%2C67%2C106%2C0.13)' transform='rotate(-30%2C160%2C100)'%3E%E2%99%A5 Shahid Developer%3C/text%3E%3Ctext x='50%25' y='70%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='10' fill='rgba(232%2C67%2C106%2C0.10)' transform='rotate(-30%2C160%2C100)'%3EDemo Only · lovepages.in%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 320px 200px;
+}
+
+/* ── 3. TOP BANNER — sabse upar sticky notice ── */
+#lp-watermark-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+  background: linear-gradient(90deg, #e8436a, #c92b55, #e8436a);
+  /* Banner text: "♥ DEMO by Shahid Developer — lovepages.in" */
+  background-size: 200% auto;
+  animation: lpBannerShimmer 3s linear infinite;
+  color: #fff;
+  text-align: center;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 7px 1rem;
+  box-shadow: 0 2px 12px rgba(232, 67, 106, 0.4);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#lp-watermark-banner a {
+  color: #ffd700;
+  text-decoration: underline;
+  font-weight: 700;
+  margin-left: 8px;
+}
+
+@keyframes lpBannerShimmer {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* ── 4. BOTTOM CORNER STAMP ── */
+#lp-watermark-stamp {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 100000;
+  background: rgba(232, 67, 106, 0.92);
+  color: #fff;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 100px;
+  box-shadow: 0 4px 20px rgba(232, 67, 106, 0.5);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  animation: lpStampPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes lpStampPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 20px rgba(232, 67, 106, 0.5);
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 28px rgba(232, 67, 106, 0.7);
+  }
+}
+
+/* ── 5. RIGHT-CLICK DISABLE (basic deterrent) ── */
+/* Note: DevTools se bypass ho sakta hai — yeh sirf casual chori rokta hai */
+
+/* ── 6. Body top padding — banner ke liye ── */
+body {
+  padding-top: 36px !important;
+}

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shahid_writes98</title>
+    <style>
+        :root {
+            --bg-color: #f8c8d8;
+            --card-bg: #f4c7d4;
+            --primary-red: #ff2d55;
+            --primary-blue: #6c8cff;
+            --text-dark: #2d0000;
+
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+
+            background: #f6c3cf;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+
+        .hearts {
+            position: pixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+
+
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 25px;
+            animation: floatUp 4s linear infinite;
+            opacity: 0.8;
+
+        }
+
+        .heart:nth-child(1) {
+            left: 10%;
+            animation-duration: 5s;
+        }
+
+        .heart:nth-child(2) {
+            left: 30%;
+            animation-duration: 7s;
+        }
+
+        .heart:nth-child(3) {
+            left: 50%;
+            animation-duration: 6s;
+        }
+
+        .heart:nth-child(4) {
+            left: 70%;
+            animation-duration: 8s;
+        }
+
+        .heart:nth-child(5) {
+            left: 90%;
+            animation-duration: 5s;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+
+            width: 90%;
+            max-width: 500px;
+
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+
+            border-radius: 30px;
+            padding: 40px 30px;
+
+            text-align: center;
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+        }
+
+
+        .page {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        img.main-gif {
+            width: 150px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--text-dark);
+            font-size: 2.2rem;
+            margin: 10px 0;
+        }
+
+        p {
+            color: #110810;
+            font-size: 1rem;
+            line-height: 1.5;
+            padding: 0 20px;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 35px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: transform 0.2s, all 0.2s;
+        }
+
+        .btn-yes {
+            background-color: var(--primary-red);
+            color: white;
+        }
+
+        .btn-no {
+            background-color: var(--primary-blue);
+            color: white;
+            position: relative;
+        }
+
+        /* Gifts Page Grid */
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .gift-card {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 15px 5px;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        .gift-card img {
+            width: 50px;
+        }
+
+        /* Quiz Options */
+        .quiz-option {
+            background: white;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary-red);
+        }
+
+        /* Polaroid Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 20px 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+        }
+
+        /* Gallery ki saari photos ko ek jaisa set karne ke liye */
+        .polaroid img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            /* Isse photo choudi (landscape) ho jayegi */
+            object-fit: cover;
+            /* Isse chehra stretch nahi hoga */
+            display: block;
+        }
+
+        /* Auto Scroll Photos */
+        .auto-scroll-container {
+            height: 400px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-right: 5px;
+        }
+
+        .auto-scroll-container img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            margin-bottom: 15px;
+            border-radius: 15px;
+        }
+
+        .final-msg {
+            font-size: 0.9rem;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        .btn-back {
+            background: var(--primary-red);
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<script>
+    // Special logic for final page music and scroll
+    if (pageNum === 16) {
+        const music = document.getElementById('bgMusic');
+        music.play().catch(e => console.log("Music error"));
+
+        const container = document.getElementById('scrollContainer');
+
+        // Purana interval clear karein
+        if (window.scrollInterval) clearInterval(window.scrollInterval);
+
+        // Photos load hone ka thoda wait karein
+        setTimeout(() => {
+            window.scrollInterval = setInterval(() => {
+                container.scrollTop += 1;
+
+                // Loop logic
+                if (container.scrollTop >= (container.scrollHeight - container.offsetHeight - 1)) {
+                    container.scrollTop = 0;
+                }
+            }, 40);
+        }, 1000); // 1 second ka delay taaki online images load ho jayein
+    }
+</script>
+<script>
+    document.addEventListener("click", function () {
+
+        const startMusic = document.getElementById("startMusic");
+
+        startMusic.play();
+
+    }, { once: true });
+</script>
+
+<body>
+    <div class="hearts">
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+    </div>
+    <div class="container" id="mainContainer">
+
+        <div id="page1" class="page active">
+            <img id="mainGif" src="https://media.tenor.com/RwAaE57CfHYAAAAm/khaupb.webp" class="main-gif"
+                alt="cute bear">
+            <h1 id="proposalText">Will you be mine 🥺?</h1>
+            <p id="proposalSub">Life is an incredible journey, and I want to spend every single second of it with you.
+            </p>
+            <div class="btn-container">
+                <button class="btn-yes" id="yesBtn" onclick="goToPage(5)">
+                    YES
+                </button>
+
+                <button class="btn-no" id="noBtn" onclick="handleNoClick()">
+                    NO
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="page5" class="page">
+            <img src="output-onlinegiftools.gif" class="main-gif">
+            <h1>I Love You Baby! </h1>
+            <p>Every second with you is a celebration. You are the spark that makes my world so much brighter!
+                <button class="btn-yes" onclick="goToPage(6)">SEE MY GIFTS →</button>
+        </div>
+
+        <div id="page6" class="page">
+
+            <h1>Something for You</h1>
+            <div class="gift-grid">
+                <div class="gift-card" onclick="goToPage(7)">
+                    <img src="output-onlinegiftoolsb.gif">
+                    <p>GIFT 1</p>
+                </div>
+                <div class=" gift-card" onclick="goToPage(12)">
+                    <img src="output-onlinegiftoolsf.gif">
+                    <p>GIFT 2</p>
+                </div>
+                <div class="gift-card" onclick="goToPage(14)">
+                    <img src="https://media.tenor.com/G2KFS4A6F24AAAAm/bubu-dudu-sseeyall.webp">
+                    <p>GIFT 3</p>
+                </div>
+            </div>
+            <button class="btn-yes" onclick="goToPage(16)">FINALLY... →</button>
+        </div>
+
+        <div id="page7" class="page">
+            <h1>Quiz for you 😚</h1>
+            <p>Who is the absolute 'Boss' in this relationship 🫡?</p>
+            <div class="quiz-option" onclick="goToPage(8)">Obviously You</div>
+            <div class="quiz-option" onclick="alert('Try again! 😜')">Me</div>
+            <div class="quiz-option" onclick="alert('Mom is boss, but here? 😜')">My Mom</div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+        </div>
+
+        <div id="page8" class="page">
+            <h1>Quiz for you 😚</h1>
+            <p>Who fights a lot in this relationship 🤨?</p>
+            <div class="quiz-option" onclick="alert('Think again! 🙄')">Always You</div>
+            <div class="quiz-option" onclick="alert('Impossible! 😂')">No One</div>
+            <div class="quiz-option" onclick="goToPage(9)">Me</div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+        </div>
+
+        <div id="page9" class="page">
+
+            <h1>Quiz for you 😚</h1>
+            <p>Where do I plan to spend the rest of my life 🧐?</p>
+            <div class="quiz-option" onclick="alert('Nice but no! 🗼')">Paris</div>
+            <div class="quiz-option" onclick="goToPage(10)">In Your Heart</div>
+            <div class="quiz-option" onclick="alert('Oxygen nahi hai wahan! 🚀')">On Mars</div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+        </div>
+
+        <div id="page10" class="page">
+
+            <h1>Quiz for you 😚</h1>
+            <div style="background: rgb(255, 243, 178); padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <p>Yay! You passed the test! You really love me! 🤟❤️</p>
+            </div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+        </div>
+
+        <div id="page12" class="page">
+
+            <h1>A Letter For You 🥺</h1>
+            <div
+                style="background: #ffa68b; padding: 20px; border-radius: 5px; text-align: left; font-family: 'Courier New', Courier, monospace; border: 1px solid #ddd;">
+                <p><strong>My Baby,</strong></p>
+                <p style="font-size: 0.9rem;">Thank you for being my person. I want to hold your hand through every
+                    season of life. You are my home. You are my everything, and I love you so so much. Be the same as
+                    you are and no sorry for irritating you. No one can replace you from my heart, ur always be my no.1.
+                </p>
+                <p><strong>Forever yours. ❤️</strong></p>
+            </div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+        </div>
+
+        <div id="page14" class="page">
+
+            <h1>Look at this cutie 😭</h1>
+            <div class="gallery-grid">
+                <div class="polaroid"><img
+                        src="https://i.pinimg.com/1200x/88/25/73/882573d9743bea8bbd873eeb5ceb9d07.jpg">
+                    <p>Sweet Hello</p>
+                </div>
+                <div class="polaroid"><img
+                        src="https://i.pinimg.com/1200x/18/ce/d7/18ced7adeae64355122257a04c24e140.jpg">
+                    <p>True Smile</p>
+                </div>
+                <div class="polaroid"><img
+                        src="https://i.pinimg.com/1200x/03/39/3c/03393c03138edf5f74c52874b6cae620.jpg">
+                    <p>Perfect Day</p>
+                </div>
+                <div class="polaroid"><img
+                        src="https://i.pinimg.com/1200x/b7/3b/1b/b73b1b2001708265dfb58b609a49ee9a.jpg">
+                    <p>Only Us</p>
+                </div>
+                <div class="polaroid"><img
+                        src="https://i.pinimg.com/1200x/5c/71/e5/5c71e54185bdf123c1f9e69d35230805.jpg">
+                    <p>My Home</p>
+                </div>
+                <div class="polaroid"><img
+                        src="https://i.pinimg.com/1200x/48/05/51/480551ce50cb3cf3792fbacfd2212a72.jpg">
+                    <p>Forever Us</p>
+                </div>
+            </div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+        </div>
+
+        <div id="page16" class="page">
+
+            <h1>You are my forever 🧿❤️!</h1>
+            <div class="auto-scroll-container" id="scrollContainer">
+                <div style="position: relative; margin-bottom: 10px;">
+                    <img src="https://i.pinimg.com/736x/40/4f/b9/404fb98e25742e523ee832822ef697e5.jpg"
+                        style="width: 100%; border-radius: 15px;">
+                    <h2
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: rgb(187, 25, 106); text-shadow: 2px 2px 5px black;">
+                        <h1> I Love You
+                    </h2>
+                </div>
+                <img src="https://i.pinimg.com/736x/aa/0d/c6/aa0dc6744e252b33a78ffc4f0e030077.jpg"
+                    style="width: 100%; border-radius: 15px; margin-bottom: 10px;">
+                <img src="https://i.pinimg.com/736x/31/3f/31/313f3158273be41c3c77b0111f670f8f.jpg"
+                    style="width: 100%; border-radius: 15px;">
+                <img src="https://i.pinimg.com/1200x/80/10/43/801043a7a37e6c5427eaf4571aae9e26.jpg">
+
+                <img src="https://i.pinimg.com/736x/39/e4/3b/39e43bdcddb35c3cfa82268aa9254923.jpg">
+
+                <img src="https://i.pinimg.com/736x/71/b7/80/71b780c21e9f795630f497d0f4f11f18.jpg">
+
+                <img src="https://i.pinimg.com/736x/98/60/0c/98600cbadaecf7983dcf896a3caa6939.jpg">
+
+                <img src="https://i.pinimg.com/736x/6c/89/3a/6c893a94ceb8a9a32d102fe640cc2bb2.jpg">
+
+                <img src="https://i.pinimg.com/736x/de/29/8c/de298c890ef7475082aa10042555e89a.jpg">
+
+                <img src="https://i.pinimg.com/736x/fc/80/34/fc8034b57bc5ffd7e5446a74f2372acd.jpg">
+
+                <img src="https://i.pinimg.com/736x/c1/ad/e6/c1ade67c2bdd4082d0cb4ea2ce785e20.jpg">
+            </div>
+            <button class="btn-back" onclick="goToPage(6)">← BACK</button>
+
+        </div>
+        <p class="final-msg">They Say That Meeting And Parting Are All In The Hands Of Fate, But What Should This Heart
+            Do That Considers Only You As Its Own. We Did Meet, But Perhaps Walking Together Was Not In Our Destiny.
+            Even Being Far Away, You Remain Somewhere Within Me, And That Small Part Of You Is My Peace./thank you so
+            much🥺
+            .</p>
+        <audio id="startMusic" loop autoplay>
+            <source src="https://files.catbox.moe/1shbf8.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="finalMusic" loop>
+            <source src="https://files.catbox.moe/ou972x.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    </div>
+
+    <script>
+
+        let noClickCount = 0;
+
+        const funnyMessages = [
+
+            "Aisa mat karo 😭",
+            "Please maan jao 🥺",
+            "Dil toot jayega 💔",
+            "Itna attitude kyu 😒",
+            "Ek baar aur soch lo 😭",
+            "Mujhe sad mat karo 😢",
+            "Please YES kar do ❤️",
+            "Kitna bhagao gi 😭",
+            "Main ro dunga 🥹",
+            "NO allowed nahi hai 😤"
+
+        ];
+
+        function goToPage(pageNum) {
+
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+
+            document.getElementById('page' + pageNum).classList.add('active');
+
+            if (pageNum === 16) {
+
+                const startMusic = document.getElementById("startMusic");
+                const finalMusic = document.getElementById("finalMusic");
+
+                startMusic.pause();
+
+                finalMusic.currentTime = 0;
+
+                finalMusic.play();
+
+                const container = document.getElementById('scrollContainer');
+
+                if (window.scrollInterval) {
+                    clearInterval(window.scrollInterval);
+                }
+
+                window.scrollInterval = setInterval(() => {
+
+                    container.scrollTop += 1;
+
+                    if (container.scrollTop >= container.scrollHeight - container.clientHeight) {
+                        container.scrollTop = 0;
+                    }
+
+                }, 30);
+            }
+        }
+
+        function handleNoClick() {
+
+            noClickCount++;
+
+            const noBtn = document.getElementById('noBtn');
+            const propText = document.getElementById('proposalText');
+            const gif = document.getElementById('mainGif');
+
+            if (noClickCount === 1) {
+
+                propText.innerText = "Think again 😭";
+
+                gif.src = "https://media.tenor.com/dg7Th23TzFUAAAAi/cute-bear.gif";
+
+                noBtn.style.transform = "scale(0.9)";
+            }
+
+            else if (noClickCount === 2) {
+
+                propText.innerText = "Are You sure 😡?";
+
+                gif.src = "https://media.tenor.com/LxggFGxwOjIAAAAi/shy-cat.gif";
+
+                noBtn.style.transform = "scale(0.7)";
+            }
+
+            else if (noClickCount === 3) {
+
+                propText.innerText = "See This! 🥺";
+
+                gif.src = "output-onlinegiftoolsk.gif";
+            }
+            else {
+
+                const randomText = funnyMessages[
+                    Math.floor(Math.random() * funnyMessages.length)
+                ];
+
+                propText.innerText = randomText;
+
+                noBtn.style.position = "fixed";
+
+                /* BUTTON SIZE */
+                const btnWidth = noBtn.offsetWidth;
+                const btnHeight = noBtn.offsetHeight;
+
+                /* SAFE AREA */
+                const safeLeft = 20;
+                const safeTop = 20;
+
+                const safeRight = window.innerWidth - btnWidth - 20;
+                const safeBottom = window.innerHeight - btnHeight - 20;
+
+                /* RANDOM POSITION */
+                let x = Math.random() * (safeRight - safeLeft) + safeLeft;
+                let y = Math.random() * (safeBottom - safeTop) + safeTop;
+
+                noBtn.style.left = `${x}px`;
+                noBtn.style.top = `${y}px`;
+
+                noBtn.style.transform = "none";
+                noBtn.style.zIndex = "9999";
+            }
+
+
+        }
+
+    </script>
+</body>
+
+</html>

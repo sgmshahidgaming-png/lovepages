@@ -1,0 +1,2867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LovePages — Cinematic Romantic Templates</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ===== RESET & ROOT ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --rose: #e8436a;
+      --rose-2: #c92b55;
+      --rose-3: #ff6b8a;
+      --gold: #d4a543;
+      --gold-2: #b8882a;
+      --gold-light: rgba(212, 165, 67, 0.15);
+      --cream: #fef9f5;
+      --cream-2: #fff4ee;
+      --cream-3: #ffeee6;
+      --dark: #130b0f;
+      --dark-2: #1e1018;
+      --dark-3: #2a1620;
+      --muted: #7a5566;
+      --muted-2: #9e7080;
+      --muted-3: #b8909f;
+      --border: rgba(232, 67, 106, 0.18);
+      --border-2: rgba(232, 67, 106, 0.09);
+      --border-3: rgba(255, 255, 255, 0.6);
+      --rose-glow: rgba(232, 67, 106, 0.25);
+      --rose-tint: rgba(232, 67, 106, 0.06);
+      --glass: rgba(255, 252, 250, 0.78);
+      --shadow-rose: 0 8px 40px rgba(232, 67, 106, 0.18);
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Outfit', sans-serif;
+      --nav-h: 70px;
+      /* Card accent colors */
+      --accent-pink: #f472b6;
+      --accent-purple: #a78bfa;
+      --accent-mint: #2dd4bf;
+      --accent-blue: #60a5fa;
+      --accent-peach: #fb923c;
+      --accent-rose2: #e8436a;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased
+    }
+
+    /* ===== GLOBAL BACKGROUND ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(ellipse 70% 45% at 10% 5%, rgba(232, 67, 106, 0.09) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 40% at 90% 90%, rgba(212, 165, 67, 0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 30% at 60% 50%, rgba(232, 67, 106, 0.04) 0%, transparent 60%),
+        linear-gradient(165deg, #fff9f5 0%, #fef4ee 40%, #fff0f7 100%);
+      pointer-events: none;
+    }
+
+    /* ===== KEYFRAMES ===== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(32px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes floatY {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-12px)
+      }
+    }
+
+    @keyframes heartbeat {
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.15)
+      }
+    }
+
+    @keyframes shimmerText {
+      0% {
+        background-position: 0% 50%
+      }
+
+      100% {
+        background-position: 200% 50%
+      }
+    }
+
+    @keyframes slideModal {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.96)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @keyframes sparkle {
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0)
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    @keyframes filterPanelIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.96)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(1);
+        opacity: 1
+      }
+
+      100% {
+        transform: scale(1.5);
+        opacity: 0
+      }
+    }
+
+    /* ===== NAV ===== */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      background: rgba(254, 249, 245, 0.88);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--rose);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo .hrt {
+      display: inline-block;
+      animation: heartbeat 1.8s ease-in-out infinite
+    }
+
+    /* Premium Shahid Developer badge — more visible */
+    .nav-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-2);
+      background: linear-gradient(135deg, rgba(212, 165, 67, 0.18), rgba(184, 136, 42, 0.1));
+      border: 1.5px solid rgba(212, 165, 67, 0.5);
+      padding: 0.28rem 0.95rem;
+      border-radius: 100px;
+      white-space: nowrap;
+      box-shadow: 0 2px 10px rgba(212, 165, 67, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    .nav-badge::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 100px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: var(--rose);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .nav-links a:hover {
+      color: var(--rose)
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1)
+    }
+
+    .nav-search {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 0.38rem 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 10px rgba(232, 67, 106, 0.06);
+    }
+
+    .nav-search:focus-within {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px var(--rose-tint)
+    }
+
+    .nav-search input {
+      border: none;
+      outline: none;
+      background: none;
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: var(--dark);
+      width: 180px;
+    }
+
+    .nav-search input::placeholder {
+      color: var(--muted-3)
+    }
+
+    .nav-search .srch-icon {
+      color: var(--muted-2);
+      font-size: 0.85rem
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--rose), var(--rose-2));
+      color: white;
+      padding: 0.55rem 1.5rem;
+      border-radius: 100px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--rose-glow);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(232, 67, 106, 0.45)
+    }
+
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      color: var(--rose);
+      font-size: 1.4rem
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-deco {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0
+    }
+
+    .hero-deco span {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: sparkle 3s ease-in-out infinite
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rose);
+      background: rgba(232, 67, 106, 0.08);
+      border: 1px solid rgba(232, 67, 106, 0.22);
+      padding: 0.3rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.6rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero-eyebrow .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rose);
+      animation: heartbeat 1.5s ease-in-out infinite
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.4rem;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .hero-title .line1 {
+      display: block;
+      font-style: italic;
+      background: linear-gradient(135deg, var(--rose) 0%, #d4365f 35%, #e8436a 60%, var(--gold) 100%);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerText 4s linear infinite;
+    }
+
+    .hero-title .line2 {
+      display: block;
+      color: var(--dark);
+      font-size: 0.6em;
+      font-style: normal;
+      margin-top: 0.2em
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.8;
+      font-weight: 300;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .hero-scroll {
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted-3);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: fadeUp 0.7s 0.5s ease both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--rose), transparent)
+    }
+
+    /* ===== STATS ===== */
+    #stats {
+      background: white;
+      border-top: 1px solid var(--border-2);
+      border-bottom: 1px solid var(--border-2);
+      padding: 2rem;
+    }
+
+    .stats-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0.75rem 1rem;
+      position: relative
+    }
+
+    .stat-item+.stat-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 36px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .stat-n {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--rose);
+      line-height: 1;
+      font-style: italic
+    }
+
+    .stat-l {
+      font-size: 0.73rem;
+      color: var(--muted);
+      margin-top: 3px;
+      font-weight: 400
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .section-head-left h2 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--dark);
+      font-style: italic
+    }
+
+    .section-head-left p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 4px
+    }
+
+    .count-pill {
+      background: rgba(232, 67, 106, 0.08);
+      color: var(--rose);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    /* ===== FILTER + SEARCH BAR ===== */
+    #templates {
+      padding: 3.5rem 0 1rem
+    }
+
+    .section-wrap {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem
+    }
+
+    .filter-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.25rem;
+      flex-wrap: wrap;
+    }
+
+    /* Premium search bar */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: white;
+      border: 1.5px solid rgba(232, 67, 106, 0.18);
+      border-radius: 100px;
+      padding: 0.6rem 1.3rem;
+      box-shadow:
+        0 2px 14px rgba(232, 67, 106, 0.07),
+        0 1px 4px rgba(0, 0, 0, 0.04),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      transition: border-color 0.22s, box-shadow 0.25s;
+      flex: 1;
+      min-width: 200px;
+      max-width: 360px;
+    }
+
+    .search-bar:focus-within {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 3px rgba(232, 67, 106, 0.1), 0 4px 20px rgba(232, 67, 106, 0.14);
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      background: none;
+      font-family: var(--font-body);
+      font-size: 0.84rem;
+      color: var(--dark);
+      width: 100%;
+    }
+
+    .search-bar input::placeholder {
+      color: var(--muted-3)
+    }
+
+    /* Filter dropdown — right side */
+    .filter-dropdown-wrap {
+      position: relative;
+      margin-left: auto
+    }
+
+    .filter-dropdown-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.6rem 1.3rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(232, 67, 106, 0.22);
+      background: white;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.22s;
+      box-shadow:
+        0 2px 12px rgba(232, 67, 106, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      white-space: nowrap;
+    }
+
+    .filter-dropdown-btn:hover,
+    .filter-dropdown-btn.active {
+      border-color: var(--rose);
+      color: var(--rose);
+      background: rgba(232, 67, 106, 0.04);
+      box-shadow: 0 4px 18px rgba(232, 67, 106, 0.15);
+    }
+
+    .filter-dropdown-btn .fd-icon {
+      font-size: 0.75rem;
+      transition: transform 0.25s
+    }
+
+    .filter-dropdown-btn.open .fd-icon {
+      transform: rotate(180deg)
+    }
+
+    /* Dropdown panel */
+    .filter-panel {
+      display: none;
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      z-index: 200;
+      background: white;
+      border-radius: 20px;
+      border: 1.5px solid rgba(232, 67, 106, 0.12);
+      box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.04),
+        0 20px 60px rgba(19, 11, 15, 0.13),
+        0 8px 24px rgba(232, 67, 106, 0.1);
+      padding: 0.6rem;
+      min-width: 220px;
+      max-height: 400px;
+      overflow-y: auto;
+      animation: filterPanelIn 0.24s cubic-bezier(.22, .68, 0, 1.15);
+    }
+
+    .filter-panel.open {
+      display: block
+    }
+
+    .filter-panel::-webkit-scrollbar {
+      width: 4px
+    }
+
+    .filter-panel::-webkit-scrollbar-track {
+      background: transparent
+    }
+
+    .filter-panel::-webkit-scrollbar-thumb {
+      background: rgba(232, 67, 106, 0.22);
+      border-radius: 4px
+    }
+
+    .fpanel-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0.6rem 1rem;
+      border-radius: 13px;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      font-family: var(--font-body);
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .fpanel-item:hover {
+      background: rgba(232, 67, 106, 0.06);
+      color: var(--rose)
+    }
+
+    .fpanel-item.active {
+      background: linear-gradient(135deg, rgba(232, 67, 106, 0.13), rgba(201, 43, 85, 0.07));
+      color: var(--rose);
+      font-weight: 700;
+    }
+
+    .fpanel-item .fi-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--rose);
+      opacity: 0;
+      flex-shrink: 0;
+      transition: opacity 0.18s;
+    }
+
+    .fpanel-item.active .fi-dot {
+      opacity: 1
+    }
+
+    /* Active filter pill */
+    .active-filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-2));
+      color: white;
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .active-filter-pill button {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      cursor: pointer;
+      font-size: 0.85rem;
+      line-height: 1;
+      padding: 0
+    }
+
+    .no-results {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 4rem 2rem;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--muted-2);
+    }
+
+    /* ===== TEMPLATE GRID ===== */
+    .tpl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.75rem;
+      padding-bottom: 5rem;
+    }
+
+    /* ===== CARD — PREMIUM SCRAPBOOK / POLAROID STYLE ===== */
+    .tpl-card {
+      background: #ffffff;
+      border-radius: 22px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow:
+        6px 0 0 0 var(--card-accent, #f472b6),
+        0 2px 4px rgba(0, 0, 0, 0.03),
+        0 8px 24px rgba(0, 0, 0, 0.07),
+        0 18px 48px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: transform 0.38s cubic-bezier(.22, .68, 0, 1.15), box-shadow 0.38s;
+    }
+
+    /* Colorful left thick accent bar */
+    .tpl-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(180deg, var(--card-accent, #f472b6) 0%, color-mix(in srgb, var(--card-accent, #f472b6) 65%, white) 100%);
+      border-radius: 22px 0 0 22px;
+      z-index: 2;
+    }
+
+    /* Scrapbook tape effect — top right */
+    .tpl-card::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: 22px;
+      width: 34px;
+      height: 13px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.28) 100%);
+      border-radius: 0 0 8px 8px;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      border-top: none;
+      backdrop-filter: blur(4px);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Assign accent colors cycling */
+    .tpl-card:nth-child(6n+1) {
+      --card-accent: var(--accent-pink)
+    }
+
+    .tpl-card:nth-child(6n+2) {
+      --card-accent: var(--accent-purple)
+    }
+
+    .tpl-card:nth-child(6n+3) {
+      --card-accent: var(--accent-mint)
+    }
+
+    .tpl-card:nth-child(6n+4) {
+      --card-accent: var(--accent-blue)
+    }
+
+    .tpl-card:nth-child(6n+5) {
+      --card-accent: var(--accent-peach)
+    }
+
+    .tpl-card:nth-child(6n+6) {
+      --card-accent: var(--accent-rose2)
+    }
+
+    .tpl-card.revealed {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.22, .68, 0, 1.15), box-shadow 0.38s;
+    }
+
+    .tpl-card:hover {
+      transform: translateY(-14px) scale(1.02) rotate(-0.25deg);
+      box-shadow:
+        6px 0 0 0 var(--card-accent, #f472b6),
+        0 4px 6px rgba(0, 0, 0, 0.04),
+        0 22px 50px rgba(0, 0, 0, 0.16),
+        0 40px 80px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .card-preview {
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin-left: 6px;
+      /* space for accent bar */
+    }
+
+    /* Radial glow overlay */
+    .card-preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255, 255, 255, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Inner shine */
+    .card-preview::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card-emoji {
+      font-size: 5rem;
+      z-index: 2;
+      transition: transform 0.45s cubic-bezier(.22, .68, 0, 1.3);
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.28));
+    }
+
+    .tpl-card:hover .card-emoji {
+      transform: scale(1.22) rotate(-5deg)
+    }
+
+    .card-preview-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 100%);
+      padding: 1rem 1.2rem 0.8rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      z-index: 3;
+    }
+
+    .live-pill {
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: white;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.22rem 0.7rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    /* Badges */
+    .card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 4;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.24rem 0.7rem;
+      border-radius: 100px;
+    }
+
+    .badge-hot {
+      background: linear-gradient(135deg, #ff5b5b, #e03030);
+      color: white;
+      box-shadow: 0 3px 12px rgba(224, 48, 48, 0.45)
+    }
+
+    .badge-trending {
+      background: linear-gradient(135deg, #f79c2d, #e07010);
+      color: white;
+      box-shadow: 0 3px 12px rgba(240, 140, 30, 0.45)
+    }
+
+    .badge-premium {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      color: white;
+      box-shadow: 0 3px 12px rgba(212, 165, 67, 0.45)
+    }
+
+    .badge-free {
+      background: linear-gradient(135deg, #2ecc71, #1a9e55);
+      color: white;
+      box-shadow: 0 3px 12px rgba(46, 204, 113, 0.45)
+    }
+
+    .badge-new {
+      background: linear-gradient(135deg, #9b59b6, #6c3483);
+      color: white;
+      box-shadow: 0 3px 12px rgba(108, 52, 131, 0.45)
+    }
+
+    .badge-viral {
+      background: linear-gradient(135deg, #e74c3c, #a93226);
+      color: white;
+      box-shadow: 0 3px 12px rgba(231, 76, 60, 0.45)
+    }
+
+    .card-body {
+      padding: 1.2rem 1.3rem 1.15rem;
+      padding-left: 1.5rem;
+    }
+
+    .card-cat {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.65rem;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+    }
+
+    .cat-rose {
+      color: var(--rose);
+      background: rgba(232, 67, 106, 0.1);
+      border: 1px solid rgba(232, 67, 106, 0.2)
+    }
+
+    .cat-gold {
+      color: var(--gold-2);
+      background: var(--gold-light);
+      border: 1px solid rgba(212, 165, 67, 0.25)
+    }
+
+    .cat-purple {
+      color: #8b5cf6;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.22)
+    }
+
+    .cat-green {
+      color: #16a34a;
+      background: rgba(22, 163, 74, 0.1);
+      border: 1px solid rgba(22, 163, 74, 0.2)
+    }
+
+    .cat-muted {
+      color: var(--muted-2);
+      background: rgba(122, 85, 102, 0.08);
+      border: 1px solid rgba(122, 85, 102, 0.18)
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.32rem;
+      line-height: 1.22;
+    }
+
+    .card-desc {
+      font-size: 0.79rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0.95rem
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border-2);
+    }
+
+    .price-wrap .price-val {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1;
+      font-style: italic;
+    }
+
+    .price-val.is-free {
+      color: var(--gold-2)
+    }
+
+    .price-wrap small {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--muted-2);
+      margin-top: 1px
+    }
+
+    .card-btns {
+      display: flex;
+      gap: 0.4rem
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-rose {
+      background: linear-gradient(135deg, var(--rose) 0%, var(--rose-2) 100%);
+      color: white;
+      padding: 0.48rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(232, 67, 106, 0.35);
+      transition: all 0.22s cubic-bezier(.22, .68, 0, 1.15);
+      font-family: var(--font-body);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-rose:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 28px rgba(232, 67, 106, 0.5);
+      background: linear-gradient(135deg, #ec5174, var(--rose-2));
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold-2));
+      box-shadow: 0 4px 16px rgba(212, 165, 67, 0.35)
+    }
+
+    .btn-gold:hover {
+      box-shadow: 0 8px 28px rgba(212, 165, 67, 0.5)
+    }
+
+    .btn-sm {
+      padding: 0.38rem 0.9rem;
+      font-size: 0.75rem
+    }
+
+    .btn-ghost {
+      background: white;
+      color: var(--rose);
+      border: 1.5px solid rgba(232, 67, 106, 0.3);
+      padding: 0.48rem 1.1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.22s;
+      font-family: var(--font-body);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+    }
+
+    .btn-ghost:hover {
+      background: var(--rose-tint);
+      border-color: var(--rose);
+      transform: translateY(-1px)
+    }
+
+    .btn-ghost-sm {
+      padding: 0.38rem 0.85rem;
+      font-size: 0.75rem
+    }
+
+    .btn-lg {
+      padding: 0.72rem 2rem;
+      font-size: 0.95rem
+    }
+
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid rgba(19, 11, 15, 0.25);
+      padding: 0.72rem 2rem;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.22s;
+      font-family: var(--font-body);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-outline-dark:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+      background: var(--rose-tint)
+    }
+
+    /* ===== HOW IT WORKS ===== */
+    #how {
+      background: linear-gradient(150deg, rgba(232, 67, 106, 0.05) 0%, rgba(212, 165, 67, 0.05) 100%);
+      border-top: 1px solid var(--border-2);
+      border-bottom: 1px solid var(--border-2);
+      padding: 5rem 2rem;
+    }
+
+    .how-inner {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3.5rem
+    }
+
+    .section-title h2 {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--dark);
+      margin-bottom: 0.4rem
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 0.88rem
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 22px;
+      border: 1px solid var(--border-2);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(232, 67, 106, 0.05);
+      transition: transform 0.28s, box-shadow 0.28s;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .step-card.revealed {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.28s
+    }
+
+    .step-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(232, 67, 106, 0.12)
+    }
+
+    .step-num {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      background: linear-gradient(135deg, rgba(232, 67, 106, 0.1), rgba(232, 67, 106, 0.18));
+      color: var(--rose);
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 900;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(232, 67, 106, 0.2);
+      box-shadow: 0 4px 18px rgba(232, 67, 106, 0.14);
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.45rem;
+      color: var(--dark)
+    }
+
+    .step-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    /* ===== TESTIMONIALS ===== */
+    #reviews {
+      padding: 5rem 2rem
+    }
+
+    .testi-wrap {
+      max-width: 1200px;
+      margin: 0 auto
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem
+    }
+
+    .testi-card {
+      background: white;
+      border-radius: 20px;
+      border: 1px solid var(--border-2);
+      padding: 1.7rem;
+      box-shadow: 0 4px 20px rgba(232, 67, 106, 0.04);
+      transition: transform 0.28s, box-shadow 0.28s;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .testi-card.revealed {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.28s
+    }
+
+    .testi-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(232, 67, 106, 0.1)
+    }
+
+    .testi-stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.85rem
+    }
+
+    .testi-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 1.1rem
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--dark)
+    }
+
+    .testi-av {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(232, 67, 106, 0.15), rgba(232, 67, 106, 0.28));
+      color: var(--rose);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(155deg, #130b0f 0%, #1e1018 60%, #2a1620 100%);
+      color: rgba(255, 255, 255, 0.45);
+      padding: 4rem 2rem 2.5rem;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--rose);
+      margin-bottom: 0.3rem
+    }
+
+    .footer-dev {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem
+    }
+
+    footer p {
+      font-size: 0.8rem
+    }
+
+    .footer-links {
+      margin: 1.4rem 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.2rem
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.4);
+      text-decoration: none;
+      padding: 0.22rem 0.8rem;
+      font-size: 0.8rem;
+      transition: color 0.2s;
+      border-radius: 4px
+    }
+
+    .footer-links a:hover {
+      color: var(--rose)
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      opacity: 0.5;
+      margin-top: 1.5rem
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      background: rgba(19, 11, 15, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+      animation: fadeIn 0.25s ease
+    }
+
+    .modal-box {
+      background: linear-gradient(155deg, #ffffff 0%, #fff8f4 100%);
+      border-radius: 28px;
+      padding: 2.5rem;
+      max-width: 480px;
+      width: 100%;
+      position: relative;
+      box-shadow: 0 40px 100px rgba(19, 11, 15, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.6);
+      animation: slideModal 0.35s cubic-bezier(.22, .68, 0, 1.15);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.1rem;
+      right: 1.1rem;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: var(--rose-tint);
+      color: var(--rose)
+    }
+
+    .modal-emoji {
+      font-size: 3.8rem;
+      display: block;
+      text-align: center;
+      margin-bottom: 1rem;
+      animation: floatY 2.5s ease-in-out infinite
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 700;
+      font-style: italic;
+      text-align: center;
+      color: var(--dark);
+      margin-bottom: 0.5rem
+    }
+
+    .modal-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 1.3rem
+    }
+
+    .modal-features {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      border-top: 1px solid var(--border-2);
+      padding-top: 1.1rem
+    }
+
+    .modal-features li {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      border-bottom: 1px solid var(--border-2)
+    }
+
+    .modal-features li:last-child {
+      border-bottom: none
+    }
+
+    .modal-features li::before {
+      content: '✓';
+      color: var(--rose);
+      font-weight: 700;
+      font-size: 0.72rem;
+      flex-shrink: 0;
+      width: 14px
+    }
+
+    .modal-price {
+      text-align: center;
+      margin-bottom: 1.5rem
+    }
+
+    .modal-price .big-price {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1
+    }
+
+    .big-price.rose {
+      color: var(--rose)
+    }
+
+    .big-price.gold {
+      color: var(--gold-2)
+    }
+
+    .modal-price small {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--muted-2);
+      margin-top: 4px
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem
+    }
+
+    .modal-actions .btn-rose,
+    .modal-actions .btn-ghost {
+      justify-content: center;
+      width: 100%
+    }
+
+    .razorpay-note {
+      font-size: 0.68rem;
+      color: var(--muted-2);
+      text-align: center;
+      margin-top: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px
+    }
+
+    .success-view {
+      display: none;
+      text-align: center;
+      padding: 1rem 0
+    }
+
+    .success-view.show {
+      display: block;
+      animation: fadeIn 0.3s ease
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      display: block;
+      margin-bottom: 1.1rem;
+      animation: heartbeat 1.5s ease-in-out infinite
+    }
+
+    .success-view h3 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-style: italic;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--dark)
+    }
+
+    .success-view p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+      line-height: 1.7
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #27ae60, #1e8449);
+      color: white;
+      padding: 0.8rem 2.2rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(39, 174, 96, 0.35);
+      transition: all 0.22s;
+      font-family: var(--font-body);
+      text-decoration: none;
+    }
+
+    .dl-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(39, 174, 96, 0.48)
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:1100px) {
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+    }
+
+    @media(max-width:860px) {
+      #nav {
+        padding: 0 1.25rem
+      }
+
+      .nav-links,
+      .nav-badge,
+      .nav-search {
+        display: none
+      }
+
+      .nav-hamburger {
+        display: flex
+      }
+
+      #hero {
+        padding: 4rem 1.25rem 2.5rem
+      }
+
+      .stats-inner {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .stat-item:nth-child(4)::before,
+      .stat-item:nth-child(5)::before {
+        display: none
+      }
+
+      .section-wrap {
+        padding: 0 1.25rem
+      }
+
+      #reviews {
+        padding: 4rem 1.25rem
+      }
+
+      .testi-wrap {
+        max-width: 100%
+      }
+    }
+
+    @media(max-width:600px) {
+      .hero-btns {
+        flex-direction: column;
+        align-items: center
+      }
+
+      .hero-btns a,
+      .hero-btns button {
+        width: 100%;
+        justify-content: center
+      }
+
+      .stats-inner {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .stat-item:nth-child(3)::before {
+        display: none
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr
+      }
+
+      .filter-row {
+        gap: 0.5rem;
+        flex-wrap: wrap
+      }
+
+      .search-bar {
+        width: 100%;
+        margin-left: 0;
+        order: 10;
+        max-width: 100%
+      }
+
+      .filter-panel {
+        left: 0;
+        right: 0;
+        min-width: unset
+      }
+
+      .modal-box {
+        padding: 1.75rem 1.5rem;
+        border-radius: 22px
+      }
+    }
+
+    /* ===== MOBILE NAV ===== */
+    .mob-nav {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      z-index: 490;
+      background: rgba(254, 249, 245, 0.97);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem 1.5rem 1.5rem;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .mob-nav.open {
+      display: flex
+    }
+
+    .mob-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border-2)
+    }
+
+    .mob-nav a:last-of-type {
+      border-bottom: none
+    }
+
+    .mob-search {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 100px;
+      padding: 0.45rem 1rem;
+    }
+
+    .mob-search input {
+      border: none;
+      outline: none;
+      background: none;
+      font-family: var(--font-body);
+      font-size: 0.84rem;
+      color: var(--dark);
+      width: 100%
+    }
+
+    /* ===== WHATSAPP FLOAT BUTTON ===== */
+    #wa-float {
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 9999;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: lpStampPulse 2.5s ease-in-out infinite;
+    }
+
+    #wa-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.6);
+    }
+
+    /* ===== TRUST BADGES ===== */
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 1rem 2rem;
+      background: white;
+      border-bottom: 1px solid var(--border-2);
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .trust-badge .t-icon {
+      font-size: 1rem;
+    }
+
+    /* ===== BACK TO TOP ===== */
+    #back-top {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      z-index: 9998;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: white;
+      border: 1.5px solid var(--border);
+      color: var(--rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #back-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #back-top:hover {
+      background: var(--rose);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* ===== HERO BADGE HIGHLIGHT ===== */
+    .hero-free-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, rgba(46, 204, 113, 0.12), rgba(26, 158, 85, 0.08));
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      color: #16a34a;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.25rem 0.9rem;
+      border-radius: 100px;
+      margin-top: 0.75rem;
+      display: inline-flex;
+    }
+
+    /* ===== PRELOADER ===== */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      transition: opacity 0.4s ease;
+    }
+
+    #preloader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .preloader-heart {
+      font-size: 3rem;
+      animation: heartbeat 0.8s ease-in-out infinite;
+      color: var(--rose);
+    }
+
+    .preloader-text {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--rose);
+    }
+
+    /* ===== SCROLL PROGRESS BAR ===== */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--rose), var(--gold));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== CATEGORY CHIPS (horizontal scroll on mobile) ===== */
+    .cat-chips {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.25rem;
+      margin-bottom: 1rem;
+      scrollbar-width: none;
+    }
+
+    .cat-chips::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-chip {
+      flex-shrink: 0;
+      padding: 0.3rem 0.9rem;
+      border-radius: 100px;
+      border: 1.5px solid var(--border);
+      background: white;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .cat-chip:hover {
+      border-color: var(--rose);
+      color: var(--rose);
+    }
+
+    .cat-chip.active {
+      background: linear-gradient(135deg, var(--rose), var(--rose-2));
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 3px 12px rgba(232, 67, 106, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="preloader-heart">♥</div>
+    <div class="preloader-text">LovePages</div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div id="progress-bar"></div>
+
+  <!-- WhatsApp Float -->
+  <a id="wa-float"
+    href="https://wa.me/?text=LovePages%20dekho%20-%20kitne%20cute%20romantic%20templates%20hain!%20lovepages.in"
+    target="_blank" rel="noopener" title="WhatsApp pe share karo">💬</a>
+
+  <!-- Back to Top -->
+  <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Upar jaao">↑</button>
+
+  <!-- ===== NAV ===== -->
+  <nav id="nav">
+    <div class="nav-left">
+      <a href="#" class="nav-logo"><span class="hrt">♥</span>&nbsp;LovePages</a>
+      <span class="nav-badge">✦ by Shahid Developer</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+    </ul>
+    <div class="nav-search">
+      <span class="srch-icon">🔍</span>
+      <input type="text" placeholder="Search templates…" id="nav-search-input" oninput="searchTemplates(this.value)"
+        autocomplete="off">
+    </div>
+    <a href="#templates" class="nav-cta">Browse Templates ♥</a>
+    <button class="nav-hamburger" onclick="toggleMobNav()" aria-label="Menu">☰</button>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mob-nav" id="mob-nav">
+    <a href="#templates" onclick="closeMobNav()">Templates</a>
+    <a href="#how" onclick="closeMobNav()">How It Works</a>
+    <a href="#reviews" onclick="closeMobNav()">Reviews</a>
+    <div class="mob-search">
+      <span>🔍</span>
+      <input type="text" placeholder="Search templates…" oninput="searchTemplates(this.value)" autocomplete="off">
+    </div>
+  </div>
+
+  <!-- Trust badges -->
+  <div class="trust-row">
+    <div class="trust-badge"><span class="t-icon">🔒</span> Razorpay Secured</div>
+    <div class="trust-badge"><span class="t-icon">⚡</span> Instant Delivery</div>
+    <div class="trust-badge"><span class="t-icon">💯</span> 10,000+ Happy Couples</div>
+    <div class="trust-badge"><span class="t-icon">🇮🇳</span> Made in India</div>
+    <div class="trust-badge"><span class="t-icon">📱</span> Mobile Friendly</div>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section id="hero">
+    <div class="hero-deco" id="hero-deco"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow"><span class="dot"></span>60 Romantic Templates Ready to Share</div>
+      <h1 class="hero-title">
+        <span class="line1">LovePages</span>
+        <span class="line2">Make them feel everything.</span>
+      </h1>
+      <p class="hero-sub">Beautiful, interactive romantic pages for proposals, birthdays, apologies and more — ready in
+        5 minutes, shareable with one link.</p>
+      <div class="hero-btns">
+        <a href="#templates" class="btn-rose btn-lg">Browse 60 Templates ♥</a>
+        <a href="#how" class="btn-outline-dark">How It Works</a>
+      </div>
+      <div style="margin-top:0.75rem;animation:fadeUp 0.7s 0.4s ease both">
+        <span class="hero-free-pill">🆓 8 Free Templates Available — No Payment Needed!</span>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>Scroll
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <div id="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-n">60+</div>
+        <div class="stat-l">Templates</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">10K+</div>
+        <div class="stat-l">Happy Couples</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">5 Min</div>
+        <div class="stat-l">Setup Time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">4.9★</div>
+        <div class="stat-l">Avg Rating</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">2026</div>
+        <div class="stat-l">Est. Year</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TEMPLATES ===== -->
+  <section id="templates">
+    <div class="section-wrap">
+      <div class="section-head">
+        <div class="section-head-left">
+          <h2>Choose Your Perfect Template</h2>
+          <p>Each is interactive, customizable &amp; shareable via a single link.</p>
+        </div>
+        <span class="count-pill" id="count-pill">60 Templates</span>
+      </div>
+
+      <!-- Quick category chips -->
+      <div class="cat-chips" id="cat-chips"></div>
+
+      <!-- Filter + inline search -->
+      <div class="filter-row" id="filter-row">
+        <div class="search-bar">
+          <span style="color:var(--muted-2);font-size:0.9rem">🔍</span>
+          <input type="text" placeholder="Search templates…" id="section-search-input"
+            oninput="searchTemplates(this.value)" autocomplete="off">
+        </div>
+
+        <div id="active-pill" style="display:none"></div>
+
+        <div class="filter-dropdown-wrap" id="filter-dropdown-wrap">
+          <button class="filter-dropdown-btn" id="filter-dropdown-btn" onclick="toggleFilterPanel()">
+            <span style="font-size:0.9rem">⚙️</span>
+            <span id="filter-btn-label">🗂️ All Categories</span>
+            <span class="fd-icon">▾</span>
+          </button>
+          <div class="filter-panel" id="filter-panel"></div>
+        </div>
+      </div>
+
+      <div class="tpl-grid" id="card-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section id="how">
+    <div class="how-inner">
+      <div class="section-title">
+        <h2>Ready in just 5 minutes</h2>
+        <p>No coding. No design skills. Just love. 💕</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Choose a Template</h3>
+          <p>Browse 60 templates and pick the one that matches your feeling perfectly.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Fill in Details</h3>
+          <p>Add names, photos, your personal message, and customize the look and feel.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Pay &amp; Publish</h3>
+          <p>One-time payment via Razorpay — UPI, cards, netbanking all supported.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <h3>Share the Link</h3>
+          <p>Send via WhatsApp, Instagram, or anywhere. Watch them fall in love!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REVIEWS ===== -->
+  <section id="reviews">
+    <div class="testi-wrap">
+      <div class="section-title">
+        <h2>What People Are Saying</h2>
+        <p>Real stories from real couples — 2026 💕</p>
+      </div>
+      <div class="testi-grid" id="testi-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-logo">♥ LovePages</div>
+    <div class="footer-dev">by Shahid Developer</div>
+    <p>Made with love in India 🇮🇳 &nbsp;·&nbsp; © 2026 LovePages</p>
+    <div class="footer-links">
+      <a href="#">Templates</a><a href="#">How It Works</a>
+      <a href="#">Contact</a><a href="#">Terms</a><a href="#">Privacy</a>
+    </div>
+    <div class="footer-copy">Powered by Razorpay · Secure payments · One-time pricing · 60 Templates</div>
+  </footer>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+
+      <div id="purchase-view">
+        <span class="modal-emoji" id="m-emoji"></span>
+        <h3 class="modal-title" id="m-title"></h3>
+        <p class="modal-desc" id="m-desc"></p>
+        <ul class="modal-features" id="m-features"></ul>
+        <div class="modal-price" id="m-price"></div>
+        <div class="modal-actions">
+          <button class="btn-rose" id="m-cta" onclick="handlePayment()">Proceed to Payment →</button>
+          <button class="btn-ghost" onclick="closeModal()">Maybe Later</button>
+        </div>
+        <p class="razorpay-note">🔒 Secured by Razorpay · UPI · Cards · Netbanking</p>
+      </div>
+
+      <div class="success-view" id="success-view">
+        <span class="success-icon">🎉</span>
+        <h3>You're All Set!</h3>
+        <p>Your template is unlocked and ready. Click below to access your personalized love page and start customizing
+          it.</p>
+        <a href="#" class="dl-btn" id="access-link" target="_blank" rel="noopener">⬇ Access Your Template</a>
+        <div style="margin-top:1rem">
+          <a href="#" id="wa-share-btn" target="_blank" rel="noopener"
+            style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#25d366,#128c7e);color:white;padding:0.65rem 1.6rem;border-radius:100px;font-size:0.85rem;font-weight:600;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,0.35);margin-top:0.5rem;">💬
+            WhatsApp pe Share Karo</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Razorpay SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- ===== DATA & LOGIC ===== -->
+  <script>
+    /* ══════════════════════════════════════════════════
+       CATEGORY CONFIGURATION
+    ══════════════════════════════════════════════════ */
+    const CATEGORIES = [
+      { slug: 'all', label: 'All Categories', emoji: '🗂️', style: 'cat-muted' },
+      { slug: 'anniversary', label: 'Anniversary', emoji: '🥂', style: 'cat-gold' },
+      { slug: 'apology', label: 'Apology', emoji: '🙏', style: 'cat-rose' },
+      { slug: 'appreciation', label: 'Appreciation', emoji: '✨', style: 'cat-purple' },
+      { slug: 'birthday', label: 'Birthday', emoji: '🎂', style: 'cat-rose' },
+      { slug: 'bucket-list', label: 'Bucket List', emoji: '🎯', style: 'cat-purple' },
+      { slug: 'confession', label: 'Confession', emoji: '🤫', style: 'cat-rose' },
+      { slug: 'daydream', label: 'Daydream', emoji: '☁️', style: 'cat-purple' },
+      { slug: 'forgiveness', label: 'Forgiveness', emoji: '🕊️', style: 'cat-green' },
+      { slug: 'friendship', label: 'Friendship', emoji: '🤝', style: 'cat-rose' },
+      { slug: 'fun', label: 'Fun', emoji: '😂', style: 'cat-rose' },
+      { slug: 'gift', label: 'Gift', emoji: '🎁', style: 'cat-gold' },
+      { slug: 'invitation', label: 'Invitation', emoji: '💌', style: 'cat-purple' },
+      { slug: 'long-distance', label: 'Long Distance', emoji: '🌍', style: 'cat-rose' },
+      { slug: 'love', label: 'Love', emoji: '❤️', style: 'cat-rose' },
+      { slug: 'love-note', label: 'Love Note', emoji: '💌', style: 'cat-rose' },
+      { slug: 'love-story', label: 'Love Story', emoji: '📖', style: 'cat-purple' },
+      { slug: 'miss', label: 'Miss You', emoji: '😢', style: 'cat-rose' },
+      { slug: 'proposal', label: 'Proposal', emoji: '💍', style: 'cat-purple' },
+      { slug: 'sorry', label: 'Sorry', emoji: '💔', style: 'cat-rose' },
+      { slug: 'valentine', label: 'Valentine', emoji: '💝', style: 'cat-rose' },
+      { slug: 'wedding', label: 'Wedding', emoji: '💒', style: 'cat-gold' },
+      { slug: 'free', label: 'Free', emoji: '🆓', style: 'cat-green' },
+    ];
+
+    function getCatMeta(slugString) {
+      const slugs = (slugString || '').split(' ');
+      for (const slug of slugs) {
+        const found = CATEGORIES.find(c => c.slug === slug && c.slug !== 'all');
+        if (found) return found;
+      }
+      return { label: slugString, emoji: '', style: 'cat-rose' };
+    }
+
+    /* ══════════════════════════════════════════════════
+       TEMPLATE DATA
+    ══════════════════════════════════════════════════ */
+    /* ══════════════════════════════════════════════════
+       👇 SIRF YAHAN APNE LINKS DAALO — AUR KUCH MAT CHHUO
+       
+       Har template mein ek "link" field hai.
+       Apna real URL wahan daalo jahan "#" likha hai.
+       
+       FREE templates → link: "https://tumhara-free-template-link.com"
+       PAID templates → link: "https://tumhara-paid-template-link.com"
+       
+       Agar kisi ka link abhi ready nahi hai toh "#" rehne do.
+    ══════════════════════════════════════════════════ */
+    const TEMPLATES = [
+      { id: 1, link: "#", title: "Propose with Stars", desc: "Romantic animated starry night proposal page with your custom message and a love quiz.", emoji: "💫", cat: "love proposal", badge: "🔥 Popular", badgeType: "hot", bg: "linear-gradient(135deg,#0d0221,#3b0764,#6b21a8)", price: "₹199", isFree: false, features: ["Animated starry night background", "Custom love message & name", "Interactive love quiz", "Mobile optimized", "Shareable link — no app needed"] },
+      { id: 2, link: "#", title: "Forgive Me Page", desc: "A heartfelt apology page with a cute animation — she can only click Yes!", emoji: "🥺", cat: "apology sorry forgiveness", badge: "", badgeType: "", bg: "linear-gradient(135deg,#fff0f3,#ffd0de,#ffb3c6)", price: "₹149", isFree: false, features: ["Cute bouncy Yes-only animation", "Custom apology note", "Impossible-to-click No button", "Shareable link", "Instant delivery"] },
+      { id: 3, link: "#", title: "Birthday Surprise", desc: "Magical birthday page with confetti rain, countdown, custom photo & music player.", emoji: "🎂", cat: "birthday", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#fff7e0,#ffe8a0,#ffd54f)", price: "₹179", isFree: false, features: ["Confetti animation", "Birthday countdown timer", "Upload custom photo", "Music player (link)", "Shareable link"] },
+      { id: 4, link: "#", title: "I Miss You", desc: "Gentle emotional page counting every day missed, with photo slideshow and custom message.", emoji: "😢", cat: "miss long-distance", badge: "", badgeType: "", bg: "linear-gradient(135deg,#e8f0ff,#c8d8ff,#a8c0ff)", price: "₹129", isFree: false, features: ["Photo slideshow", "Miss-you day counter", "Soft emotional animation", "Custom message", "Shareable link"] },
+      { id: 5, link: "#", title: "Will You Be Mine?", desc: "A simple, sweet proposal page — completely free. Perfect for a first gesture of love!", emoji: "🌹", cat: "love proposal free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#ffe8f0,#ffd0e0,#ffb8cd)", price: "FREE", isFree: true, features: ["Sweet heart animation", "Custom name input", "Shareable link", "Mobile optimized", "No payment needed"] },
+      { id: 6, link: "#", title: "Our Love Story", desc: "A premium timeline of your relationship milestones, photos and anniversary counter.", emoji: "📖", cat: "love love-story anniversary", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#1e2a4a,#2e3d6a,#4059a8)", price: "₹249", isFree: false, features: ["Love timeline with dates", "Photo memory gallery", "Custom milestones", "Anniversary counter", "Shareable link"] },
+      { id: 7, link: "#", title: "Love Letter", desc: "Beautiful animated letter with wax seal opening effect and custom poem.", emoji: "💌", cat: "love love-note", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#3d0000,#7b1a1a,#c0392b)", price: "₹199", isFree: false, features: ["Wax seal opening animation", "Custom love letter text", "Floating petals effect", "Background music option", "Shareable link"] },
+      { id: 8, link: "#", title: "Do You Like Me?", desc: "Funny interactive page — the No button runs away! They can only click Yes.", emoji: "🤔", cat: "fun love confession", badge: "🔥 Viral", badgeType: "viral", bg: "linear-gradient(135deg,#fff3e0,#ffe0b2,#ffcc80)", price: "₹99", isFree: false, features: ["Runaway No button", "Funny GIF reactions", "Custom question text", "Share result as image", "Mobile optimized"] },
+      { id: 9, link: "#", title: "Wedding Invitation", desc: "An elegant digital wedding invitation with RSVP button, couple photos and event details.", emoji: "💒", cat: "wedding invitation", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#fff8f0,#f5e6d0,#e8cfa0)", price: "₹349", isFree: false, features: ["Elegant floral design", "RSVP button", "Couple photo gallery", "Event details & map link", "Shareable invite link"] },
+      { id: 10, link: "#", title: "Long Distance Love", desc: "For long distance couples — time difference, reunion countdown & love notes.", emoji: "🌍", cat: "miss love long-distance", badge: "", badgeType: "", bg: "linear-gradient(135deg,#0a192f,#0d2137,#1a3a5c)", price: "₹199", isFree: false, features: ["Live time difference clock", "Reunion countdown", "Custom love notes wall", "Photo strip", "Shareable link"] },
+      { id: 11, link: "#", title: "Cute Bear Sorry", desc: "An adorable teddy bear apology page with puppy eyes animation and heart balloons.", emoji: "🐻", cat: "apology sorry fun", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#fef0e8,#fddbc8,#f9c4a0)", price: "₹149", isFree: false, features: ["Teddy bear puppy eye animation", "Heart balloon floats", "Custom sorry message", "Voice note option", "Shareable link"] },
+      { id: 12, link: "#", title: "Anniversary Special", desc: "Celebrate your anniversary with fireworks, photo album and custom vows.", emoji: "🥂", cat: "love anniversary", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#1a0a00,#3d1a00,#7a3a00)", price: "₹299", isFree: false, features: ["Fireworks animation", "Photo album gallery", "Custom vows & promises", "Relationship timeline", "Shareable link"] },
+      { id: 13, link: "#", title: "Couple Goals Quiz", desc: "Test how well you know each other! Fun interactive quiz for couples.", emoji: "💑", cat: "love fun", badge: "🔥 Popular", badgeType: "hot", bg: "linear-gradient(135deg,#f8e1f4,#e8b8e8,#d480d4)", price: "₹149", isFree: false, features: ["10 fun couple questions", "Score & result animation", "Custom questions option", "Share score card", "Mobile optimized"] },
+      { id: 14, link: "#", title: "Valentine Special", desc: "Dreamy Valentine page with rose rain, chocolate box reveal & custom message.", emoji: "💝", cat: "love valentine", badge: "", badgeType: "", bg: "linear-gradient(135deg,#4a0010,#8b0025,#c0003d)", price: "₹179", isFree: false, features: ["Rose rain animation", "Chocolate box reveal", "Custom Valentine message", "Video embed option", "Shareable link"] },
+      { id: 15, link: "#", title: "Romantic Poem / Shayari", desc: "Reveal your poem line by line with beautiful particle effects and typewriter animation.", emoji: "📜", cat: "love love-note", badge: "", badgeType: "", bg: "linear-gradient(135deg,#0d0d0d,#1a0a1a,#2d0a2d)", price: "₹179", isFree: false, features: ["Line-by-line reveal animation", "Particle effects background", "Custom poem / shayari", "Typewriter effect", "Shareable link"] },
+      { id: 16, link: "#", title: "Happy Friendship Day", desc: "Celebrate your best friend with a free collage and custom message!", emoji: "🤝", cat: "friendship free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#e8f5e9,#c8e6c9,#a5d6a7)", price: "FREE", isFree: true, features: ["Friend collage frame", "Custom message", "Animated confetti", "Shareable link", "No payment needed"] },
+      { id: 17, link: "#", title: "Sweet 16 / 18 Birthday", desc: "Milestone birthday page with sparkles, wishes wall and age reveal countdown.", emoji: "🎉", cat: "birthday", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#1a0030,#3a0060,#6600cc)", price: "₹199", isFree: false, features: ["Sparkle fireworks", "Wishes wall", "Age countdown reveal", "Custom photo strip", "Shareable link"] },
+      { id: 18, link: "#", title: "Midnight Crush Reveal", desc: "Anonymous crush reveal with midnight countdown and dramatic glow effect.", emoji: "🌙", cat: "love confession", badge: "🔥 Popular", badgeType: "hot", bg: "linear-gradient(135deg,#050520,#0a0a40,#141464)", price: "₹149", isFree: false, features: ["Midnight countdown timer", "Glow reveal animation", "Anonymous sender option", "Custom hint clues", "Shareable link"] },
+      { id: 19, link: "#", title: "Engagement Announcement", desc: "Share your engagement news with ring animation and beautiful couple photos.", emoji: "💍", cat: "wedding proposal", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#f0e8d0,#e0d0a8,#c8b878)", price: "₹279", isFree: false, features: ["Diamond ring animation", "Engagement photo gallery", "Custom announcement text", "Social share buttons", "Shareable link"] },
+      { id: 20, link: "#", title: "Love Compatibility Test", desc: "Calculate your love compatibility score with hilarious animated results!", emoji: "💘", cat: "fun love", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#ffe0ec,#ffb3cc,#ff80aa)", price: "₹99", isFree: false, features: ["Compatibility calculator", "Animated score reveal", "Funny result messages", "Share compatibility card", "Mobile optimized"] },
+      { id: 21, link: "#", title: "Sorry with Flowers", desc: "Send a virtual bouquet with heartfelt apology note and soft background music.", emoji: "💐", cat: "apology sorry", badge: "", badgeType: "", bg: "linear-gradient(135deg,#fff0f8,#ffd6ee,#ffb3e0)", price: "₹169", isFree: false, features: ["Virtual flower bouquet", "Custom apology note", "Soft background music", "Delivery animation", "Shareable link"] },
+      { id: 22, link: "#", title: "Surprise Gift Box", desc: "Animated gift box opens to reveal birthday wishes, photos and secret message!", emoji: "🎁", cat: "birthday gift", badge: "", badgeType: "", bg: "linear-gradient(135deg,#ff4500,#cc3500,#992800)", price: "₹189", isFree: false, features: ["Gift box opening animation", "Hidden message reveal", "Photo inside box", "Custom wishes", "Shareable link"] },
+      { id: 23, link: "#", title: "1000 Reasons I Love You", desc: "Reveal 1000 reasons you love them one at a time — they'll keep clicking!", emoji: "💕", cat: "love appreciation", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#2d0030,#5a0060,#800080)", price: "₹229", isFree: false, features: ["1000 reasons library", "Custom reasons you add", "Click reveal animation", "Save favorites option", "Shareable link"] },
+      { id: 24, link: "#", title: "Counting Days Together", desc: "Live counter showing every second since you first met — always ticking!", emoji: "⏳", cat: "miss anniversary", badge: "", badgeType: "", bg: "linear-gradient(135deg,#001a33,#003366,#004d99)", price: "₹139", isFree: false, features: ["Live days/hours/minutes counter", "Custom start date", "Milestone celebrations", "Couple photo background", "Shareable link"] },
+      { id: 25, link: "#", title: "Simple Birthday Card", desc: "Clean and free birthday card with confetti — send in 1 minute!", emoji: "🎈", cat: "birthday free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#e8f5e9,#f3e5f5,#fce4ec)", price: "FREE", isFree: true, features: ["Confetti animation", "Custom birthday message", "Simple clean design", "Shareable link", "No payment needed"] },
+      { id: 26, link: "#", title: "Memory Jar", desc: "A digital jar filled with your sweet memories, photos and random love notes!", emoji: "🫙", cat: "love love-story", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#fffde7,#fff9c4,#fff59d)", price: "₹219", isFree: false, features: ["Digital memory jar UI", "Photo memories", "Random note generator", "Add new memories", "Shareable link"] },
+      { id: 27, link: "#", title: "Love Dare Challenge", desc: "7-day love dare challenge — each day unlocks a new sweet task for your partner!", emoji: "🎯", cat: "love bucket-list", badge: "", badgeType: "", bg: "linear-gradient(135deg,#ff6b35,#f7c59f,#efefd0)", price: "₹159", isFree: false, features: ["7-day dare calendar", "Daily unlock animation", "Custom dare tasks", "Progress tracker", "Shareable link"] },
+      { id: 28, link: "#", title: "Come Back Soon", desc: "A waiting page for someone far away — live absence counter and reunion date!", emoji: "✈️", cat: "miss long-distance", badge: "", badgeType: "", bg: "linear-gradient(135deg,#e3f2fd,#bbdefb,#90caf9)", price: "₹149", isFree: false, features: ["Live absence counter", "Reunion countdown", "Emotional message", "Custom photo", "Shareable link"] },
+      { id: 29, link: "#", title: "Baby Shower Invite", desc: "Adorable pastel baby shower invite with RSVP and gift registry link!", emoji: "👶", cat: "wedding invitation gift", badge: "", badgeType: "", bg: "linear-gradient(135deg,#fce4ec,#f8bbd9,#f48fb1)", price: "₹279", isFree: false, features: ["Pastel animated theme", "RSVP functionality", "Gift registry link", "Custom baby name reveal", "Shareable invite"] },
+      { id: 30, link: "#", title: "Your Name in the Stars", desc: "Their name written across a galaxy of stars — an unforgettable surprise!", emoji: "⭐", cat: "love daydream", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#000005,#050520,#0a0a40)", price: "₹169", isFree: false, features: ["Name in constellation", "Galaxy star field", "Custom dedication message", "Zoom & explore stars", "Shareable link"] },
+      { id: 31, link: "#", title: "Puppy Eyes Sorry", desc: "Animated puppy with tail wagging — they can't possibly stay mad!", emoji: "🐶", cat: "apology sorry fun forgiveness", badge: "", badgeType: "", bg: "linear-gradient(135deg,#fff8f0,#ffe8cc,#ffd4a0)", price: "₹129", isFree: false, features: ["Animated puppy eyes", "Tail wagging animation", "Custom sorry message", "Forgive button effect", "Shareable link"] },
+      { id: 32, link: "#", title: "Secret Admirer", desc: "Send anonymous love notes with clues — keep them guessing who it is!", emoji: "🕵️", cat: "love confession", badge: "🔥 Popular", badgeType: "hot", bg: "linear-gradient(135deg,#0a0a0a,#1a1a2e,#16213e)", price: "₹159", isFree: false, features: ["Anonymous identity", "Clue reveal system", "Custom love messages", "Dramatic reveal option", "Shareable link"] },
+      { id: 33, link: "#", title: "Birthday Scrapbook", desc: "A digital scrapbook with photos, stickers and memories from all your friends!", emoji: "📷", cat: "birthday gift appreciation", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#fff3e0,#ffe0b2,#ffcc80)", price: "₹259", isFree: false, features: ["Multi-photo scrapbook", "Custom stickers & notes", "Friends can add memories", "Animated page turns", "Shareable link"] },
+      { id: 34, link: "#", title: "Teri Yaad 🇮🇳", desc: "Hindi/Urdu romantic shayari page — unhe feel karao kitna pyaar karte ho!", emoji: "🌹", cat: "love love-note", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#1a0010,#380020,#660040)", price: "₹179", isFree: false, features: ["Hindi/Urdu romantic text", "Shayari generator", "Custom name & photo", "Soft music background", "Shareable link"] },
+      { id: 35, link: "#", title: "Roast My Partner 😂", desc: "Funny roast card with memes and inside jokes — all love, no harm!", emoji: "🔥", cat: "fun", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#1a0000,#3a0000,#660000)", price: "₹119", isFree: false, features: ["Custom roast messages", "Meme generator", "Inside joke section", "Share as image", "Mobile optimized"] },
+      { id: 36, link: "#", title: "Anniversary Card Deluxe", desc: "Luxurious gold anniversary card with photo slideshow and vow renewal!", emoji: "👑", cat: "anniversary love", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#1a1000,#332200,#664400)", price: "₹319", isFree: false, features: ["Gold glitter effects", "Photo slideshow", "Vow renewal section", "Timeline of years", "Shareable link"] },
+      { id: 37, link: "#", title: "Quick Sorry Note", desc: "Simple and sweet — a quick apology note from the heart, no payment needed!", emoji: "🤍", cat: "apology sorry forgiveness free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#fafafa,#f0f0f0,#e0e0e0)", price: "FREE", isFree: true, features: ["Simple clean design", "Custom sorry message", "Heart animation", "Shareable link", "No payment needed"] },
+      { id: 38, link: "#", title: "Photo Collage Love Wall", desc: "Polaroid-style photo collage wall with custom captions and love quotes!", emoji: "🖼️", cat: "love appreciation", badge: "", badgeType: "", bg: "linear-gradient(135deg,#ffecd2,#fcb69f,#ff9a9e)", price: "₹209", isFree: false, features: ["Polaroid photo frames", "Custom captions", "Grid & random layouts", "Love quote overlays", "Shareable link"] },
+      { id: 39, link: "#", title: "Goodnight My Love", desc: "Send them to sleep with a sweet goodnight page with moon, stars and a lullaby!", emoji: "🌙", cat: "miss love daydream", badge: "", badgeType: "", bg: "linear-gradient(135deg,#020210,#060630,#0a0a50)", price: "₹139", isFree: false, features: ["Night sky animation", "Lullaby music option", "Custom goodnight message", "Sleep timer", "Shareable link"] },
+      { id: 40, link: "#", title: "Best Friend Forever", desc: "Celebrate your BFF with a traits quiz, shared memories and a custom certificate!", emoji: "👯", cat: "friendship fun appreciation", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#f3e5f5,#e1bee7,#ce93d8)", price: "₹159", isFree: false, features: ["BFF traits quiz", "Shared memory timeline", "Funny inside jokes section", "Custom BFF certificate", "Shareable link"] },
+      { id: 41, link: "#", title: "Morning Surprise", desc: "Wake them up with a beautiful sunrise animation and custom good morning note!", emoji: "☀️", cat: "love appreciation", badge: "", badgeType: "", bg: "linear-gradient(135deg,#ff9800,#ff7043,#ff5722)", price: "₹129", isFree: false, features: ["Sunrise animation", "Custom morning message", "Daily reset option", "Warm color theme", "Shareable link"] },
+      { id: 42, link: "#", title: "Haldi Ceremony Invite 🇮🇳", desc: "Vibrant Indian Haldi invite with marigold flowers and traditional design!", emoji: "🌼", cat: "wedding invitation", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#fff9c4,#fff176,#ffee58)", price: "₹249", isFree: false, features: ["Marigold flower animation", "Vibrant yellow theme", "Custom ceremony details", "RSVP button", "Shareable invite"] },
+      { id: 43, link: "#", title: "Reasons You Are Special", desc: "Animated list of all the reasons they are special to you — they'll love it!", emoji: "✨", cat: "love appreciation", badge: "", badgeType: "", bg: "linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)", price: "₹169", isFree: false, features: ["One-by-one reveal animation", "Custom reasons list", "Add photos per reason", "Beautiful card design", "Shareable link"] },
+      { id: 44, link: "#", title: "Surprise Party Invite", desc: "Fun party invite with balloons, dancing emojis and countdown to party time!", emoji: "🎊", cat: "birthday fun invitation", badge: "🔥 Popular", badgeType: "hot", bg: "linear-gradient(135deg,#e040fb,#aa00ff,#7c4dff)", price: "₹189", isFree: false, features: ["Balloon animation", "Party countdown", "Guest list RSVP", "Location & time embed", "Shareable invite link"] },
+      { id: 45, link: "#", title: "Heart Rain", desc: "Hearts rain from the sky with your custom love message — simple and sweet!", emoji: "💗", cat: "love love-note", badge: "", badgeType: "", bg: "linear-gradient(135deg,#f8f0ff,#eebbff,#dd88ff)", price: "₹99", isFree: false, features: ["Heart rain animation", "Custom love message", "Color customization", "Loop forever option", "Shareable link"] },
+      { id: 46, link: "#", title: "Simple I Miss You", desc: "A free heartfelt miss-you note — minimal, sweet, and straight from the heart!", emoji: "💙", cat: "miss long-distance free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#e3f2fd,#bbdefb,#90caf9)", price: "FREE", isFree: true, features: ["Soft floating animation", "Custom miss-you message", "Minimal beautiful design", "Shareable link", "No payment needed"] },
+      { id: 47, link: "#", title: "Promise Page", desc: "Make your promises official — beautiful handwritten style with a digital seal!", emoji: "🤞", cat: "love confession", badge: "", badgeType: "", bg: "linear-gradient(135deg,#3e1a00,#6b3300,#994d00)", price: "₹189", isFree: false, features: ["Handwritten promise style", "Custom promises list", "Digital seal effect", "Lock icon animation", "Shareable link"] },
+      { id: 48, link: "#", title: "Meme Birthday Card 😂", desc: "Hilarious birthday meme card with custom memes and funny GIFs!", emoji: "😂", cat: "fun birthday", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#212121,#424242,#616161)", price: "₹129", isFree: false, features: ["Custom meme templates", "Funny GIF inserts", "Inside joke text box", "Share as image/link", "Mobile optimized"] },
+      { id: 49, link: "#", title: "Mehndi Night Invite 🇮🇳", desc: "Gorgeous henna pattern invite for Mehndi night — vibrant Indian design!", emoji: "🌸", cat: "wedding invitation", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#ff6f00,#e65100,#bf360c)", price: "₹249", isFree: false, features: ["Henna pattern animation", "Warm orange/pink theme", "Ceremony details", "RSVP button", "Shareable invite link"] },
+      { id: 50, link: "#", title: "Custom Love Song", desc: "Your love story turned into a custom song with lyrics and music player!", emoji: "🎵", cat: "love love-story", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#001a33,#003366,#0052a3)", price: "₹289", isFree: false, features: ["AI lyrics generator", "Custom music player", "Animated music visualizer", "Song dedication section", "Shareable link"] },
+      { id: 51, link: "#", title: "Dosti Ka Rang 🇮🇳", desc: "Holi-inspired friendship page with color splash animation — bahut rangeen!", emoji: "🎨", cat: "friendship fun", badge: "", badgeType: "", bg: "linear-gradient(135deg,#ff1744,#f50057,#d500f9,#651fff,#2979ff)", price: "₹159", isFree: false, features: ["Color splash animation", "Friendship quiz", "Memory photos", "Custom Holi message", "Shareable link"] },
+      { id: 52, link: "#", title: "Last Chance Letter", desc: "Cinematic emotional letter reveal — woh pakka dil pe le lenge!", emoji: "📩", cat: "apology sorry love", badge: "🔥 Viral", badgeType: "viral", bg: "linear-gradient(135deg,#0a0a0a,#1c1c1c,#2c2c2c)", price: "₹199", isFree: false, features: ["Cinematic letter reveal", "Emotional background music", "Custom heartfelt message", "Countdown to reply", "Shareable link"] },
+      { id: 53, link: "#", title: "Fireworks Proposal", desc: "Spectacular fireworks spelling your proposal in the night sky — wow them!", emoji: "🎆", cat: "love proposal", badge: "✨ Premium", badgeType: "premium", bg: "linear-gradient(135deg,#000014,#00001e,#000028)", price: "₹249", isFree: false, features: ["Custom fireworks display", "Message written in sky", "Proposal music", "Yes/No reveal option", "Shareable link"] },
+      { id: 54, link: "#", title: "Quick Love Note", desc: "Instant free love note — type, share, spread love in under 1 minute!", emoji: "💟", cat: "love love-note free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#fce4ec,#f8bbd0,#f48fb1)", price: "FREE", isFree: true, features: ["Instant love note", "Custom message", "Heart animation", "Shareable link", "No payment needed"] },
+      { id: 55, link: "#", title: "Virtual Cake Cutting", desc: "They swipe to cut the cake and birthday wishes pop out — super fun!", emoji: "🎂", cat: "birthday fun", badge: "🎉 Trending", badgeType: "trending", bg: "linear-gradient(135deg,#880e4f,#ad1457,#c2185b)", price: "₹179", isFree: false, features: ["Interactive cake cutting", "Hidden wishes inside", "Candle blow effect", "Custom cake design", "Shareable link"] },
+      { id: 56, link: "#", title: "Hugs from Afar", desc: "Send virtual bear hugs to your long-distance love — they'll feel it!", emoji: "🤗", cat: "miss long-distance", badge: "", badgeType: "", bg: "linear-gradient(135deg,#fff8e1,#ffecb3,#ffe082)", price: "₹149", isFree: false, features: ["Bear hug animation", "Warm glow effect", "Custom emotional message", "Voice message option", "Shareable link"] },
+      { id: 57, link: "#", title: "Sangeet Night Invite 🇮🇳", desc: "Festive Sangeet invite with Bollywood vibes, dance animation and music!", emoji: "💃", cat: "wedding invitation", badge: "💜 New", badgeType: "new", bg: "linear-gradient(135deg,#4a148c,#6a1b9a,#7b1fa2)", price: "₹269", isFree: false, features: ["Dance animation", "Bollywood music player", "Festive color theme", "Event details & schedule", "Shareable invite"] },
+      { id: 58, link: "#", title: "Infinite Love Loop", desc: "Mesmerizing infinite heart loop with your names — it never ends, just like your love!", emoji: "♾️", cat: "love daydream", badge: "", badgeType: "", bg: "linear-gradient(135deg,#1a0030,#2d0050,#4a0080)", price: "₹159", isFree: false, features: ["Infinite loop animation", "Custom names in hearts", "Mesmerizing visual", "Screen saver mode", "Shareable link"] },
+      { id: 59, link: "#", title: "Friendship Roast Card 😈", desc: "Savage roast card for your best friend — they'll laugh and cry at the same time!", emoji: "😈", cat: "fun friendship", badge: "🔥 Viral", badgeType: "viral", bg: "linear-gradient(135deg,#bf360c,#d84315,#e64a19)", price: "₹119", isFree: false, features: ["Savage roast templates", "Custom inside jokes", "Funny award certificates", "Share as image", "Mobile optimized"] },
+      { id: 60, link: "#", title: "Ultimate Love Bundle 👑", desc: "Get ALL templates at once — best value pack with lifetime access and priority support!", emoji: "🫀", cat: "love wedding birthday anniversary", badge: "👑 BEST VALUE", badgeType: "premium", bg: "linear-gradient(135deg,#1a0010,#3a0030,#660055)", price: "₹999", isFree: false, features: ["10 premium templates included", "Unlimited customization", "Lifetime access", "Priority support", "All future updates free"] },
+      { id: 61, link: "#", title: "Free Valentine Card", desc: "A sweet free Valentine's Day card with floating hearts — ready in seconds!", emoji: "💕", cat: "valentine love free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#fff0f3,#ffd6e7,#ffadc9)", price: "FREE", isFree: true, features: ["Floating heart animation", "Custom Valentine message", "Clean pastel design", "Shareable link", "No payment needed"] },
+      { id: 62, link: "#", title: "Appreciation Note", desc: "Tell someone how much they mean to you — a free heartfelt appreciation page!", emoji: "🌸", cat: "appreciation free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#f0fff4,#dcfce7,#bbf7d0)", price: "FREE", isFree: true, features: ["Warm appreciation message", "Gentle animation", "Custom name", "Shareable link", "No payment needed"] },
+      { id: 63, link: "#", title: "Free Apology Card", desc: "Say sorry simply and sincerely — a free apology page with a gentle touch.", emoji: "🕊️", cat: "apology forgiveness free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#f8fafc,#e2e8f0,#cbd5e1)", price: "FREE", isFree: true, features: ["Sincere apology message", "Peace dove animation", "Simple clean design", "Shareable link", "No payment needed"] },
+      { id: 64, link: "#", title: "Free Proposal Page", desc: "Pop the question with this free romantic proposal page — beautiful and simple!", emoji: "💍", cat: "proposal love free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#fdf4ff,#fae8ff,#f0abfc)", price: "FREE", isFree: true, features: ["Ring reveal animation", "Custom proposal message", "Yes/No buttons", "Shareable link", "No payment needed"] },
+      { id: 65, link: "#", title: "Free Long Distance Hug", desc: "A free warm hug page for your long-distance love — feel closer instantly!", emoji: "🤗", cat: "long-distance miss free", badge: "FREE", badgeType: "free", bg: "linear-gradient(135deg,#fff7ed,#fed7aa,#fdba74)", price: "FREE", isFree: true, features: ["Hug animation", "Custom warm message", "Distance note", "Shareable link", "No payment needed"] },
+    ];
+
+    const TESTIMONIALS = [
+      { stars: "★★★★★", text: "\"Maine 'Forgive Me Page' use kiya aur usne turant maafi de di! Best ₹149 ever spent 😂❤️\"", author: "Rahul S.", loc: "Delhi", initials: "RS" },
+      { stars: "★★★★★", text: "\"My boyfriend sent me the Birthday Surprise template and I literally cried. It was so beautiful and personal.\"", author: "Priya M.", loc: "Mumbai", initials: "PM" },
+      { stars: "★★★★★", text: "\"'Our Love Story' template for our 2-year anniversary was perfect. She screenshot kar liya sab! 😍\"", author: "Arjun K.", loc: "Bangalore", initials: "AK" },
+      { stars: "★★★★★", text: "\"Teri Yaad wala template bheja — rone lagi woh! Itna emotional tha, mujhe khud bhi rona aa gaya 😭💕\"", author: "Sahil K.", loc: "Kanpur", initials: "SK" },
+      { stars: "★★★★★", text: "\"Do You Like Me template ka No button bhaag gaya toh usne das baar Yes dabaya 😂 Best ₹99 ever!\"", author: "Rohit G.", loc: "Pune", initials: "RG" },
+      { stars: "★★★★★", text: "\"Wedding Invitation ne toh sab relatives ko shock kar diya — itna beautiful digital invite pehli baar dekha!\"", author: "Neha P.", loc: "Jaipur", initials: "NP" }
+    ];
+
+    // ===== STATE =====
+    let activeFilter = 'all';
+    let activeSearch = '';
+    let currentItem = null;
+    // 👇 YAHAN APNI RAZORPAY KEY DAALO (Razorpay Dashboard > Settings > API Keys)
+    const RAZORPAY_KEY = "YOUR_RAZORPAY_KEY_HERE";
+
+    // ===== RENDER TEMPLATES =====
+    function buildCard(t) {
+      const meta = getCatMeta(t.cat);
+      const catLabel = meta.emoji ? `${meta.emoji} ${meta.label}` : meta.label;
+      const catStyle = meta.style || 'cat-rose';
+
+      const badgeHtml = t.badge
+        ? `<span class="card-badge badge-${t.badgeType}">${t.badge}</span>`
+        : '';
+      const priceHtml = t.isFree
+        ? `<div class="price-val is-free">Free</div><small>forever</small>`
+        : `<div class="price-val">${t.price}</div><small>one-time</small>`;
+      const ctaBtnHtml = t.isFree
+        ? `<button class="btn-rose btn-gold btn-sm" onclick="event.stopPropagation();openModal(TEMPLATES.find(x=>x.id===${t.id}))">Use Free</button>`
+        : `<button class="btn-rose btn-sm" onclick="event.stopPropagation();openModal(TEMPLATES.find(x=>x.id===${t.id}))">Buy Now</button>`;
+
+      return `
+      <div class="tpl-card" data-id="${t.id}" data-cat="${t.cat}" onclick="openModal(TEMPLATES.find(x=>x.id===${t.id}))">
+        <div class="card-preview" style="background:${t.bg}">
+          ${badgeHtml}
+          <span class="card-emoji">${t.emoji}</span>
+          <div class="card-preview-overlay"><span class="live-pill">Live Preview</span></div>
+        </div>
+        <div class="card-body">
+          <span class="card-cat ${catStyle}">${catLabel}</span>
+          <div class="card-title">${t.title}</div>
+          <div class="card-desc">${t.desc}</div>
+          <div class="card-footer">
+            <div class="price-wrap">${priceHtml}</div>
+            <div class="card-btns">
+              <button class="btn-ghost btn-ghost-sm" onclick="event.stopPropagation();previewTemplate(TEMPLATES.find(x=>x.id===${t.id}))">👁 Preview</button>
+              ${ctaBtnHtml}
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function renderCards() {
+      const grid = document.getElementById('card-grid');
+      const pill = document.getElementById('count-pill');
+      const filt = activeFilter;
+      const srch = activeSearch.trim().toLowerCase();
+
+      const filtered = TEMPLATES.filter(t => {
+        const slugs = t.cat.split(' ');
+        const catMatch = filt === 'all' || slugs.includes(filt);
+        const tMeta = getCatMeta(t.cat);
+        const srchMatch = !srch ||
+          t.title.toLowerCase().includes(srch) ||
+          t.desc.toLowerCase().includes(srch) ||
+          t.cat.toLowerCase().includes(srch) ||
+          tMeta.label.toLowerCase().includes(srch);
+        return catMatch && srchMatch;
+      });
+
+      const freeCount = TEMPLATES.filter(t => t.isFree).length;
+      const premCount = TEMPLATES.filter(t => !t.isFree).length;
+      pill.textContent = `${filtered.length} Template${filtered.length !== 1 ? 's' : ''}`;
+
+      const eyebrow = document.querySelector('.hero-eyebrow');
+      if (eyebrow) {
+        eyebrow.innerHTML = `<span class="dot"></span>${TEMPLATES.length} Templates · ${freeCount} Free · ${premCount} Premium`;
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="no-results">💔 No templates found for "${srch || filt}"</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(buildCard).join('');
+
+      requestAnimationFrame(() => {
+        const cards = grid.querySelectorAll('.tpl-card');
+        cards.forEach((c, i) => {
+          setTimeout(() => c.classList.add('revealed'), i * 35);
+        });
+      });
+    }
+
+    // ===== BUILD FILTER PANEL =====
+    function buildFilterPanel() {
+      const panel = document.getElementById('filter-panel');
+      panel.innerHTML = CATEGORIES.map(cat => `
+        <button class="fpanel-item${cat.slug === 'all' ? ' active' : ''}" data-cat="${cat.slug}"
+          onclick="selectFilter('${cat.slug}', '${cat.emoji} ${cat.label}', this)">
+          <span class="fi-dot"></span>
+          <span>${cat.emoji}</span>
+          <span>${cat.label}</span>
+        </button>`).join('');
+    }
+
+    // ===== FILTER DROPDOWN =====
+    function toggleFilterPanel() {
+      const btn = document.getElementById('filter-dropdown-btn');
+      const panel = document.getElementById('filter-panel');
+      const isOpen = panel.classList.contains('open');
+      if (isOpen) { closeFilterPanel(); } else {
+        panel.classList.add('open');
+        btn.classList.add('open');
+      }
+    }
+
+    function closeFilterPanel() {
+      document.getElementById('filter-panel').classList.remove('open');
+      document.getElementById('filter-dropdown-btn').classList.remove('open');
+    }
+
+    function selectFilter(cat, label, btnEl) {
+      document.querySelectorAll('.fpanel-item').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      document.getElementById('filter-btn-label').textContent = label;
+
+      const pill = document.getElementById('active-pill');
+      if (cat !== 'all') {
+        pill.style.display = 'inline-flex';
+        pill.innerHTML = `<span class="active-filter-pill">${label} <button onclick="selectFilter('all','🗂️ All Categories', document.querySelector('.fpanel-item[data-cat=all]'))">✕</button></span>`;
+      } else {
+        pill.style.display = 'none';
+      }
+
+      closeFilterPanel();
+      activeFilter = cat;
+      renderCards();
+    }
+
+    document.addEventListener('click', function (e) {
+      const wrap = document.getElementById('filter-dropdown-wrap');
+      if (wrap && !wrap.contains(e.target)) closeFilterPanel();
+    });
+
+    // ===== SEARCH =====
+    function searchTemplates(val) {
+      activeSearch = val;
+      document.querySelectorAll('#nav-search-input,#section-search-input').forEach(el => {
+        if (el.value !== val) el.value = val;
+      });
+      renderCards();
+    }
+
+    function clearFilter() {
+      activeFilter = 'all';
+      activeSearch = '';
+      document.querySelectorAll('#nav-search-input,#section-search-input').forEach(el => el.value = '');
+      document.getElementById('active-pill').style.display = 'none';
+      document.getElementById('active-pill').innerHTML = '';
+      document.getElementById('filter-btn-label').textContent = '🗂️ All Categories';
+      document.querySelectorAll('.fpanel-item').forEach(el => el.classList.toggle('active', el.dataset.slug === 'all'));
+      document.querySelectorAll('.cat-chip').forEach(el => el.classList.toggle('active', el.textContent.includes('All')));
+      renderCards();
+    }
+
+    // ===== PREVIEW — Watermark ke saath new tab mein kholta hai =====
+
+    // Watermark CSS jo preview window mein inject hogi
+    const WATERMARK_CSS = `
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 99998;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='15' font-weight='bold' fill='rgba(232%2C67%2C106%2C0.13)' transform='rotate(-30%2C160%2C100)'%3E%E2%99%A5 LovePages DEMO%3C/text%3E%3Ctext x='50%25' y='70%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-size='10' fill='rgba(232%2C67%2C106%2C0.10)' transform='rotate(-30%2C160%2C100)'%3ENot for use%3C/text%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 320px 200px;
+      }
+      #lp-demo-banner {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        z-index: 2147483647 !important;
+        background: linear-gradient(90deg,#e8436a,#c92b55,#e8436a) !important;
+        background-size: 200% auto !important;
+        animation: lpShimmer 3s linear infinite !important;
+        color: #fff !important;
+        text-align: center !important;
+        font-family: sans-serif !important;
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        padding: 8px 12px !important;
+        letter-spacing: 0.04em !important;
+        user-select: none !important;
+        -webkit-user-select: none !important;
+        box-shadow: 0 2px 16px rgba(232,67,106,0.5) !important;
+      }
+      #lp-demo-stamp {
+        position: fixed !important;
+        bottom: 16px !important;
+        right: 16px !important;
+        z-index: 2147483647 !important;
+        background: rgba(232,67,106,0.92) !important;
+        color: #fff !important;
+        font-family: sans-serif !important;
+        font-size: 11px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        padding: 6px 14px !important;
+        border-radius: 100px !important;
+        pointer-events: none !important;
+        user-select: none !important;
+        box-shadow: 0 4px 20px rgba(232,67,106,0.6) !important;
+      }
+      @keyframes lpShimmer {
+        0%   { background-position: 0% center; }
+        100% { background-position: 200% center; }
+      }
+    `;
+
+    // Yeh script preview window ke document mein inject hogi
+    const WATERMARK_SCRIPT = `
+      (function(){
+        // Right-click disable
+        document.addEventListener('contextmenu', function(e){ e.preventDefault(); return false; });
+
+        // Keyboard shortcuts block: Ctrl+S, Ctrl+U, Ctrl+Shift+I, F12
+        document.addEventListener('keydown', function(e){
+          if(
+            (e.ctrlKey && (e.key==='s' || e.key==='S' || e.key==='u' || e.key==='U')) ||
+            (e.ctrlKey && e.shiftKey && (e.key==='i' || e.key==='I' || e.key==='j' || e.key==='J' || e.key==='c' || e.key==='C')) ||
+            e.key==='F12'
+          ){ e.preventDefault(); e.stopPropagation(); return false; }
+        }, true);
+
+        // Top banner inject
+        var banner = document.createElement('div');
+        banner.id = 'lp-demo-banner';
+        banner.innerHTML = '🔒 DEMO PREVIEW — LovePages ♥ &nbsp;|&nbsp; Yeh sirf demo hai — purchase karo asli template ke liye &nbsp;|&nbsp; <strong>lovepages.in</strong>';
+        document.body.prepend(banner);
+        document.body.style.paddingTop = '38px';
+
+        // Bottom stamp inject
+        var stamp = document.createElement('div');
+        stamp.id = 'lp-demo-stamp';
+        stamp.textContent = '♥ LovePages DEMO';
+        document.body.appendChild(stamp);
+      })();
+    `;
+
+    function previewTemplate(item) {
+      if (!item) return;
+      if (item.link && item.link !== '#') {
+        // Naya tab kholo
+        const previewWin = window.open(item.link, '_blank');
+
+        // Jab page load ho, watermark inject karo
+        if (previewWin) {
+          previewWin.addEventListener('load', function () {
+            try {
+              // CSS inject
+              const style = previewWin.document.createElement('style');
+              style.textContent = WATERMARK_CSS;
+              previewWin.document.head.appendChild(style);
+
+              // JS inject (banner + right-click block)
+              const script = previewWin.document.createElement('script');
+              script.textContent = WATERMARK_SCRIPT;
+              previewWin.document.body.appendChild(script);
+            } catch (e) {
+              // Cross-origin page pe inject nahi hoga — watermark.css link se kaam chalao
+              console.warn('LovePages: Cross-origin preview — watermark manually add karo template mein.');
+            }
+          });
+        }
+      } else {
+        // Link set nahi — modal dikhao
+        openModal(item);
+        const note = document.getElementById('preview-missing-note');
+        if (!note) {
+          const p = document.createElement('p');
+          p.id = 'preview-missing-note';
+          p.style.cssText = 'color:#e8436a;font-size:0.78rem;margin-top:0.5rem;text-align:center;font-weight:600;';
+          p.textContent = '⚠️ Is template ka preview link abhi set nahi hai.';
+          document.getElementById('m-features').after(p);
+        }
+      }
+    }
+
+    // ===== MODAL =====
+    function openModal(item) {
+      currentItem = item;
+      document.getElementById('m-emoji').textContent = item.emoji;
+      document.getElementById('m-title').textContent = item.title;
+      document.getElementById('m-desc').textContent = item.desc;
+      document.getElementById('m-features').innerHTML = item.features.map(f => `<li>${f}</li>`).join('');
+
+      // ✅ Access link set karo — jab bhi modal khule
+      const accessBtn = document.getElementById('access-link');
+      if (accessBtn) accessBtn.href = (item.link && item.link !== '#') ? item.link : '#';
+
+      const mp = document.getElementById('m-price');
+      if (item.isFree) {
+        mp.innerHTML = `<div class="big-price gold">FREE</div><small>No payment needed — use instantly</small>`;
+      } else {
+        mp.innerHTML = `<div class="big-price rose">${item.price}</div><small>one-time payment · no subscription ever</small>`;
+      }
+
+      const cta = document.getElementById('m-cta');
+      if (item.isFree) {
+        cta.textContent = 'Use Free Template →';
+        cta.className = 'btn-rose btn-gold';
+        cta.onclick = showSuccess;
+      } else {
+        cta.textContent = `Pay ${item.price} & Unlock →`;
+        cta.className = 'btn-rose';
+        cta.onclick = handlePayment;
+      }
+
+      document.getElementById('purchase-view').style.display = 'block';
+      document.getElementById('success-view').classList.remove('show');
+      document.getElementById('modal-overlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      updateWaShareBtn(item);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+      // Preview note hata do
+      const note = document.getElementById('preview-missing-note');
+      if (note) note.remove();
+    }
+
+    function handleOverlayClick(e) {
+      if (e.target === document.getElementById('modal-overlay')) closeModal();
+    }
+
+    // ===== PAYMENT =====
+    function parseAmount(str) {
+      const n = parseInt((str || '').replace(/[^\d]/g, ''), 10);
+      return isNaN(n) ? 0 : n * 100;
+    }
+
+    function handlePayment() {
+      if (!currentItem || currentItem.isFree) { showSuccess(); return; }
+      const amount = parseAmount(currentItem.price);
+
+      if (RAZORPAY_KEY === 'YOUR_RAZORPAY_KEY_HERE') {
+        alert('⚠️ Demo Mode\n\nReplace YOUR_RAZORPAY_KEY_HERE in the script with your actual Razorpay key to enable real payments.\n\nShowing success screen for demo…');
+        showSuccess();
+        return;
+      }
+
+      const options = {
+        key: RAZORPAY_KEY,
+        amount, currency: 'INR',
+        name: 'LovePages',
+        description: currentItem.title,
+        image: '',
+        handler() { showSuccess(); },
+        prefill: { name: '', email: '', contact: '' },
+        theme: { color: '#e8436a' }
+      };
+      try {
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', () => alert('Payment failed. Please try again.'));
+        rzp.open();
+      } catch (e) {
+        alert('Unable to open Razorpay. Check your key and internet connection.');
+      }
+    }
+
+    function showSuccess() {
+      document.getElementById('purchase-view').style.display = 'none';
+      document.getElementById('success-view').classList.add('show');
+
+      // ✅ Payment ke baad bhi access link update karo
+      const accessBtn = document.getElementById('access-link');
+      if (accessBtn && currentItem) {
+        if (currentItem.link && currentItem.link !== '#') {
+          accessBtn.href = currentItem.link;
+          accessBtn.style.opacity = '1';
+          accessBtn.style.pointerEvents = 'auto';
+        } else {
+          accessBtn.href = '#';
+          accessBtn.style.opacity = '0.5';
+          accessBtn.onclick = function (e) {
+            e.preventDefault();
+            alert('⚠️ Is template ka link abhi set nahi hai.\nTEMPLATES array mein id=' + currentItem.id + ' ke liye link daalo.');
+          };
+        }
+      }
+    }
+
+    // ===== TESTIMONIALS =====
+    function renderTestimonials() {
+      document.getElementById('testi-grid').innerHTML = TESTIMONIALS.map(t => `
+      <div class="testi-card">
+        <div class="testi-stars">${t.stars}</div>
+        <div class="testi-text">${t.text}</div>
+        <div class="testi-author">
+          <div class="testi-av">${t.initials}</div>
+          ${t.author}, ${t.loc}
+        </div>
+      </div>`).join('');
+      observeReveal('.testi-card');
+    }
+
+    // ===== HERO SPARKLES =====
+    function createSparkles() {
+      const deco = document.getElementById('hero-deco');
+      const chars = ['✦', '✧', '♥', '✿', '❋', '◆'];
+      for (let i = 0; i < 18; i++) {
+        const s = document.createElement('span');
+        s.textContent = chars[Math.floor(Math.random() * chars.length)];
+        s.style.left = `${Math.random() * 100}%`;
+        s.style.top = `${Math.random() * 100}%`;
+        s.style.animationDelay = `${Math.random() * 4}s`;
+        s.style.animationDuration = `${2.5 + Math.random() * 2}s`;
+        s.style.fontSize = `${0.7 + Math.random() * 1}rem`;
+        s.style.color = Math.random() > 0.5 ? 'var(--rose)' : 'var(--gold)';
+        s.style.opacity = '0';
+        deco.appendChild(s);
+      }
+    }
+
+    // ===== SCROLL REVEAL =====
+    function observeReveal(sel) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const delay = Array.from(el.parentElement.children).indexOf(el) * 60;
+            setTimeout(() => el.classList.add('revealed'), delay);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(sel).forEach(el => obs.observe(el));
+    }
+
+    // ===== MOBILE NAV =====
+    function toggleMobNav() { document.getElementById('mob-nav').classList.toggle('open') }
+    function closeMobNav() { document.getElementById('mob-nav').classList.remove('open') }
+
+    // ===== KEYBOARD ESC =====
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal() });
+
+    // ===== SCROLL PROGRESS & BACK TO TOP =====
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      document.getElementById('progress-bar').style.width = progress + '%';
+
+      const backTop = document.getElementById('back-top');
+      if (scrollTop > 400) backTop.classList.add('visible');
+      else backTop.classList.remove('visible');
+    });
+
+    // ===== CATEGORY CHIPS =====
+    function buildCategoryChips() {
+      const popular = ['all', 'love', 'birthday', 'apology', 'proposal', 'anniversary', 'friendship', 'free', 'wedding'];
+      const chipsEl = document.getElementById('cat-chips');
+      if (!chipsEl) return;
+      popular.forEach(slug => {
+        const cat = CATEGORIES.find(c => c.slug === slug);
+        if (!cat) return;
+        const btn = document.createElement('button');
+        btn.className = 'cat-chip' + (slug === 'all' ? ' active' : '');
+        btn.textContent = (cat.emoji ? cat.emoji + ' ' : '') + cat.label;
+        btn.onclick = () => {
+          document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+          btn.classList.add('active');
+          filterByCategory(slug);
+        };
+        chipsEl.appendChild(btn);
+      });
+    }
+
+    function filterByCategory(slug) {
+      activeFilter = slug;
+      activeSearch = '';
+      document.getElementById('section-search-input').value = '';
+      document.getElementById('nav-search-input').value = '';
+      // Sync dropdown
+      document.querySelectorAll('.fpanel-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.slug === slug);
+      });
+      const cat = CATEGORIES.find(c => c.slug === slug);
+      document.getElementById('filter-btn-label').textContent = cat ? (cat.emoji ? cat.emoji + ' ' + cat.label : cat.label) : 'All Categories';
+      const activePill = document.getElementById('active-pill');
+      if (slug === 'all') {
+        activePill.style.display = 'none';
+        activePill.innerHTML = '';
+      } else {
+        activePill.style.display = 'inline-flex';
+        activePill.innerHTML = `<span class="active-filter-pill">${cat ? cat.label : slug} <button onclick="clearFilter()">✕</button></span>`;
+      }
+      renderCards();
+    }
+
+    // ===== WHATSAPP SHARE IN MODAL =====
+    function updateWaShareBtn(item) {
+      const btn = document.getElementById('wa-share-btn');
+      if (!btn || !item) return;
+      const msg = encodeURIComponent(`Dekho yeh amazing template: "${item.title}" — ${item.price === 'FREE' ? 'FREE hai!' : item.price + ' mein mil raha hai!'} lovepages.in`);
+      btn.href = `https://wa.me/?text=${msg}`;
+    }
+
+    // ===== INIT =====
+    document.addEventListener('DOMContentLoaded', () => {
+      // Preloader hide
+      setTimeout(() => {
+        const pl = document.getElementById('preloader');
+        if (pl) pl.classList.add('hide');
+        setTimeout(() => { if (pl) pl.style.display = 'none'; }, 400);
+      }, 600);
+
+      createSparkles();
+      buildFilterPanel();
+      buildCategoryChips();
+      renderCards();
+      renderTestimonials();
+      observeReveal('.step-card');
+    });
+  </script>
+</body>
+
+</html>
