@@ -268,6 +268,13 @@
             margin-top: 20px;
         }
     </style>
+
+<style>
+#lp-banner{position:fixed;top:0;left:0;right:0;z-index:100000;background:linear-gradient(90deg,#e8436a,#c92b55,#e8436a);color:#fff;text-align:center;font-family:sans-serif;font-size:0.78rem;font-weight:600;padding:7px 1rem;box-shadow:0 2px 12px rgba(232,67,106,0.4);user-select:none;}
+#lp-banner a{color:#ffd700;text-decoration:underline;font-weight:700;margin-left:8px;}
+#lp-stamp{position:fixed;bottom:12px;right:16px;z-index:100000;background:rgba(232,67,106,0.92);color:#fff;font-family:sans-serif;font-size:0.72rem;font-weight:700;padding:5px 12px;border-radius:20px;pointer-events:none;user-select:none;}
+body::after{content:"";position:fixed;inset:0;z-index:99999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='200'%3E%3Ctext x='50%25' y='45%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='15' font-weight='bold' fill='rgba(232,67,106,0.13)' transform='rotate(-30,160,100)'%3E%E2%99%A5 Shahid Developer%3C/text%3E%3Ctext x='50%25' y='70%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='10' fill='rgba(232,67,106,0.10)' transform='rotate(-30,160,100)'%3EDemo Only%3C/text%3E%3C/svg%3E");background-repeat:repeat;background-size:320px 200px;}
+</style>
 </head>
 <script>
     // Special logic for final page music and scroll
@@ -304,6 +311,8 @@
 </script>
 
 <body>
+<div id="lp-banner">♥ Demo by <strong>Shahid Developer</strong> — Purchase karo full access ke liye | <a href="https://sgmshahidgaming-png.github.io/lovepages/" target="_blank">Abhi Kharido</a></div>
+<div id="lp-stamp">♥ Shahid Developer</div>
     <div class="hearts">
         <div class="heart">❤️</div>
         <div class="heart">❤️</div>
