@@ -1981,8 +1981,8 @@
 
   <!-- WhatsApp Float -->
   <a id="wa-float"
-    href="https://wa.me/?text=LovePages%20dekho%20-%20kitne%20cute%20romantic%20templates%20hain!%20lovepages.in"
-    target="_blank" rel="noopener" title="WhatsApp pe share karo">💬</a>
+    href="https://wa.me/918081429272?text=Namaste%20Shahid%20Developer%2C%20mujhe%20apna%20Love%20Page%20customize%20karwana%20hai!"
+    target="_blank" rel="noopener" title="Customize karwane ke liye WhatsApp karein">💬</a>
 
   <!-- Back to Top -->
   <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Upar jaao">↑</button>
@@ -2165,7 +2165,7 @@
     <p>Made with love in India 🇮🇳 &nbsp;·&nbsp; © 2026 LovePages</p>
     <div class="footer-links">
       <a href="#">Templates</a><a href="#">How It Works</a>
-      <a href="#">Contact</a><a href="#">Terms</a><a href="#">Privacy</a>
+      <a href="https://wa.me/918081429272?text=Namaste%20Shahid%20Developer%2C%20mujhe%20apna%20Love%20Page%20customize%20karwana%20hai!" target="_blank">📲 Customize karwao</a><a href="#">Terms</a><a href="#">Privacy</a>
     </div>
     <div class="footer-copy">Powered by Razorpay · Secure payments · One-time pricing · 60 Templates</div>
   </footer>
@@ -2694,7 +2694,15 @@
         name: 'LovePages',
         description: currentItem.title,
         image: '',
-        handler() { showSuccess(); },
+        handler() {
+          if (currentItem && currentItem.id === 1) {
+            window.location.href = 'https://sgmshahidgaming-png.github.io/lovepages/thankyou-t1.html';
+          } else if (currentItem && currentItem.id === 2) {
+            window.location.href = 'https://sgmshahidgaming-png.github.io/lovepages/thankyou-t2.html';
+          } else {
+            window.location.href = 'https://sgmshahidgaming-png.github.io/lovepages/thankyou.html';
+          }
+        },
         prefill: { name: '', email: '', contact: '' },
         theme: { color: '#e8436a' }
       };
