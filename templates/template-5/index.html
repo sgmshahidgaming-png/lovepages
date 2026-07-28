@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Premium romantic relationship timeline with anniversary counter and memory stories.">
+  <title>Our Beautiful Journey</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <style>
+    :root {
+      /* CHANGE COLORS HERE */
+      --bg: #fffaf8;
+      --bg-soft: #fff2f3;
+      --beige: #f7ece5;
+      --rose: #c96d7d;
+      --rose-dark: #98495a;
+      --rose-light: #edb5bf;
+      --text: #412f34;
+      --muted: #79666b;
+      --white: #fff;
+      --border: rgba(201, 109, 125, .18);
+      --shadow: 0 22px 65px rgba(111, 61, 71, .13);
+      --shadow-hover: 0 30px 78px rgba(111, 61, 71, .21);
+      --heading: "Playfair Display", serif;
+      --body: "DM Sans", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: var(--body);
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at 8% 8%, rgba(249, 220, 225, .78), transparent 28%),
+        radial-gradient(circle at 90% 42%, rgba(247, 236, 229, .9), transparent 34%),
+        linear-gradient(180deg, #fffdfc, var(--bg), #fff6f6);
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(201, 109, 125, .45);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), 1180px);
+      margin-inline: auto;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -80px;
+      color: rgba(201, 109, 125, .13);
+      animation: floatHeart linear infinite;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0) scale(.8);
+        opacity: 0;
+      }
+
+      12% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate3d(var(--drift), -115vh, 0) rotate(40deg) scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    .hero {
+      padding: 108px 0 70px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 22px;
+      color: var(--rose);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      width: 42px;
+      height: 1px;
+      content: "";
+      background: linear-gradient(90deg, transparent, var(--rose-light));
+    }
+
+    .eyebrow::after {
+      background: linear-gradient(90deg, var(--rose-light), transparent);
+    }
+
+    .hero h1 {
+      max-width: 950px;
+      margin-inline: auto;
+      font-family: var(--heading);
+      font-size: clamp(3rem, 8vw, 6.7rem);
+      font-weight: 600;
+      line-height: .98;
+      letter-spacing: -.045em;
+    }
+
+    .hero h1 em {
+      color: var(--rose);
+      font-weight: 600;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 27px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .hero-heart {
+      display: grid;
+      width: 64px;
+      height: 64px;
+      margin: 35px auto 0;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .7);
+      box-shadow: var(--shadow);
+      color: var(--rose);
+      place-items: center;
+      backdrop-filter: blur(14px);
+      animation: pulse 2.7s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    .counter-section {
+      padding: 25px 0 100px;
+    }
+
+    .counter-card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(32px, 6vw, 62px);
+      border: 1px solid rgba(255, 255, 255, .82);
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .86), rgba(255, 240, 242, .65));
+      box-shadow: var(--shadow);
+      text-align: center;
+      backdrop-filter: blur(22px);
+    }
+
+    .section-label {
+      margin-bottom: 10px;
+      color: var(--rose);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+    }
+
+    .counter-card h2,
+    .section-heading h2,
+    .cta h2 {
+      font-family: var(--heading);
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .counter-card h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+    }
+
+    .counter-card>p:not(.section-label) {
+      max-width: 610px;
+      margin: 14px auto 35px;
+      color: var(--muted);
+    }
+
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .counter-item {
+      min-width: 0;
+      padding: 24px 10px 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .7);
+      box-shadow: 0 12px 35px rgba(112, 68, 76, .08);
+    }
+
+    .counter-number {
+      display: block;
+      color: var(--rose-dark);
+      font-family: var(--heading);
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      font-variant-numeric: tabular-nums;
+      line-height: 1;
+    }
+
+    .counter-unit {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .71rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .timeline-section {
+      padding: 68px 0 110px;
+    }
+
+    .section-heading {
+      max-width: 760px;
+      margin: 0 auto 72px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    }
+
+    .section-heading p:last-child {
+      margin-top: 18px;
+      color: var(--muted);
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1080px;
+      margin-inline: auto;
+    }
+
+    .timeline::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, transparent, var(--rose-light) 7%, var(--rose-light) 93%, transparent);
+      content: "";
+      transform: translateX(-50%);
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 86px 1fr;
+      align-items: center;
+      min-height: 420px;
+      margin-bottom: 54px;
+    }
+
+    .timeline-marker {
+      z-index: 3;
+      display: grid;
+      grid-column: 2;
+      width: 52px;
+      height: 52px;
+      margin-inline: auto;
+      border: 8px solid var(--bg);
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 8px 26px rgba(159, 84, 97, .2);
+      color: var(--rose);
+      place-items: center;
+    }
+
+    .timeline-content {
+      opacity: 0;
+      transition: opacity .8s ease, transform .8s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+      grid-column: 1;
+      transform: translateX(-52px);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+      grid-column: 3;
+      transform: translateX(52px);
+    }
+
+    .timeline-item.is-visible .timeline-content {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .memory-card {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .84);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: var(--shadow);
+      transition: transform .35s ease, box-shadow .35s ease;
+      backdrop-filter: blur(20px);
+    }
+
+    .memory-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .photo-button {
+      position: relative;
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: var(--beige);
+    }
+
+    .memory-photo-wrap {
+      position: relative;
+    }
+
+    .song-button {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 5;
+      display: grid;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 50%;
+      background: rgba(44, 25, 30, .5);
+      color: white;
+      cursor: pointer;
+      place-items: center;
+      backdrop-filter: blur(10px);
+      transition: transform .3s ease, background .3s ease;
+    }
+
+    .song-button:hover {
+      transform: scale(1.08);
+      background: rgba(44, 25, 30, .72);
+    }
+
+    .song-button.is-playing {
+      background: var(--rose);
+    }
+
+    .song-button.is-playing i {
+      animation: pulse 1.3s ease-in-out infinite;
+    }
+
+    .photo-button img {
+      height: 250px;
+      object-fit: cover;
+      transition: transform .7s ease;
+    }
+
+    .memory-card:hover .photo-button img {
+      transform: scale(1.045);
+    }
+
+    .photo-overlay {
+      position: absolute;
+      right: 18px;
+      bottom: 17px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255, 255, 255, .48);
+      border-radius: 999px;
+      background: rgba(44, 25, 30, .26);
+      color: white;
+      font-size: .76rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .memory-body {
+      padding: 28px 30px 31px;
+    }
+
+    .memory-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--rose-dark);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .memory-date-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .memory-date-edit-btn {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .8);
+      color: var(--rose);
+      cursor: pointer;
+      font-size: .62rem;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .memory-date-edit-btn:hover {
+      background: rgba(201, 109, 125, .16);
+      transform: scale(1.1) rotate(-8deg);
+    }
+
+    .memory-body h3 {
+      font-family: var(--heading);
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .memory-body p {
+      margin-top: 13px;
+      color: var(--muted);
+    }
+
+    .cta-section {
+      padding: 38px 0 120px;
+      text-align: center;
+    }
+
+    .cta {
+      padding: clamp(44px, 8vw, 84px) 24px;
+      border: 1px solid rgba(255, 255, 255, .8);
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(253, 226, 231, .8), rgba(255, 255, 255, .82), rgba(247, 236, 229, .88));
+      box-shadow: var(--shadow);
+    }
+
+    .cta h2 {
+      max-width: 720px;
+      margin-inline: auto;
+      font-size: clamp(2.3rem, 6vw, 4.6rem);
+    }
+
+    .cta>p:not(.section-label) {
+      max-width: 590px;
+      margin: 18px auto 30px;
+      color: var(--muted);
+    }
+
+    .memory-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      min-height: 56px;
+      padding: 15px 27px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      box-shadow: 0 15px 33px rgba(158, 77, 93, .27);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .memory-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 43px rgba(158, 77, 93, .35);
+    }
+
+    .edit-date-button {
+      position: absolute;
+      top: clamp(16px, 3vw, 26px);
+      right: clamp(16px, 3vw, 26px);
+      z-index: 4;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .85);
+      box-shadow: 0 10px 26px rgba(112, 68, 76, .14);
+      color: var(--rose);
+      cursor: pointer;
+      place-items: center;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .edit-date-button:hover {
+      transform: translateY(-2px) rotate(-8deg);
+      box-shadow: 0 14px 32px rgba(112, 68, 76, .22);
+    }
+
+    /* Date customization modal */
+    .date-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1500;
+      display: grid;
+      visibility: hidden;
+      padding: 24px;
+      background: rgba(45, 27, 31, .82);
+      opacity: 0;
+      place-items: center;
+      transition: opacity .32s ease, visibility .32s ease;
+      backdrop-filter: blur(16px);
+    }
+
+    .date-modal.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .date-dialog {
+      position: relative;
+      width: min(100%, 440px);
+      padding: clamp(30px, 5vw, 44px);
+      border: 1px solid rgba(255, 255, 255, .82);
+      border-radius: 26px;
+      background: #fffdfc;
+      box-shadow: 0 35px 100px rgba(18, 8, 10, .4);
+      text-align: center;
+    }
+
+    .date-dialog h3 {
+      margin: 6px 0 12px;
+      font-family: var(--heading);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 600;
+    }
+
+    .date-modal-hint {
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .date-field {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--rose-dark);
+      font-size: .76rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    .date-input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 1rem;
+    }
+
+    .date-modal-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .date-modal-actions .nav-button {
+      width: 100%;
+    }
+
+    /* Image modal */
+    .image-modal,
+    .story-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1500;
+      display: grid;
+      visibility: hidden;
+      padding: 24px;
+      background: rgba(45, 27, 31, .82);
+      opacity: 0;
+      place-items: center;
+      transition: opacity .32s ease, visibility .32s ease;
+      backdrop-filter: blur(16px);
+    }
+
+    .image-modal.is-open,
+    .story-modal.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .image-dialog {
+      position: relative;
+      width: min(100%, 940px);
+      overflow: hidden;
+      border-radius: 26px;
+      background: white;
+      box-shadow: 0 35px 100px rgba(18, 8, 10, .4);
+    }
+
+    .image-dialog img {
+      max-height: 74vh;
+      object-fit: cover;
+    }
+
+    .image-dialog p {
+      padding: 20px 24px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 10;
+      display: grid;
+      width: 45px;
+      height: 45px;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 50%;
+      background: rgba(44, 25, 30, .55);
+      color: white;
+      cursor: pointer;
+      place-items: center;
+      backdrop-filter: blur(12px);
+    }
+
+    /* Story modal */
+    .story-dialog {
+      position: relative;
+      width: min(100%, 1100px);
+      height: min(700px, 92vh);
+      max-height: 92vh;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, .34);
+      border-radius: 32px;
+      background: #fffdfc;
+      box-shadow: 0 45px 120px rgba(35, 17, 21, .45);
+      transform: translateY(28px) scale(.96);
+      transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .story-modal.is-open .story-dialog {
+      transform: translateY(0) scale(1);
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      height: 100%;
+    }
+
+    .story-photo {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      background: var(--beige);
+    }
+
+    .story-photo>img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-photo::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(180deg, transparent 25%, rgba(34, 17, 21, .15) 55%, rgba(34, 17, 21, .82));
+    }
+
+    .story-count {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      z-index: 2;
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .18);
+      color: white;
+      font-size: .78rem;
+      letter-spacing: .12em;
+      backdrop-filter: blur(14px);
+    }
+
+    .story-photo-copy {
+      position: absolute;
+      right: 32px;
+      bottom: 32px;
+      left: 32px;
+      z-index: 2;
+      color: white;
+    }
+
+    .story-photo-copy span {
+      display: block;
+      margin-bottom: 10px;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    .story-photo-copy p {
+      font-family: var(--heading);
+      font-size: clamp(1.45rem, 3vw, 2.12rem);
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .story-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+      padding: clamp(42px, 6vw, 70px);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(249, 220, 225, .56), transparent 31%),
+        linear-gradient(145deg, #fffdfc, #fff8f6);
+    }
+
+    .story-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .story-meta p {
+      color: var(--rose);
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .story-meta time {
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .story-content h2 {
+      max-width: 590px;
+      font-family: var(--heading);
+      font-size: clamp(2.35rem, 5vw, 4rem);
+      font-weight: 600;
+      line-height: 1.04;
+      letter-spacing: -.03em;
+    }
+
+    .story-intro {
+      max-width: 570px;
+      margin-top: 17px;
+      color: var(--rose-dark);
+      font-family: var(--heading);
+      font-size: 1.12rem;
+      font-style: italic;
+    }
+
+    .story-details {
+      margin-top: 30px;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, .74);
+      box-shadow: 0 14px 40px rgba(130, 75, 85, .07);
+    }
+
+    .story-details h3 {
+      margin-bottom: 10px;
+      font-family: var(--heading);
+      font-size: 1.38rem;
+      font-weight: 600;
+    }
+
+    .story-details p {
+      color: var(--muted);
+    }
+
+    .story-highlight {
+      display: flex;
+      gap: 15px;
+      margin-top: 21px;
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(249, 220, 225, .68), rgba(247, 236, 229, .75));
+    }
+
+    .story-highlight i {
+      margin-top: 5px;
+      color: var(--rose);
+    }
+
+    .story-highlight p {
+      font-family: var(--heading);
+      font-style: italic;
+    }
+
+    .story-navigation {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 17px;
+      margin-top: auto;
+      padding-top: 33px;
+    }
+
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 12px 19px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: .84rem;
+      font-weight: 600;
+    }
+
+    .prev-button {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--rose-dark);
+    }
+
+    .next-button {
+      background: linear-gradient(135deg, var(--rose), var(--rose-dark));
+      color: white;
+    }
+
+    .nav-button:disabled {
+      cursor: not-allowed;
+      opacity: .43;
+    }
+
+    .story-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .story-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border-radius: 50%;
+      background: rgba(201, 109, 125, .26);
+      cursor: pointer;
+    }
+
+    .story-dot.active {
+      width: 25px;
+      border-radius: 999px;
+      background: var(--rose);
+    }
+
+    @media (max-width: 900px) {
+      .counter-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .timeline::before {
+        left: 26px;
+        transform: none;
+      }
+
+      .timeline-item {
+        grid-template-columns: 52px 1fr;
+        gap: 18px;
+        min-height: auto;
+        margin-bottom: 44px;
+      }
+
+      .timeline-marker {
+        grid-column: 1;
+        align-self: start;
+        margin: 30px 0 0;
+      }
+
+      .timeline-item:nth-child(odd) .timeline-content,
+      .timeline-item:nth-child(even) .timeline-content {
+        grid-column: 2;
+        grid-row: 1;
+        transform: translateY(42px);
+      }
+
+      .timeline-item.is-visible .timeline-content {
+        transform: translateY(0);
+      }
+
+      .story-dialog {
+        overflow-y: auto;
+      }
+
+      .story-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .story-photo,
+      .story-photo>img {
+        min-height: 380px;
+        max-height: 430px;
+        height: auto;
+      }
+
+      .story-content {
+        overflow: visible;
+        height: auto;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(calc(100% - 24px), 1180px);
+      }
+
+      .hero {
+        padding: 82px 0 52px;
+      }
+
+      .counter-card {
+        padding: 36px 17px;
+        border-radius: 24px;
+      }
+
+      .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .timeline::before {
+        left: 21px;
+      }
+
+      .timeline-item {
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+      }
+
+      .timeline-marker {
+        width: 42px;
+        height: 42px;
+        border-width: 6px;
+      }
+
+      .photo-button img {
+        height: 205px;
+      }
+
+      .memory-body {
+        padding: 23px 20px 25px;
+      }
+
+      .story-modal {
+        padding: 0;
+      }
+
+      .story-dialog {
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0;
+      }
+
+      .story-photo,
+      .story-photo>img {
+        min-height: 330px;
+        max-height: 330px;
+      }
+
+      .story-photo-copy {
+        right: 21px;
+        bottom: 21px;
+        left: 21px;
+      }
+
+      .story-content {
+        padding: 34px 20px 28px;
+      }
+
+      .story-meta {
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .story-details {
+        padding: 20px 18px;
+      }
+
+      .story-navigation {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .story-dots {
+        grid-column: 1/-1;
+        grid-row: 1;
+      }
+
+      .prev-button {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .next-button {
+        grid-column: 2;
+        grid-row: 2;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+
+      .timeline-content {
+        opacity: 1;
+        transform: none !important;
+      }
+
+      .floating-hearts {
+        display: none;
+      }
+    }
+
+    /* ===== Permanent watermark: tiled background text ===== */
+    .demo-watermark {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22420%22%20height%3D%22420%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3Cpattern%20id%3D%22wm%22%20width%3D%22420%22%20height%3D%22420%22%20patternUnits%3D%22userSpaceOnUse%22%20patternTransform%3D%22rotate%28-28%29%22%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%220%22%20y%3D%2260%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28152%2C73%2C90%2C0.09%29%22%3EShahid%20Developer%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%2220%22%20y%3D%22150%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22600%22%20fill%3D%22rgba%28152%2C73%2C90%2C0.075%29%22%3EDemo%20Only%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22210%22%20y%3D%22260%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2223%22%20font-weight%3D%22700%22%20fill%3D%22rgba%28152%2C73%2C90%2C0.09%29%22%3EShahid%20Developer%3C/text%3E%0A%20%20%20%20%20%20%3Ctext%20x%3D%22230%22%20y%3D%22350%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2216%22%20font-weight%3D%22600%22%20fill%3D%22rgba%28152%2C73%2C90%2C0.075%29%22%3EDemo%20Only%3C/text%3E%0A%20%20%20%20%3C/pattern%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22420%22%20height%3D%22420%22%20fill%3D%22url%28%23wm%29%22/%3E%0A%3C/svg%3E");
+      background-repeat: repeat;
+      pointer-events: none;
+    }
+
+    /* ===== Permanent watermark: top demo banner ===== */
+    .demo-banner {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 11px 16px;
+      background: linear-gradient(90deg, var(--rose-dark), var(--rose));
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 600;
+      text-align: center;
+      letter-spacing: .01em;
+    }
+
+    .demo-banner a {
+      color: #ffe6ac;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    /* ===== Permanent watermark: bottom-right floating badge ===== */
+    .demo-badge {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 20;
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: var(--rose);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    @media (max-width: 640px) {
+      .demo-banner {
+        font-size: .72rem;
+        padding: 9px 10px;
+      }
+
+      .demo-badge {
+        right: 12px;
+        bottom: 12px;
+        padding: 7px 14px;
+        font-size: .7rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="demo-banner">
+    ▼ Demo by <strong>Shahid Developer</strong> — Purchase karo full access ke liye |
+    <a href="#" target="_blank" rel="noopener">Abhi Kharido</a>
+  </div>
+  <div class="demo-watermark" aria-hidden="true"></div>
+  <div class="demo-badge">▼ Shahid Developer</div>
+
+  <div class="floating-hearts" id="floatingHearts" aria-hidden="true"></div>
+
+  <main>
+    <header class="hero">
+      <div class="container">
+        <div class="eyebrow"><i class="fa-solid fa-heart"></i> Our Love Story</div>
+        <h1>Our Beautiful <em>Journey</em></h1>
+        <p>A premium timeline of our relationship milestones, photos, and anniversary memories.</p>
+        <div class="hero-heart"><i class="fa-solid fa-heart"></i></div>
+      </div>
+    </header>
+
+    <section class="counter-section" aria-labelledby="counterTitle">
+      <div class="container">
+        <div class="counter-card">
+          <button class="edit-date-button" id="editDateBtn" type="button" aria-label="Change our anniversary date">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+          <p class="section-label">Together Since Our Special Day</p>
+          <h2 id="counterTitle">Every Second With You Is Beautiful</h2>
+          <p>Counting every precious moment since the day our beautiful story began.</p>
+
+          <div class="counter-grid" aria-label="Time spent together">
+            <div class="counter-item"><span class="counter-number" id="years">00</span><span
+                class="counter-unit">Years</span></div>
+            <div class="counter-item"><span class="counter-number" id="months">00</span><span
+                class="counter-unit">Months</span></div>
+            <div class="counter-item"><span class="counter-number" id="days">00</span><span
+                class="counter-unit">Days</span></div>
+            <div class="counter-item"><span class="counter-number" id="hours">00</span><span
+                class="counter-unit">Hours</span></div>
+            <div class="counter-item"><span class="counter-number" id="minutes">00</span><span
+                class="counter-unit">Minutes</span></div>
+            <div class="counter-item"><span class="counter-number" id="seconds">00</span><span
+                class="counter-unit">Seconds</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="timeline-section" id="our-memories" aria-labelledby="timelineTitle">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-label">Moments We Will Always Treasure</p>
+          <h2 id="timelineTitle">A Love Story Written in Memories</h2>
+          <p>From the moment we first met to every beautiful memory that followed, each chapter made our journey more
+            special.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button" data-image="https://files.catbox.moe/ujiciy.png"
+                    data-caption="The day we first met and our beautiful journey began."
+                    aria-label="Open first meeting photo">
+                    <img src="https://files.catbox.moe/ujiciy.png" alt="The day we first met" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224567/tu_thodi_der_or_thehar_jA_lyrics_720P_HD_snz1qh.mp4"
+                    data-track="As Long As You Love Me" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-met"><i class="fa-solid fa-heart"></i> 14 February
+                      2022</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-met" aria-label="Edit this date"><i
+                        class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>The Day We First Met</h3>
+                  <p>The world felt brighter that day. One simple meeting quietly became the beginning of our most
+                    beautiful story.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button"
+                    data-image="https://i.pinimg.com/736x/64/22/2e/64222ea9bdddb67969bad35014449f98.jpg"
+                    data-caption="Our first conversation that made everything feel special."
+                    aria-label="Open first conversation photo">
+                    <img src="https://i.pinimg.com/736x/64/22/2e/64222ea9bdddb67969bad35014449f98.jpg"
+                      alt="Our first conversation" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224557/Saathiya_lyrics___Shreya_Ghosal__songlyrics__saathiya__shorts_720P_HD_jxzmnk.mp4"
+                    data-track="Clear Eyes" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-conversation"><i class="fa-solid fa-heart"></i> 18 February
+                      2022</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-conversation"
+                      aria-label="Edit this date"><i class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>Our First Conversation</h3>
+                  <p>A few simple words became hours of smiles, comfort, and a connection that already felt special.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button" data-image="https://files.catbox.moe/dhg9fo.png"
+                    data-caption="Our first date filled with nervous smiles." aria-label="Open first date photo">
+                    <img src="https://files.catbox.moe/dhg9fo.png" alt="Our first date" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224562/Ye_Jo_Halka_Halka_Suroor_Hai___Lyrical_Song_Status_Edit_%EF%B8%8F_720P_HD__1_v5khso.mp4"
+                    data-track="Sweet and Low" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-date"><i class="fa-solid fa-heart"></i> 5 March 2022</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-date" aria-label="Edit this date"><i
+                        class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>Our First Date</h3>
+                  <p>Between shy glances, laughter, and long conversations, our first date became a memory my heart will
+                    always keep.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button"
+                    data-image="https://res.cloudinary.com/zcnphhc3/image/upload/v1785178862/ChatGPT_Image_Jul_28_2026_12_29_45_AM_n8ju6w.png"
+                    data-caption="The warmth of our first hug." aria-label="Open first hug photo">
+                    <img
+                      src="https://res.cloudinary.com/zcnphhc3/image/upload/v1785178862/ChatGPT_Image_Jul_28_2026_12_29_45_AM_n8ju6w.png"
+                      alt="Our first hug" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224530/Seene_Se_Tum_Mere_Aake_Lag_Jao_Na___Whatsapp_Status_%EF%B8%8F__Arijit_Singh___Chal_Waha_Jaate_Hain_Status_720P_60FPS_soenvz.mp4"
+                    data-track="Magic Marker" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-hug"><i class="fa-solid fa-heart"></i> 10 March 2022</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-hug" aria-label="Edit this date"><i
+                        class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>Our First Hug</h3>
+                  <p>For a few seconds, the whole world went quiet, and all I could feel was how safe I felt in your
+                    arms.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button" data-image="https://files.catbox.moe/3kjvnj.png"
+                    data-caption="Our first photo together." aria-label="Open first photo together">
+                    <img src="https://files.catbox.moe/3kjvnj.png" alt="Our first photo together" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224554/Aankhon_ki_hai_ye_khwahishein__shorts__arijitsingh__lyrics__bollywood__akshaykumar__lovesadstatus_720P_HD_k1shqn.mp4"
+                    data-track="Thinkin' Back" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-photo"><i class="fa-solid fa-heart"></i> 20 March 2022</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-photo"
+                      aria-label="Edit this date"><i class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>Our First Photo Together</h3>
+                  <p>One photograph captured two smiles, one unforgettable moment, and the beginning of countless
+                    memories.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button" data-image="https://files.catbox.moe/d6jvss.png"
+                    data-caption="One of our most beautiful memories." aria-label="Open beautiful memory photo">
+                    <img src="https://files.catbox.moe/d6jvss.png" alt="Our most beautiful memory" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224560/_Off-Campus_Series__.__.___Plot___Based_on_the_viral_book_series_by_Elle_Kennedy__the_show_is_set_at_Briar_University_and_follows_the_lives_of_the_elit_y70boe.mp4"
+                    data-track="Blue Skies" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-beautiful"><i class="fa-solid fa-heart"></i> 12 August
+                      2023</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-beautiful"
+                      aria-label="Edit this date"><i class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>Our Most Beautiful Memory</h3>
+                  <p>Time seemed to pause while we laughed, dreamed, and held each other close. That moment felt exactly
+                    like home.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-content">
+              <div class="memory-card">
+                <div class="memory-photo-wrap">
+                  <button class="photo-button"
+                    data-image="https://res.cloudinary.com/zcnphhc3/image/upload/v1785178869/ChatGPT_Image_Jul_28_2026_12_29_54_AM_mv0kbs.png"
+                    data-caption="The promise we made to each other." aria-label="Open our forever promise photo">
+                    <img
+                      src="https://res.cloudinary.com/zcnphhc3/image/upload/v1785178869/ChatGPT_Image_Jul_28_2026_12_29_54_AM_mv0kbs.png"
+                      alt="Our forever promise" loading="lazy">
+                    <span class="photo-overlay"><i class="fa-solid fa-expand"></i> View Photo</span>
+                  </button>
+                  <button class="song-button" type="button"
+                    data-audio="https://res.cloudinary.com/zcnphhc3/video/upload/v1785224563/Unconfirmed_download_https___www.instagram.com_reel_DbGBGS4gQkR__MP4_cxp09w.mp4"
+                    data-track="The Engagement" aria-label="Play our song for this memory" aria-pressed="false">
+                    <i class="fa-solid fa-play"></i>
+                  </button>
+                </div>
+                <div class="memory-body">
+                  <div class="memory-date-row">
+                    <time class="memory-date" data-key="tl-promise"><i class="fa-solid fa-heart"></i> 14 February
+                      2024</time>
+                    <button class="memory-date-edit-btn" type="button" data-key="tl-promise"
+                      aria-label="Edit this date"><i class="fa-solid fa-pen"></i></button>
+                  </div>
+                  <h3>💍 Our Forever Promise</h3>
+                  <p>No matter what tomorrow brings, I promise to stand beside you, choose you again and again, and love
+                    you a little more with every passing day.</p>
+                </div>
+              </div>
+            </div>
+            <div class="timeline-marker"><i class="fa-solid fa-heart"></i></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta">
+          <p class="section-label">And This Is Only the Beginning</p>
+          <h2>Every Memory With You Feels Like Magic</h2>
+          <p>Open our memory diary and revisit the moments, conversations, places, and promises that made our journey
+            unforgettable.</p>
+
+          <!-- THIS BUTTON NOW OPENS THE 5-CARD MEMORY DIARY -->
+          <button class="memory-button" id="openMemoryStories" type="button">
+            View Our Memories
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Timeline image viewer -->
+  <div class="image-modal" id="imageModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="image-dialog">
+      <button class="modal-close" id="imageClose" aria-label="Close image"><i class="fa-solid fa-xmark"></i></button>
+      <img id="modalImage" src="" alt="">
+      <p id="modalCaption"></p>
+    </div>
+  </div>
+
+  <!-- Anniversary date editor -->
+  <div class="date-modal" id="dateModal" role="dialog" aria-modal="true" aria-labelledby="dateModalTitle"
+    aria-hidden="true">
+    <div class="date-dialog">
+      <button class="modal-close" id="dateModalClose" aria-label="Close date editor"><i
+          class="fa-solid fa-xmark"></i></button>
+      <p class="section-label">Customise Your Counter</p>
+      <h3 id="dateModalTitle">When Did Your Story Begin?</h3>
+      <p class="date-modal-hint">Pick your special day and the counter above will update instantly, on every device you
+        open this page on.</p>
+      <label class="date-field" for="anniversaryDateInput">Anniversary date</label>
+      <input type="date" id="anniversaryDateInput" class="date-input">
+      <div class="date-modal-actions">
+        <button class="nav-button prev-button" id="dateModalCancel" type="button">Cancel</button>
+        <button class="nav-button next-button" id="dateModalSave" type="button">Save Date</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Per-memory date editor: used by every timeline card's pencil button -->
+  <div class="date-modal" id="memoryDateModal" role="dialog" aria-modal="true" aria-labelledby="memoryDateModalTitle"
+    aria-hidden="true">
+    <div class="date-dialog">
+      <button class="modal-close" id="memoryDateModalClose" aria-label="Close date editor"><i
+          class="fa-solid fa-xmark"></i></button>
+      <h3 id="memoryDateModalTitle">Update This Memory's Date</h3>
+      <p class="date-modal-hint">Pick the real date for this moment. It will be saved on this device.</p>
+
+      <label class="date-field" for="memoryDateInput">Memory date</label>
+      <input type="date" id="memoryDateInput" class="date-input">
+      <div class="date-modal-actions">
+        <button class="nav-button prev-button" id="memoryDateModalCancel" type="button">Cancel</button>
+        <button class="nav-button next-button" id="memoryDateModalSave" type="button">Save Date</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKING 5-CARD MEMORY STORY MODAL -->
+  <div class="story-modal" id="memoryStoryModal" role="dialog" aria-modal="true" aria-labelledby="storyTitle"
+    aria-hidden="true">
+    <div class="story-dialog">
+      <button class="modal-close" id="closeMemoryStories" aria-label="Close memory diary"><i
+          class="fa-solid fa-xmark"></i></button>
+
+      <div class="story-layout">
+        <div class="story-photo">
+          <img id="storyImage" src="https://media1.tenor.com/m/fbOyKze_WwMAAAAd/milk-and-mocha-bear-couple.gif"
+            alt="Romantic memory">
+          <div class="story-count"><span id="currentStory">01</span> / <span id="totalStories">05</span></div>
+          <div class="story-photo-copy">
+            <span id="storyCategory">The Beginning</span>
+            <p id="storyQuote"></p>
+          </div>
+        </div>
+
+        <div class="story-content">
+          <div class="story-meta">
+            <p><i class="fa-solid fa-heart"></i> Our Memory Diary</p>
+            <time id="storyDate"></time>
+          </div>
+
+          <h2 id="storyTitle"></h2>
+          <p class="story-intro" id="storyIntro"></p>
+
+          <div class="story-details">
+            <h3 id="storyDetailHeading"></h3>
+            <p id="storyDescription"></p>
+          </div>
+
+          <div class="story-highlight">
+            <i class="fa-solid fa-quote-left"></i>
+            <p id="storyHighlight"></p>
+          </div>
+
+          <div class="story-navigation">
+            <button class="nav-button prev-button" id="previousStory" type="button">
+              <i class="fa-solid fa-arrow-left"></i> Previous
+            </button>
+
+            <div class="story-dots" id="storyDots"></div>
+
+            <button class="nav-button next-button" id="nextStory" type="button">
+              Next Memory <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    "use strict";
+
+    /* DEFAULT START DATE (used only the first time, before anyone customises it) */
+    const DEFAULT_START_DATE = "2022-02-14";
+    const START_DATE_STORAGE_KEY = "ourBeautifulJourneyStartDate";
+
+    let RELATIONSHIP_START_DATE = (localStorage.getItem(START_DATE_STORAGE_KEY) || DEFAULT_START_DATE) + "T00:00:00";
+
+    const pad = n => String(n).padStart(2, "0");
+
+    function addMonths(date, months) {
+      const result = new Date(date);
+      const originalDay = result.getDate();
+      result.setDate(1);
+      result.setMonth(result.getMonth() + months);
+      const lastDay = new Date(result.getFullYear(), result.getMonth() + 1, 0).getDate();
+      result.setDate(Math.min(originalDay, lastDay));
+      return result;
+    }
+
+    function updateCounter() {
+      const start = new Date(RELATIONSHIP_START_DATE);
+      const now = new Date();
+      if (Number.isNaN(start.getTime()) || now < start) return;
+
+      let totalMonths = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+      let anchor = addMonths(start, totalMonths);
+
+      if (anchor > now) {
+        totalMonths--;
+        anchor = addMonths(start, totalMonths);
+      }
+
+      let remaining = now - anchor;
+      const dayMs = 86400000;
+      const hourMs = 3600000;
+      const minuteMs = 60000;
+
+      const values = {
+        years: Math.floor(totalMonths / 12),
+        months: totalMonths % 12,
+        days: Math.floor(remaining / dayMs)
+      };
+
+      remaining %= dayMs;
+      values.hours = Math.floor(remaining / hourMs);
+      remaining %= hourMs;
+      values.minutes = Math.floor(remaining / minuteMs);
+      values.seconds = Math.floor((remaining % minuteMs) / 1000);
+
+      Object.entries(values).forEach(([id, value]) => {
+        document.getElementById(id).textContent = pad(value);
+      });
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    /* Customisable anniversary date */
+    const dateModal = document.getElementById("dateModal");
+    const editDateBtn = document.getElementById("editDateBtn");
+    const anniversaryDateInput = document.getElementById("anniversaryDateInput");
+    const dateModalSave = document.getElementById("dateModalSave");
+    const dateModalCancel = document.getElementById("dateModalCancel");
+    const dateModalClose = document.getElementById("dateModalClose");
+
+    function openDateModal() {
+      anniversaryDateInput.value = RELATIONSHIP_START_DATE.slice(0, 10);
+      dateModal.classList.add("is-open");
+      dateModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeDateModal() {
+      dateModal.classList.remove("is-open");
+      dateModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    editDateBtn.addEventListener("click", openDateModal);
+    dateModalCancel.addEventListener("click", closeDateModal);
+    dateModalClose.addEventListener("click", closeDateModal);
+
+    dateModal.addEventListener("click", event => {
+      if (event.target === dateModal) closeDateModal();
+    });
+
+    dateModalSave.addEventListener("click", () => {
+      const chosen = anniversaryDateInput.value;
+      if (!chosen) return;
+
+      localStorage.setItem(START_DATE_STORAGE_KEY, chosen);
+      RELATIONSHIP_START_DATE = chosen + "T00:00:00";
+      updateCounter();
+      closeDateModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (dateModal.classList.contains("is-open") && event.key === "Escape") closeDateModal();
+    });
+
+    /* Customisable date for every single memory card in the timeline */
+    const MEMORY_DATE_DEFAULTS = {
+      "tl-met": "2022-02-14",
+      "tl-conversation": "2022-02-18",
+      "tl-date": "2022-03-05",
+      "tl-hug": "2022-03-10",
+      "tl-photo": "2022-03-20",
+      "tl-beautiful": "2023-08-12",
+      "tl-promise": "2024-02-14"
+    };
+    const MEMORY_DATE_STORAGE_PREFIX = "ourBeautifulJourneyMemoryDate:";
+
+    function formatMemoryDate(isoDate) {
+      const parsed = new Date(isoDate + "T00:00:00");
+      if (Number.isNaN(parsed.getTime())) return "";
+      return parsed.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    }
+
+    function applyMemoryDate(key) {
+      const stored = localStorage.getItem(MEMORY_DATE_STORAGE_PREFIX + key) || MEMORY_DATE_DEFAULTS[key];
+      const timeEl = document.querySelector(`.memory-date[data-key="${key}"]`);
+      if (timeEl && stored) {
+        timeEl.innerHTML = `<i class="fa-solid fa-heart"></i> ${formatMemoryDate(stored)}`;
+      }
+    }
+
+    Object.keys(MEMORY_DATE_DEFAULTS).forEach(applyMemoryDate);
+
+    const memoryDateModal = document.getElementById("memoryDateModal");
+    const memoryDateInput = document.getElementById("memoryDateInput");
+    const memoryDateModalTitle = document.getElementById("memoryDateModalTitle");
+    const memoryDateModalSave = document.getElementById("memoryDateModalSave");
+    const memoryDateModalCancel = document.getElementById("memoryDateModalCancel");
+    const memoryDateModalClose = document.getElementById("memoryDateModalClose");
+    let editingMemoryDateKey = null;
+
+    function openMemoryDateModal(key, label) {
+      editingMemoryDateKey = key;
+      memoryDateInput.value = localStorage.getItem(MEMORY_DATE_STORAGE_PREFIX + key) || MEMORY_DATE_DEFAULTS[key];
+      memoryDateModalTitle.textContent = label ? `Update Date: ${label}` : "Update This Memory's Date";
+      memoryDateModal.classList.add("is-open");
+      memoryDateModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeMemoryDateModal() {
+      memoryDateModal.classList.remove("is-open");
+      memoryDateModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      editingMemoryDateKey = null;
+    }
+
+    document.querySelectorAll(".memory-date-edit-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const key = button.dataset.key;
+        const card = button.closest(".memory-card");
+        const label = card ? card.querySelector("h3").textContent : "";
+        openMemoryDateModal(key, label);
+      });
+    });
+
+    memoryDateModalSave.addEventListener("click", () => {
+      const chosen = memoryDateInput.value;
+      if (!chosen || !editingMemoryDateKey) return;
+
+      localStorage.setItem(MEMORY_DATE_STORAGE_PREFIX + editingMemoryDateKey, chosen);
+      applyMemoryDate(editingMemoryDateKey);
+      refreshStoryDateIfOpen(editingMemoryDateKey);
+      closeMemoryDateModal();
+    });
+
+    memoryDateModalCancel.addEventListener("click", closeMemoryDateModal);
+    memoryDateModalClose.addEventListener("click", closeMemoryDateModal);
+
+    memoryDateModal.addEventListener("click", event => {
+      if (event.target === memoryDateModal) closeMemoryDateModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (memoryDateModal.classList.contains("is-open") && event.key === "Escape") closeMemoryDateModal();
+    });
+
+    /* Timeline scroll animation */
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .14 });
+      timelineItems.forEach(item => observer.observe(item));
+    } else {
+      timelineItems.forEach(item => item.classList.add("is-visible"));
+    }
+
+    /* Generic image fallback */
+    function makePlaceholder(title, path) {
+      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f9dce1"/>
+              <stop offset="50%" stop-color="#fff8f6"/>
+              <stop offset="100%" stop-color="#f1dfd5"/>
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="900" fill="url(#g)"/>
+          <text x="600" y="385" text-anchor="middle" font-size="115" fill="#c96d7d">♥</text>
+          <text x="600" y="505" text-anchor="middle" font-family="Georgia" font-size="48" fill="#98495a">${title}</text>
+          <text x="600" y="570" text-anchor="middle" font-family="Arial" font-size="24" fill="#79666b">${path}</text>
+        </svg>
+      `);
+    }
+
+    document.querySelectorAll(".photo-button img").forEach((img, index) => {
+      img.addEventListener("error", () => {
+        img.src = makePlaceholder(`Memory ${index + 1}`, "Check your internet connection");
+      }, { once: true });
+    });
+
+    /* Timeline image modal */
+    const imageModal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalCaption = document.getElementById("modalCaption");
+
+    document.querySelectorAll(".photo-button").forEach(button => {
+      button.addEventListener("click", () => {
+        modalImage.src = button.dataset.image;
+        modalImage.alt = button.querySelector("img").alt;
+        modalCaption.textContent = button.dataset.caption;
+        imageModal.classList.add("is-open");
+        imageModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+      });
+    });
+
+    document.getElementById("imageClose").addEventListener("click", closeImageModal);
+
+    function closeImageModal() {
+      imageModal.classList.remove("is-open");
+      imageModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    /* Memory songs: one shared player, click to play, click again to pause */
+    const memorySongPlayer = new Audio();
+    memorySongPlayer.preload = "none";
+    let activeSongButton = null;
+
+    function setButtonPlaying(button, isPlaying) {
+      button.classList.toggle("is-playing", isPlaying);
+      button.setAttribute("aria-pressed", String(isPlaying));
+      button.querySelector("i").className = isPlaying ? "fa-solid fa-pause" : "fa-solid fa-play";
+    }
+
+    document.querySelectorAll(".song-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const isSameTrack = activeSongButton === button;
+
+        if (activeSongButton && activeSongButton !== button) {
+          setButtonPlaying(activeSongButton, false);
+        }
+
+        if (isSameTrack && !memorySongPlayer.paused) {
+          memorySongPlayer.pause();
+          setButtonPlaying(button, false);
+          activeSongButton = null;
+          return;
+        }
+
+        if (!isSameTrack) {
+          memorySongPlayer.src = button.dataset.audio;
+        }
+
+        memorySongPlayer.play().catch(() => {
+          setButtonPlaying(button, false);
+          activeSongButton = null;
+        });
+        setButtonPlaying(button, true);
+        activeSongButton = button;
+      });
+    });
+
+    memorySongPlayer.addEventListener("ended", () => {
+      if (activeSongButton) setButtonPlaying(activeSongButton, false);
+      activeSongButton = null;
+    });
+
+    imageModal.addEventListener("click", event => {
+      if (event.target === imageModal) closeImageModal();
+    });
+
+    /* 5 EDITABLE MEMORY CARDS */
+    const memories = [
+      {
+        key: "tl-met",
+        date: "14 February 2022",
+        category: "The Beginning",
+        image: "https://res.cloudinary.com/zcnphhc3/image/upload/f_auto,q_auto/ChatGPT_Image_Jul_24_2026_04_01_48_PM_urktbk",
+        title: "The First Time We Met",
+        intro: "The beautiful beginning of a story neither of us wanted to end.",
+        detailHeading: "What Happened That Day",
+        description: "That day began like any ordinary day, but meeting you changed everything. We spoke about our lives, our favourite things, our dreams, and the small moments that made us smile. At first we were a little nervous, but slowly every sentence felt natural. By the time we had to leave, I already knew that this meeting would always remain special.",
+        highlight: "I still remember the happiness I felt when you smiled at me for the first time.",
+        quote: "Some moments become memories, and some memories become our whole world."
+      },
+      {
+        key: "tl-date",
+        date: "5 March 2022",
+        category: "Our Favourite Place",
+        image: "https://res.cloudinary.com/zcnphhc3/image/upload/f_auto,q_auto/ChatGPT_Image_Jul_24_2026_04_35_17_PM_i537do",
+        title: "The Place That Became Ours",
+        intro: "It was not only a beautiful place; it became special because you were there.",
+        detailHeading: "Everything We Talked About",
+        description: "We sat together away from the noise and talked about childhood stories, favourite songs, future dreams, and the places we wanted to visit. We laughed at silly things and shared thoughts we normally kept inside. Time passed so quickly that day because every conversation with you felt peaceful, honest, and meaningful.",
+        highlight: "The place was beautiful, but my favourite view was always you sitting beside me.",
+        quote: "A simple place becomes unforgettable when it holds the laughter of two people in love."
+      },
+      {
+        key: "tl-photo",
+        date: "20 March 2022",
+        category: "Our First Photograph",
+        image: "https://res.cloudinary.com/zcnphhc3/image/upload/v1784891764/ChatGPT_Image_Jul_24_2026_04_43_01_PM_tqld9t.png",
+        title: "The Picture That Started Everything",
+        intro: "One photograph quietly captured the beginning of countless future memories.",
+        detailHeading: "The Story Behind That Photo",
+        description: "We tried to take the perfect picture, but our laughter kept interrupting us. After several attempts, we finally captured a photograph that was not perfectly posed but felt completely real. It held our nervous smiles, our growing comfort, and the happiness we felt simply standing together.",
+        highlight: "It was our first photo together, but it already looked like the beginning of forever.",
+        quote: "The best photographs are not perfect; they simply hold the feelings we never want to forget."
+      },
+      {
+        key: "tl-beautiful",
+        date: "12 August 2023",
+        category: "A Day Full of Laughter",
+        image: "https://res.cloudinary.com/zcnphhc3/image/upload/v1784892092/ChatGPT_Image_Jul_24_2026_04_50_30_PM_slkh7t.png",
+        title: "The Day We Forgot the World",
+        intro: "A day filled with laughter, silly conversations, and moments that felt like home.",
+        detailHeading: "Why This Day Is So Special",
+        description: "We had no complicated plan. We simply walked together, ate our favourite food, clicked random photos, and laughed at jokes that probably no one else would understand. We spoke about how much our lives had changed since we first met. Everything felt peaceful, light, and exactly where it was meant to be.",
+        highlight: "I realised happiness was not a place or a plan; it was simply being with you.",
+        quote: "Love lives in the small moments we never planned but never forget."
+      },
+      {
+        key: "tl-promise",
+        date: "14 February 2024",
+        category: "💍 Our Forever Promise",
+        image: "https://res.cloudinary.com/zcnphhc3/image/upload/v1785178869/ChatGPT_Image_Jul_28_2026_12_29_54_AM_mv0kbs.png",
+        title: "A Promise Written in Forever",
+        intro: "Not just words, but a quiet vow to hold on to each other through everything.",
+        detailHeading: "The Promise We Made",
+        description: "That day we looked back at our first meeting, our long conversations, our little arguments, and every moment we supported one another. We promised to protect our bond, communicate honestly, celebrate every achievement, and never stop choosing this love, no matter what life brings our way.",
+        highlight: "No matter how many years pass, I will always choose you with the same love in my heart.",
+        quote: "A real promise is not spoken once; it is kept quietly, every single day."
+      }
+    ];
+
+    const storyModal = document.getElementById("memoryStoryModal");
+    const storyImage = document.getElementById("storyImage");
+    const storyCategory = document.getElementById("storyCategory");
+    const storyQuote = document.getElementById("storyQuote");
+    const storyDate = document.getElementById("storyDate");
+    const storyTitle = document.getElementById("storyTitle");
+    const storyIntro = document.getElementById("storyIntro");
+    const storyDetailHeading = document.getElementById("storyDetailHeading");
+    const storyDescription = document.getElementById("storyDescription");
+    const storyHighlight = document.getElementById("storyHighlight");
+    const currentStory = document.getElementById("currentStory");
+    const totalStories = document.getElementById("totalStories");
+    const storyDots = document.getElementById("storyDots");
+    const previousStory = document.getElementById("previousStory");
+    const nextStory = document.getElementById("nextStory");
+
+    let currentIndex = 0;
+    totalStories.textContent = pad(memories.length);
+
+    memories.forEach((memory, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "story-dot";
+      dot.setAttribute("aria-label", `Open memory ${index + 1}`);
+      dot.addEventListener("click", () => showStory(index));
+      storyDots.appendChild(dot);
+    });
+
+    function getMemoryDisplayDate(memory) {
+      if (memory.key) {
+        const stored = localStorage.getItem(MEMORY_DATE_STORAGE_PREFIX + memory.key) || MEMORY_DATE_DEFAULTS[memory.key];
+        const formatted = formatMemoryDate(stored);
+        if (formatted) return formatted;
+      }
+      return memory.date;
+    }
+
+    function refreshStoryDateIfOpen(key) {
+      if (!storyModal.classList.contains("is-open")) return;
+      const current = memories[currentIndex];
+      if (current && current.key === key) {
+        storyDate.textContent = getMemoryDisplayDate(current);
+      }
+    }
+
+    function showStory(index) {
+      currentIndex = index;
+      const memory = memories[index];
+
+      storyImage.src = memory.image;
+      storyImage.alt = memory.title;
+      storyCategory.textContent = memory.category;
+      storyQuote.textContent = memory.quote;
+      storyDate.textContent = getMemoryDisplayDate(memory);
+      storyTitle.textContent = memory.title;
+      storyIntro.textContent = memory.intro;
+      storyDetailHeading.textContent = memory.detailHeading;
+      storyDescription.textContent = memory.description;
+      storyHighlight.textContent = memory.highlight;
+      currentStory.textContent = pad(index + 1);
+
+      document.querySelectorAll(".story-dot").forEach((dot, dotIndex) => {
+        dot.classList.toggle("active", dotIndex === index);
+      });
+
+      previousStory.disabled = index === 0;
+      nextStory.innerHTML = index === memories.length - 1
+        ? 'Start Again <i class="fa-solid fa-rotate-right"></i>'
+        : 'Next Memory <i class="fa-solid fa-arrow-right"></i>';
+    }
+
+    function openStoryModal() {
+      showStory(0);
+      storyModal.classList.add("is-open");
+      storyModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeStoryModal() {
+      storyModal.classList.remove("is-open");
+      storyModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+    }
+
+    document.getElementById("openMemoryStories").addEventListener("click", openStoryModal);
+    document.getElementById("closeMemoryStories").addEventListener("click", closeStoryModal);
+
+    previousStory.addEventListener("click", () => {
+      if (currentIndex > 0) showStory(currentIndex - 1);
+    });
+
+    nextStory.addEventListener("click", () => {
+      showStory(currentIndex < memories.length - 1 ? currentIndex + 1 : 0);
+    });
+
+    storyModal.addEventListener("click", event => {
+      if (event.target === storyModal) closeStoryModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (imageModal.classList.contains("is-open") && event.key === "Escape") closeImageModal();
+
+      if (!storyModal.classList.contains("is-open")) return;
+      if (event.key === "Escape") closeStoryModal();
+      if (event.key === "ArrowRight") nextStory.click();
+      if (event.key === "ArrowLeft" && currentIndex > 0) previousStory.click();
+    });
+
+    storyImage.addEventListener("error", () => {
+      storyImage.src = makePlaceholder(
+        `Romantic Memory ${currentIndex + 1}`,
+        "Check your internet connection"
+      );
+    });
+
+    showStory(0);
+
+    /* Floating hearts: spawn continuously, forever, one heart at a time */
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const heartsHolder = document.getElementById("floatingHearts");
+
+      function spawnHeart() {
+        const heart = document.createElement("i");
+        heart.className = "floating-heart fa-solid fa-heart";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.fontSize = 10 + Math.random() * 19 + "px";
+        const duration = 13 + Math.random() * 13;
+        heart.style.animationDuration = duration + "s";
+        heart.style.setProperty("--drift", Math.round(Math.random() * 160 - 80) + "px");
+        heartsHolder.appendChild(heart);
+        setTimeout(() => heart.remove(), duration * 1000 + 500);
+      }
+
+      const initialCount = innerWidth < 700 ? 10 : 18;
+      for (let i = 0; i < initialCount; i++) {
+        setTimeout(spawnHeart, i * 400);
+      }
+
+      setInterval(spawnHeart, 1400);
+    }
+  </script>
+</body>
+
+</html>
