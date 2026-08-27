@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — Shahid Developer (New Template)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #e8436a;
+    --pink-dark: #c92b55;
+    --pink-light: #ff7096;
+    --gold: #f5c842;
+    --bg: #0d0a0e;
+    --card: #1a1220;
+    --card-2: #150f18;
+    --border: rgba(232,67,106,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(232,67,106,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(201,43,85,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(232,67,106,0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hearts {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .heart {
+    position: absolute; bottom: -50px; font-size: 1.2rem; opacity: 0;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(0) scale(0.5) rotate(0deg); }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.2; }
+    100% { opacity: 0; transform: translateY(-110vh) scale(1.2) rotate(360deg); }
+  }
+
+  .container {
+    position: relative; z-index: 1; width: 100%; max-width: 560px;
+    padding: 2rem 1.5rem; text-align: center;
+  }
+
+  .check-wrap { width: 80px; height: 80px; margin: 0 auto 1.5rem; position: relative; }
+  .check-circle {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+    display: flex; align-items: center; justify-content: center; font-size: 2rem;
+    box-shadow: 0 0 30px rgba(232,67,106,0.5), 0 0 60px rgba(232,67,106,0.2);
+    animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  }
+  @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+  .pulse-ring {
+    position: absolute; inset: -8px; border-radius: 50%;
+    border: 2px solid rgba(232,67,106,0.4);
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+
+  .brand-row {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    margin-bottom: 0.8rem; animation: fadeUp 0.6s 0.2s both;
+  }
+  .brand {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--pink-light);
+  }
+  .premium-tag {
+    font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--gold), #ffe08a);
+    color: #3a2a00; padding: 0.18rem 0.55rem; border-radius: 50px; font-weight: 700;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vw, 2.8rem);
+    font-weight: 700; line-height: 1.15; margin-bottom: 0.6rem;
+    animation: fadeUp 0.6s 0.3s both;
+  }
+  h1 span {
+    display: block;
+    background: linear-gradient(90deg, var(--pink-light), var(--gold), var(--pink-light));
+    background-size: 200%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; animation: shimmer 3s linear infinite;
+  }
+  @keyframes shimmer { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+
+  .subtitle {
+    color: rgba(255,255,255,0.55); font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;
+    animation: fadeUp 0.6s 0.4s both;
+  }
+
+  .cards {
+    display: flex; flex-direction: column; gap: 1.1rem; margin-bottom: 1.6rem;
+    animation: fadeUp 0.6s 0.5s both;
+  }
+
+  .card {
+    background: linear-gradient(180deg, var(--card), var(--card-2));
+    border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1.5rem 1.3rem;
+    text-align: left; position: relative; overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  .card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--pink), var(--gold), var(--pink));
+  }
+  .card:hover {
+    border-color: rgba(232,67,106,0.5); box-shadow: 0 10px 30px rgba(232,67,106,0.15);
+    transform: translateY(-2px);
+  }
+
+  .card-head { margin-bottom: 1rem; }
+  .card-label {
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--pink-light); margin-bottom: 0.3rem;
+  }
+  .card-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: #fff; }
+
+  .btn-download {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+    color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+    padding: 0.75rem 1.2rem; border-radius: 12px; width: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(232,67,106,0.35);
+    margin-bottom: 1.1rem;
+  }
+  .btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(232,67,106,0.5); }
+  .btn-download:active { transform: translateY(0); }
+
+  .link-section {
+    border-top: 1px dashed rgba(255,255,255,0.12); padding-top: 1rem;
+  }
+  .link-label {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem; font-weight: 600;
+  }
+  .link-box {
+    display: flex; gap: 0.5rem; margin-bottom: 0.55rem;
+  }
+  .link-input {
+    flex: 1; min-width: 0; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+    padding: 0.6rem 0.8rem; color: rgba(255,255,255,0.75); font-size: 0.78rem;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-copy {
+    flex-shrink: 0; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--gold), #e0ab1f);
+    color: #241a00; font-weight: 700; font-size: 0.78rem;
+    padding: 0.6rem 1rem; border-radius: 10px; transition: transform 0.15s, opacity 0.2s;
+  }
+  .btn-copy:hover { transform: translateY(-1px); }
+  .btn-copy.copied { background: linear-gradient(135deg, #5fd88a, #2fae63); color: #06210f; }
+  .link-note {
+    font-size: 0.76rem; color: rgba(255,255,255,0.45); line-height: 1.55;
+  }
+
+  .help-box {
+    background: rgba(232,67,106,0.06); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.2rem 1.3rem; margin-bottom: 1.6rem;
+    animation: fadeUp 0.6s 0.6s both;
+  }
+  .help-title {
+    font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.4rem; color: #fff;
+  }
+  .help-text {
+    font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 0.9rem;
+  }
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, #25D366, #128C4A);
+    color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600;
+    padding: 0.65rem 1.2rem; border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.45); }
+
+  .note {
+    background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 12px; padding: 1rem 1.2rem; font-size: 0.82rem;
+    color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.65s both;
+  }
+  .note strong { color: var(--gold); }
+
+  .footer { font-size: 0.75rem; color: rgba(255,255,255,0.25); animation: fadeUp 0.6s 0.7s both; }
+  .footer a { color: var(--pink-light); text-decoration: none; }
+
+  @keyframes fadeUp { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+  .divider {
+    width: 60px; height: 2px; background: linear-gradient(90deg, transparent, var(--pink), transparent);
+    margin: 1rem auto 1.5rem; animation: fadeUp 0.6s 0.35s both;
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+
+  <div class="check-wrap">
+    <div class="check-circle">✓</div>
+    <div class="pulse-ring"></div>
+  </div>
+
+  <div class="brand-row">
+    <div class="brand">♥ Shahid Developer</div>
+    <div class="premium-tag">Premium</div>
+  </div>
+
+  <h1>
+    Payment<br>
+    <span>Successful!</span>
+  </h1>
+
+  <div class="divider"></div>
+
+  <p class="subtitle">
+    Shukriya! Aapka order confirm ho gaya hai.<br>
+    Neeche apna template download karein. 💝
+  </p>
+
+  <div class="cards">
+
+      <div class="card">
+        <div class="card-head">
+          <div class="card-label">Template 6</div>
+          <div class="card-name">Template 6 🎁</div>
+        </div>
+
+        <a class="btn-download" href="https://drive.google.com/file/d/1eZ68yOeN-Ft9TpoV78R4Hag0X6XghuiL/view?usp=sharing" target="_blank">⬇ HTML File Download</a>
+
+        <div class="link-section">
+          <div class="link-label">🔗 Live Preview Link</div>
+          <div class="link-box">
+            <input type="text" class="link-input" id="link-6" value="https://template-6-clean.netlify.app/" readonly>
+            <button class="btn-copy" onclick="copyLink('link-6', this)">Copy</button>
+          </div>
+          <p class="link-note">Isi link ko copy karke seedha browser mein khol sakte hain ya jisko surprise dena hai use bhej sakte hain — bina kisi file download kiye, ekdum ready-to-open! 💫</p>
+        </div>
+      </div>
+
+  </div>
+
+  <div class="help-box">
+    <div class="help-title">🤔 Template samajh nahi aaya?</div>
+    <div class="help-text">
+      Koi tension nahi lene ka! Agar file open karne mein, setup karne mein ya use karne mein koi bhi dikkat aa rahi hai, toh seedha mujhe message kar dein — main khud aapko step-by-step samjha dunga ya set kar ke de dunga.
+    </div>
+    <a class="btn-whatsapp" href="https://wa.me/91XXXXXXXXXX" target="_blank">💬 WhatsApp par Message Karein</a>
+  </div>
+
+  <div class="note">
+    <strong>⚠️ Note:</strong> Yeh links sirf aapke liye hain — kisi aur ke saath share mat karein. Koi bhi dikkat ho toh WhatsApp karein: <strong>Shahid Developer</strong>
+  </div>
+
+  <div class="footer">
+    Made with ♥ by <a href="https://sgmshahidgaming-png.github.io/lovepages/" target="_blank">Shahid Developer</a>
+  </div>
+
+</div>
+
+<script>
+  const heartsEl = document.getElementById('hearts');
+  const emojis = ['♥','💕','💝','💖','💗'];
+  for (let i = 0; i < 18; i++) {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = Math.random() * 100 + '%';
+    h.style.animationDuration = (8 + Math.random() * 10) + 's';
+    h.style.animationDelay = (Math.random() * 10) + 's';
+    h.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+    heartsEl.appendChild(h);
+  }
+
+  function copyLink(inputId, btn) {
+    const input = document.getElementById(inputId);
+    const finish = () => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1500);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(input.value).then(finish).catch(() => {
+        input.select();
+        document.execCommand('copy');
+        finish();
+      });
+    } else {
+      input.select();
+      document.execCommand('copy');
+      finish();
+    }
+  }
+</script>
+</body>
+</html>

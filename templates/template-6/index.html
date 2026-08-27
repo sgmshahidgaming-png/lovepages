@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title id="page-title">For You 🐼❤️</title>
+<meta name="description" content="A small sorry, made with care.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  --blush:        #f5c6dc;
+  --baby-pink:    #eeb4cf;
+  --lavender:     #d3bdf0;
+  --peach:        #f5c9a8;
+  --cream:        #fffaf3;
+  --rose-gold:    #d99b8f;
+  --plum:         #2e1a2a;
+  --plum-soft:    #5c3f56;
+  --white:        #ffffff;
+
+  /* premium accents */
+  --gold:         #cda15a;
+  --gold-soft:    #f3dfae;
+  --gold-deep:    #9c6f34;
+  --gold-grad:    linear-gradient(120deg, var(--gold-deep), var(--gold), var(--gold-soft), var(--gold));
+
+  --glass-bg:      rgba(255,255,255,0.52);
+  --glass-border:  rgba(255,255,255,0.7);
+  --glass-shadow:  0 20px 60px -20px rgba(80,40,70,0.45);
+  --gold-shadow:   0 2px 20px -4px rgba(205,161,90,0.6);
+
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+
+  --ease: cubic-bezier(.22,.9,.32,1);
+}
+
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--plum);
+  background:
+    radial-gradient(circle at 12% 8%, var(--lavender) 0%, transparent 42%),
+    radial-gradient(circle at 88% 15%, var(--blush) 0%, transparent 48%),
+    radial-gradient(circle at 50% 95%, var(--peach) 0%, transparent 52%),
+    radial-gradient(circle at 50% 45%, rgba(243,223,174,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse at center, transparent 45%, rgba(46,26,42,0.16) 100%),
+    var(--cream);
+  background-size:200% 200%, 200% 200%, 200% 200%, 160% 160%, 100% 100%, auto;
+  animation: bgDrift 26s ease-in-out infinite;
+  min-height:100dvh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+@keyframes bgDrift{
+  0%,100%{ background-position:0% 0%, 100% 0%, 50% 100%, 50% 50%, 0 0, 0 0; }
+  50%{ background-position:10% 10%, 90% 15%, 55% 90%, 45% 55%, 0 0, 0 0; }
+}
+h1,h2,h3{ font-family:var(--font-display); margin:0; color:var(--plum); font-weight:600; }
+.heading{
+  background:linear-gradient(120deg, var(--plum) 30%, var(--gold-deep) 50%, var(--plum) 70%);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:var(--plum);
+  animation: shineText 7s ease-in-out infinite;
+}
+@keyframes shineText{
+  0%,100%{ background-position:0% center; }
+  50%{ background-position:100% center; }
+}
+p{ margin:0; }
+button{ font-family:var(--font-body); border:none; cursor:pointer; background:none; }
+img{ max-width:100%; display:block; }
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+/* ============================================================
+   TYPING ENGINE
+   ============================================================ */
+.word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(6px);
+  filter:blur(3px);
+  transition:opacity .35s ease, transform .35s ease, filter .35s ease;
+  white-space:pre-wrap;
+}
+.word.show{ opacity:1; transform:translateY(0); filter:blur(0); }
+.type-line{ display:block; }
+.type-cursor{
+  display:inline-block;
+  width:2px;
+  margin-left:2px;
+  animation:blink 0.9s step-start infinite;
+  color:var(--rose-gold);
+  font-weight:600;
+}
+@keyframes blink{ 50%{ opacity:0; } }
+
+/* ============================================================
+   LAYOUT / SECTIONS
+   ============================================================ */
+.section{
+  min-height:100dvh;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:80px 20px;
+  position:relative;
+  text-align:center;
+}
+.section-inner{ max-width:640px; width:100%; display:flex; flex-direction:column; align-items:center; gap:22px; }
+#envelope-section .section-inner{ max-width:780px; }
+#cards-section .section-inner{ max-width:960px; }
+.eyebrow{
+  font-size:clamp(12px,2vw,14px);
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  font-weight:600;
+}
+.heading{ font-size:clamp(30px,6.6vw,48px); line-height:1.28; letter-spacing:.005em; }
+.body-text{ font-size:clamp(18px,3.6vw,22px); line-height:2; color:var(--plum-soft); font-weight:400; letter-spacing:.01em; }
+
+/* glass card */
+.glass{
+  position:relative;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--glass-shadow), inset 0 1px 0 rgba(255,255,255,0.6);
+  padding:clamp(24px,5vw,48px);
+}
+.glass::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:inherit;
+  padding:1px;
+  background:var(--gold-grad);
+  background-size:220% auto;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:.55;
+  pointer-events:none;
+  animation:shineText 7s ease-in-out infinite;
+}
+
+/* reveal on scroll */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.in{ opacity:1; transform:translateY(0); }
+
+/* floating panda */
+.float-anim{ animation:floaty 5s ease-in-out infinite; }
+@keyframes floaty{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-14px);} }
+
+.char-img{
+  width:clamp(140px,32vw,220px);
+  height:clamp(140px,32vw,220px);
+  object-fit:contain;
+  filter:drop-shadow(0 18px 30px rgba(140,90,130,0.25)) drop-shadow(0 4px 14px rgba(205,161,90,0.25));
+}
+.char-img.small{ width:clamp(70px,18vw,110px); height:clamp(70px,18vw,110px); }
+.char-fallback{
+  width:clamp(140px,32vw,220px);
+  height:clamp(140px,32vw,220px);
+  border-radius:50%;
+  background:linear-gradient(145deg,var(--baby-pink),var(--lavender));
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(48px,10vw,72px);
+}
+
+/* ============================================================
+   BACKGROUND PARTICLES
+   ============================================================ */
+#particle-layer{
+  position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden;
+}
+.particle{
+  position:absolute; bottom:-40px;
+  color:var(--rose-gold);
+  opacity:.55;
+  animation:rise linear infinite;
+  will-change:transform;
+}
+@keyframes rise{
+  0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+  10%{ opacity:.6; }
+  90%{ opacity:.5; }
+  100%{ transform:translateY(-110vh) translateX(var(--drift,20px)) rotate(360deg); opacity:0; }
+}
+.section, header, footer{ position:relative; z-index:1; }
+
+/* ============================================================
+   LOADING SCREEN
+   ============================================================ */
+#loader{
+  position:fixed; inset:0; z-index:999;
+  background:linear-gradient(160deg,var(--lavender),var(--blush) 55%, var(--peach));
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:22px;
+  transition:opacity .8s ease, visibility .8s ease;
+}
+#loader.hide{ opacity:0; visibility:hidden; pointer-events:none; }
+.loader-heart{
+  font-size:44px;
+  animation:pulseHeart 1.1s ease-in-out infinite;
+}
+@keyframes pulseHeart{ 0%,100%{ transform:scale(1);} 50%{ transform:scale(1.25);} }
+#loader-text{ font-family:var(--font-display); font-size:clamp(16px,4vw,20px); color:var(--plum); max-width:80vw; }
+.loader-bar{ width:180px; height:4px; border-radius:4px; background:rgba(255,255,255,.6); overflow:hidden; }
+.loader-bar-fill{ height:100%; width:0%; background:var(--rose-gold); border-radius:4px; animation:fillBar 1.8s var(--ease) forwards; }
+@keyframes fillBar{ to{ width:100%; } }
+
+/* ============================================================
+   HERO / NAV / PROGRESS
+   ============================================================ */
+#progress-bar{
+  position:fixed; top:0; left:0; height:4px; width:0%;
+  background:linear-gradient(90deg,var(--rose-gold),var(--lavender));
+  z-index:500; transition:width .1s linear;
+}
+
+.cta-btn{
+  position:relative;
+  overflow:hidden;
+  padding:16px 38px;
+  border-radius:100px;
+  background:linear-gradient(135deg,var(--rose-gold),var(--baby-pink));
+  border:1px solid rgba(255,255,255,.5);
+  color:#fff;
+  font-weight:600;
+  font-size:16px;
+  letter-spacing:.01em;
+  box-shadow:0 14px 30px -10px rgba(232,169,161,0.7), var(--gold-shadow);
+  min-height:52px;
+  min-width:44px;
+  opacity:0;
+  transform:translateY(10px) scale(.96);
+  transition:opacity .5s ease, transform .5s ease, box-shadow .3s ease;
+}
+.cta-btn::after{
+  content:"";
+  position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.65), transparent);
+  transform:skewX(-20deg);
+  animation:sheen 3.2s ease-in-out infinite;
+}
+@keyframes sheen{ 0%{ left:-60%; } 55%,100%{ left:130%; } }
+.cta-btn.show{ opacity:1; transform:translateY(0) scale(1); }
+.cta-btn:hover{ box-shadow:0 18px 36px -8px rgba(232,169,161,0.85), var(--gold-shadow); transform:translateY(-3px) scale(1.02); }
+.cta-btn:active{ transform:translateY(0) scale(.97); }
+.cta-btn:focus-visible{ outline:3px solid var(--plum); outline-offset:3px; }
+
+/* ============================================================
+   ENVELOPE
+   ============================================================ */
+.envelope-wrap{ perspective:1200px; cursor:pointer; margin-top:2px; }
+#env-sub{ margin-top:-6px; }
+.envelope{
+  width:min(300px,80vw);
+  height:190px;
+  position:relative;
+  transition:transform .4s var(--ease);
+}
+.envelope-wrap:hover .envelope{ transform:translateY(-4px); }
+.env-body{
+  position:absolute; inset:0;
+  background:linear-gradient(160deg,#fff,var(--blush));
+  border-radius:14px;
+  box-shadow:0 20px 40px -18px rgba(140,90,130,.5);
+  border:1px solid rgba(255,255,255,.8);
+}
+.env-flap{
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  clip-path:polygon(0 0, 50% 55%, 100% 0);
+  background:linear-gradient(160deg,var(--rose-gold),var(--baby-pink));
+  border-radius:14px 14px 0 0;
+  transform-origin:top;
+  transition:transform .9s var(--ease);
+  z-index:3;
+}
+.envelope.open .env-flap{ transform:rotateX(180deg); }
+.env-heart{
+  position:absolute; top:44%; left:50%; transform:translate(-50%,-50%);
+  font-size:26px; z-index:4;
+  transition:opacity .3s ease;
+}
+.envelope.open .env-heart{ opacity:0; }
+.env-letter{
+  position:absolute; left:8%; right:8%; bottom:6px;
+  height:70%;
+  background:var(--cream);
+  border-radius:10px 10px 4px 4px;
+  box-shadow:0 -6px 18px rgba(0,0,0,.08);
+  z-index:2;
+  transform:translateY(6%);
+  transition:transform 1s var(--ease) .3s;
+}
+.envelope.open .env-letter{ transform:translateY(-92%); }
+.envelope.shake{ animation:shakeEnv .5s ease; }
+@keyframes shakeEnv{ 0%,100%{transform:rotate(0);} 25%{transform:rotate(-2deg);} 75%{transform:rotate(2deg);} }
+
+.letter-paper{
+  position:relative;
+  width:92vw; max-width:780px;
+  background:linear-gradient(180deg, var(--cream), #fff);
+  border-radius:var(--radius-md);
+  border:1px solid rgba(205,161,90,0.35);
+  box-shadow:0 24px 50px -20px rgba(140,90,130,.4), var(--gold-shadow);
+  padding:clamp(26px,5vw,48px);
+  margin-top:36px;
+  opacity:0; transform:translateY(20px) scale(.98);
+  transition:opacity .7s ease, transform .7s ease;
+  text-align:left;
+}
+@media (min-width:600px){ .letter-paper{ width:700px; } }
+.letter-paper::before{
+  content:"";
+  position:absolute; top:10px; left:10px; right:10px; bottom:10px;
+  border:1px solid rgba(205,161,90,0.3);
+  border-radius:calc(var(--radius-md) - 6px);
+  pointer-events:none;
+}
+.letter-paper.show{ opacity:1; transform:translateY(0) scale(1); }
+.letter-paper .body-text{ text-align:left; }
+.letter-paper .body-text .type-line{ margin-bottom:14px; }
+
+/* ============================================================
+   CARDS GRID
+   ============================================================ */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  width:100%;
+  max-width:920px;
+}
+@media (max-width:900px){ .cards-grid{ grid-template-columns:repeat(2,1fr); max-width:680px; } }
+@media (max-width:560px){ .cards-grid{ grid-template-columns:1fr; width:92%; max-width:460px; margin:0 auto; } }
+.mini-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:var(--radius-md);
+  padding:clamp(28px,4vw,36px) clamp(22px,3vw,28px);
+  min-height:250px;
+  text-align:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+  opacity:0; transform:translateY(24px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease), box-shadow .35s ease, border-color .35s ease;
+}
+.mini-card::after{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:4px;
+  background:var(--gold-grad);
+  background-size:220% auto;
+  animation:shineText 6s ease-in-out infinite;
+}
+/* soft accent tint variation so cards feel individually flavoured but coordinated */
+.mini-card:nth-child(5n+1){ background:linear-gradient(160deg, rgba(211,189,240,0.30), var(--glass-bg)); }
+.mini-card:nth-child(5n+2){ background:linear-gradient(160deg, rgba(245,198,220,0.30), var(--glass-bg)); }
+.mini-card:nth-child(5n+3){ background:linear-gradient(160deg, rgba(245,201,168,0.30), var(--glass-bg)); }
+.mini-card:nth-child(5n+4){ background:linear-gradient(160deg, rgba(217,155,143,0.22), var(--glass-bg)); }
+.mini-card:nth-child(5n+5){ background:linear-gradient(160deg, rgba(238,180,207,0.28), var(--glass-bg)); }
+.mini-card.in{ opacity:1; transform:translateY(0); }
+.mini-card:hover{
+  transform:translateY(-6px) scale(1.015);
+  box-shadow:0 26px 50px -18px rgba(140,90,130,0.45), 0 0 0 1px rgba(205,161,90,0.25);
+}
+.mini-card h3{ font-size:19px; letter-spacing:.01em; }
+.mini-card p{ font-size:15.5px; color:var(--plum-soft); line-height:1.65; }
+.mini-card .card-sub .type-line{ display:block; margin-bottom:4px; }
+.card-title{
+  background:linear-gradient(120deg, var(--plum), var(--gold-deep) 50%, var(--plum));
+  background-size:220% auto;
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:var(--plum);
+}
+
+/* ============================================================
+   CHAT
+   ============================================================ */
+.chat-wrap{
+  width:100%; max-width:480px;
+  display:flex; flex-direction:column; gap:12px;
+  align-items:stretch;
+}
+.chat-row{ display:flex; align-items:flex-end; gap:10px; opacity:0; transform:translateY(10px); transition:opacity .5s ease, transform .5s ease; }
+.chat-row.in{ opacity:1; transform:translateY(0); }
+.chat-row.right{ flex-direction:row-reverse; }
+.chat-avatar{ width:36px; height:36px; border-radius:50%; flex:none; overflow:hidden; background:var(--lavender); display:flex; align-items:center; justify-content:center; font-size:18px; }
+.chat-bubble{
+  background:var(--white);
+  border-radius:18px;
+  padding:12px 16px;
+  font-size:15px;
+  box-shadow:0 8px 18px -10px rgba(140,90,130,.3);
+  max-width:75%;
+  text-align:left;
+}
+.chat-row.right .chat-bubble{ background:linear-gradient(135deg,var(--baby-pink),var(--lavender)); }
+.typing-dots{
+  display:flex; gap:4px; padding:12px 16px; background:var(--white); border-radius:18px; width:fit-content;
+  box-shadow:0 8px 18px -10px rgba(140,90,130,.3);
+}
+.typing-dots span{ width:6px; height:6px; border-radius:50%; background:var(--rose-gold); animation:dotPulse 1.2s ease-in-out infinite; }
+.typing-dots span:nth-child(2){ animation-delay:.15s; }
+.typing-dots span:nth-child(3){ animation-delay:.3s; }
+@keyframes dotPulse{ 0%,60%,100%{ opacity:.3; transform:translateY(0);} 30%{ opacity:1; transform:translateY(-3px);} }
+.big-shout{ font-family:var(--font-display); font-size:clamp(22px,6vw,32px); margin-top:6px; opacity:0; transform:scale(.9); transition:opacity .5s ease, transform .5s ease; }
+.big-shout.in{ opacity:1; transform:scale(1); }
+
+/* ============================================================
+   FOUR IMPORTANT THINGS
+   ============================================================ */
+.important-list{ display:flex; flex-direction:column; gap:16px; width:100%; text-align:left; }
+.important-item{ display:flex; align-items:center; gap:14px; font-size:clamp(16px,3vw,19px); color:var(--plum); }
+.important-dot{ width:8px; height:8px; border-radius:50%; background:var(--rose-gold); flex:none; }
+
+/* ============================================================
+   FORGIVENESS BUTTONS
+   ============================================================ */
+.choice-row{ display:flex; gap:16px; flex-wrap:wrap; justify-content:center; position:relative; min-height:60px; width:100%; }
+.btn-yes{
+  position:relative; overflow:hidden;
+  padding:16px 34px; border-radius:100px; font-weight:600; font-size:16px; color:#fff;
+  background:linear-gradient(135deg,var(--rose-gold),var(--baby-pink));
+  border:1px solid rgba(255,255,255,.5);
+  box-shadow:0 14px 30px -10px rgba(232,169,161,.7), var(--gold-shadow);
+  min-height:52px; transition:transform .25s ease, box-shadow .25s ease;
+}
+.btn-yes::after{
+  content:"";
+  position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background:linear-gradient(120deg, transparent, rgba(255,255,255,.65), transparent);
+  transform:skewX(-20deg);
+  animation:sheen 3.2s ease-in-out infinite;
+}
+.btn-yes:hover{ transform:translateY(-3px); }
+.btn-yes:active{ transform:scale(.96); }
+.btn-no{
+  padding:16px 34px; border-radius:100px; font-weight:600; font-size:16px;
+  color:var(--plum); background:var(--white); border:1px solid rgba(140,90,130,.2);
+  min-height:52px; position:relative; transition:transform .35s var(--ease);
+}
+.btn-yes:focus-visible, .btn-no:focus-visible{ outline:3px solid var(--plum); outline-offset:3px; }
+.no-msg{ font-size:13px; color:var(--rose-gold); margin-top:8px; min-height:16px; }
+
+/* ============================================================
+   CONFETTI / HEART BURST
+   ============================================================ */
+.burst-heart{
+  position:fixed; z-index:600; pointer-events:none; font-size:20px;
+  animation:burstUp 1.1s ease-out forwards;
+}
+@keyframes burstUp{
+  0%{ opacity:1; transform:translate(0,0) scale(1) rotate(0);}
+  100%{ opacity:0; transform:translate(var(--dx,0px),var(--dy,-120px)) scale(1.4) rotate(var(--rot,120deg));}
+}
+.confetti-piece{
+  position:fixed; z-index:601; pointer-events:none; font-size:18px;
+  animation:confettiFall 2.2s ease-in forwards;
+}
+@keyframes confettiFall{
+  0%{ opacity:1; transform:translate(0,0) rotate(0);}
+  100%{ opacity:0; transform:translate(var(--dx,0px), 100vh) rotate(var(--rot,540deg));}
+}
+
+/* checkmark */
+.check-wrap{ width:64px; height:64px; border-radius:50%; background:linear-gradient(135deg,var(--rose-gold),var(--baby-pink)); display:flex; align-items:center; justify-content:center; margin:0 auto; }
+.check-wrap svg{ width:32px; height:32px; }
+.check-wrap path{ stroke:#fff; stroke-width:3; fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:40; stroke-dashoffset:40; animation:drawCheck .6s ease forwards .2s; }
+@keyframes drawCheck{ to{ stroke-dashoffset:0; } }
+
+/* ============================================================
+   MUSIC BUTTON
+   ============================================================ */
+#music-btn{
+  position:fixed; bottom:22px; right:22px; z-index:400;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--glass-bg); backdrop-filter:blur(14px);
+  border:1px solid rgba(205,161,90,0.55);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; box-shadow:var(--glass-shadow), var(--gold-shadow);
+  transition:transform .3s ease;
+}
+#music-btn:hover{ transform:scale(1.08); }
+#music-btn.playing{ animation:spinSlow 6s linear infinite; }
+@keyframes spinSlow{ to{ transform:rotate(360deg); } }
+
+/* ============================================================
+   BACK TO TOP
+   ============================================================ */
+#back-to-top{
+  position:fixed; bottom:22px; left:22px; z-index:400;
+  width:48px; height:48px; border-radius:50%;
+  background:var(--glass-bg); backdrop-filter:blur(14px);
+  border:1px solid var(--glass-border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; box-shadow:var(--glass-shadow);
+  opacity:0; visibility:hidden; transform:translateY(10px);
+  transition:opacity .35s ease, transform .35s ease, visibility .35s ease;
+}
+#back-to-top.show{ opacity:1; visibility:visible; transform:translateY(0); }
+
+/* footer */
+footer{ padding:40px 20px 100px; text-align:center; color:var(--plum-soft); font-size:13px; }
+
+.sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+@media (max-width:400px){
+  .cta-btn, .btn-yes, .btn-no{ padding:14px 26px; font-size:15px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     CONFIG — swap these URLs to change assets
+     ============================================================ -->
+<div id="particle-layer" aria-hidden="true"></div>
+
+<div id="progress-bar" role="progressbar" aria-label="Reading progress" aria-hidden="true"></div>
+
+<!-- LOADER -->
+<div id="loader" role="status" aria-live="polite">
+  <div class="loader-heart" aria-hidden="true">🐼</div>
+  <div id="loader-text"></div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<button id="music-btn" aria-label="Play background music" aria-pressed="false">▶</button>
+<audio id="bg-audio" loop preload="none"></audio>
+
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="section" id="hero">
+  <div class="section-inner">
+    <img class="char-img float-anim" data-char="pandaSad" alt="A sad little panda" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback float-anim',innerHTML:'🐼',ariaLabel:'panda'}))">
+    <h1 class="heading" id="hero-heading" aria-live="polite"></h1>
+    <div class="body-text" id="hero-body" aria-live="polite"></div>
+    <button class="cta-btn" id="hero-cta">Sun Lo Na Ek Baar 🥺</button>
+  </div>
+</section>
+
+<!-- ============================================================
+     PANDA MESSAGE
+     ============================================================ -->
+<section class="section" id="panda-msg">
+  <div class="section-inner glass reveal">
+    <img class="char-img" data-char="pandaHeart" alt="Panda holding a heart" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',innerHTML:'🐼💗'}))">
+    <h2 class="heading" id="panda-heading"></h2>
+    <div class="body-text" id="panda-body"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ENVELOPE
+     ============================================================ -->
+<section class="section" id="envelope-section">
+  <div class="section-inner">
+    <h2 class="heading" id="env-heading"></h2>
+    <p class="body-text" id="env-sub"></p>
+    <div class="envelope-wrap" id="envelope-wrap" role="button" tabindex="0" aria-label="Open the letter envelope">
+      <div class="envelope" id="envelope">
+        <div class="env-body"></div>
+        <div class="env-letter"></div>
+        <div class="env-flap"></div>
+        <div class="env-heart">💌</div>
+      </div>
+    </div>
+
+    <div class="letter-paper" id="letter-paper">
+      <div class="body-text" id="letter-body"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOUR CUTE CARDS
+     ============================================================ -->
+<section class="section" id="cards-section">
+  <div class="section-inner">
+    <h2 class="heading reveal">A Few Small Things I Want To Say 🐼</h2>
+    <div class="cards-grid" id="cards-grid">
+      <div class="mini-card glass" data-idx="0">
+        <img class="char-img small" data-char="foxSad" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊'}))">
+        <h3 class="card-title" data-text="Haan, galti meri thi 🥺"></h3>
+        <p class="card-sub" data-text="Ghuma phira ke nahi bolna, seedha keh raha hoon.
+
+Us waqt jo bola ya kiya, wo sahi nahi tha.
+
+Excuse dhoondhne se achha lagta hai bas accept kar loon.
+
+Toh yahi kar raha hoon. Galti meri thi."></p>
+      </div>
+      <div class="mini-card glass" data-idx="1">
+        <img class="char-img small" data-char="foxHeart" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊❤️'}))">
+        <h3 class="card-title" data-text="Ek mauka aur de do? ❤️"></h3>
+        <p class="card-sub" data-text="Main koi safai nahi de raha, sach mein.
+
+Bas ye chahta hoon ki tumhe pata ho ki mujhe fark padta hai.
+
+Turant maaf karo, aisi jaldi bhi nahi hai.
+
+Bas jaanna tha ki main try kar raha hoon."></p>
+      </div>
+      <div class="mini-card glass" data-idx="2">
+        <img class="char-img small" data-char="foxCute" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊'}))">
+        <h3 class="card-title" data-text="Dobara nahi hoga 😅"></h3>
+        <p class="card-sub" data-text="Pata hai pehle bhi bola tha, isliye is baar sirf words nahi.
+
+Dhyan rakhne ki koshish karunga, seriously.
+
+Perfect nahi bologa, par better zaroor bolunga.
+
+Ek chance dekar dekh lo na. 🙏"></p>
+      </div>
+      <div class="mini-card glass" data-idx="3">
+        <img class="char-img small" data-char="foxCelebrate" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊🎉'}))">
+        <h3 class="card-title" data-text="Itna gussa toh nahi 😂🥺"></h3>
+        <p class="card-sub" data-text="Thoda kam nahi ho sakta gussa? Bas puch raha hoon 😂
+
+Serious mein, tumhara ye ignore-mode bahut scary hai.
+
+Smile wali tum zyada pasand hai mujhe.
+
+Bas ek chhoti si smile chahiye. 🥺"></p>
+      </div>
+      <div class="mini-card glass" data-idx="4">
+        <img class="char-img small" data-char="pandaSad2" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🐼'}))">
+        <h3 class="card-title" data-text="Ye panda bhi udaas hai 🐼"></h3>
+        <p class="card-sub" data-text="Isne bhi bamboo chhod diya hai abhi ke liye 😭
+
+Bola bas itna hai ki sab theek ho jaaye.
+
+Tumhare gusse ka asar isko bhi hai.
+
+Ek smile se ye phirse khush ho jayega."></p>
+      </div>
+      <div class="mini-card glass" data-idx="5">
+        <img class="char-img small" data-char="foxHeart2" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊❤️'}))">
+        <h3 class="card-title" data-text="Ye genuine hai, drama nahi 🥺"></h3>
+        <p class="card-sub" data-text="Emoji ke peeche chhupa nahi raha kuch.
+
+Jo bol raha hoon wahi feel bhi kar raha hoon.
+
+Koi show off nahi, koi performance nahi.
+
+Bas sach mein bura lag raha hai."></p>
+      </div>
+      <div class="mini-card glass" data-idx="6">
+        <img class="char-img small" data-char="pandaHug" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🐼🤗'}))">
+        <h3 class="card-title" data-text="Ek hug bhejun? 🤗"></h3>
+        <p class="card-sub" data-text="Virtual hi sahi, par pura dil se hai 😂
+
+No terms, no conditions attached.
+
+Bas thoda sa gussa kam karna hoga.
+
+Deal? 🤗"></p>
+      </div>
+      <div class="mini-card glass" data-idx="7">
+        <img class="char-img small" data-char="foxCute2" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊'}))">
+        <h3 class="card-title" data-text="Sach mein miss ho raha hai 😩"></h3>
+        <p class="card-sub" data-text="Phone baar baar check kar raha hoon, pata hai.
+
+Har vibration pe lagta hai shayad tumhara message ho.
+
+Ye kehna emotional lag sakta hai par sach yehi hai.
+
+Baat karna miss kar raha hoon. 🥺"></p>
+      </div>
+      <div class="mini-card glass" data-idx="8">
+        <img class="char-img small" data-char="pandaFlowers" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback float-anim',innerHTML:'🐼🌸'}))">
+        <h3 class="card-title" data-text="Phool abhi virtual hain 🌸"></h3>
+        <p class="card-sub" data-text="Asli wale jald hi milenge, promise 😂
+
+Filhaal inhi se kaam chalao.
+
+Chhota gesture hai, par dil se hai.
+
+Smile aa gayi toh samajh lunga kaam ban gaya. 🌸"></p>
+      </div>
+      <div class="mini-card glass" data-idx="9">
+        <img class="char-img small" data-char="pandaCelebrate" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback float-anim',innerHTML:'🐼🎉'}))">
+        <h3 class="card-title" data-text="Bas ek smile chahiye 🥺✨"></h3>
+        <p class="card-sub" data-text="Itna hi kaafi hoga abhi ke liye.
+
+Panda aur fox dono wait kar rahe hain 😂
+
+Jaise hi smile aayegi, sab normal lagega.
+
+Waiting hai, but no pressure. ✨"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOUR IMPORTANT THINGS
+     ============================================================ -->
+<section class="section" id="important-section">
+  <div class="section-inner glass reveal">
+    <img class="char-img small" data-char="foxHeart" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:32px',innerHTML:'🦊'}))">
+    <h2 class="heading" id="important-heading"></h2>
+    <div class="important-list" id="important-list"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CHAT
+     ============================================================ -->
+<section class="section" id="chat-section">
+  <div class="section-inner">
+    <h2 class="heading reveal">Panda &amp; Fox Discuss The Situation</h2>
+    <div class="chat-wrap" id="chat-wrap"></div>
+    <div class="big-shout" id="big-shout">OKAY, DIL SE SORRY 😭❤️🐼</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORGIVENESS
+     ============================================================ -->
+<section class="section" id="forgive-section">
+  <div class="section-inner">
+    <img class="char-img float-anim" data-char="pandaFlowers2" alt="Panda holding flowers" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback float-anim',innerHTML:'🐼🌸'}))">
+    <h2 class="heading" id="forgive-heading"></h2>
+
+    <div class="choice-row" id="choice-row" style="display:none;">
+      <button class="btn-yes" id="btn-yes">Haan, Maaf Kiya ❤️</button>
+      <button class="btn-no" id="btn-no">Abhi Bhi Gussa Hoon 😒</button>
+    </div>
+    <div class="no-msg" id="no-msg"></div>
+
+    <div id="forgive-result" style="width:100%; display:flex; flex-direction:column; align-items:center; gap:18px;"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL SECTION
+     ============================================================ -->
+<section class="section" id="final-section">
+  <div class="section-inner glass reveal" style="position:relative;">
+    <div style="display:flex; gap:14px; justify-content:center;">
+      <img class="char-img small" data-char="pandaHug2" alt="Panda" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:30px',innerHTML:'🐼'}))">
+      <img class="char-img small" data-char="foxHeart3" alt="Fox" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',style:'width:70px;height:70px;font-size:30px',innerHTML:'🦊'}))">
+    </div>
+    <h2 class="heading" id="final-heading"></h2>
+    <div class="body-text" id="final-body" style="text-align:center;"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     LATE MESSAGE — Isko Dekho
+     ============================================================ -->
+<section class="section" id="late-section">
+  <div class="section-inner glass reveal">
+    <img class="char-img" data-char="pandaWaiting" alt="Panda waiting" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'char-fallback',innerHTML:'🐼⏳'}))">
+    <h2 class="heading" id="late-heading"></h2>
+    <div class="body-text" id="late-body"></div>
+  </div>
+</section>
+
+<footer id="site-footer">
+  Made with 🐼 &amp; ❤️
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   CONFIG — replace with real asset URLs any time
+   ============================================================ */
+const CONFIG = {
+  // Leave receiverName EMPTY so the page never says a specific person's
+  // name — it works for anyone you send it to. Fill it in only if you
+  // want to personalize it with a name.
+  receiverName: "",
+  senderName: "",
+
+  // Shown at the very bottom of the page as a small credit line.
+  // Leave as "" to show just "Made with 🐼 & ❤️" with no brand name.
+  brandName: "",
+
+  // Soft, royalty-free (CC0, no attribution needed) instrumental track.
+  // Swap this anytime for a different song URL.
+  backgroundMusic: "https://files.catbox.moe/86gdgj.mp4",
+
+  // All character images are real, working, transparent-background GIFs
+  // (no more broken/placeholder stickers) — panda + fox only, as requested.
+  pandaSad:       "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzZ6cGNlNDMwZ3FoamViaWc0bmc1OWw2cGhnZGt4cGEwMTU4MnJqeiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/JF70qeolvPS0ph52ZY/giphy.gif",
+  pandaHeart:     "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzZ6cGNlNDMwZ3FoamViaWc0bmc1OWw2cGhnZGt4cGEwMTU4MnJqeiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/a8yQ78qONgObZ8nJHC/giphy.gif",
+  pandaFlowers:   "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzZ6cGNlNDMwZ3FoamViaWc0bmc1OWw2cGhnZGt4cGEwMTU4MnJqeiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/0EpxIHABGNp9xXx6Ai/giphy.gif",
+  pandaHug:       "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDhpMXpzMGZvMnhjeGRta2QzNnJic3h4czlyODhhajljZjRiMjFqeSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/mCG7tfIMx9HK3sXYmO/giphy.gif",
+  pandaCelebrate: "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbzZ6cGNlNDMwZ3FoamViaWc0bmc1OWw2cGhnZGt4cGEwMTU4MnJqeiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/n9uSaf3v1Xtl99Maec/giphy.gif",
+
+  foxCute:      "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDVqaTFienU2OHE0Mm85Nnh0anAxMzVjZjd4ajRmZGcwM3BnN210NiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/71OVKEBQsfInOpo2CN/giphy.gif",
+  foxSad:       "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDJ5a3lnZ3o4c3ByM3pqMzZpbzJzZHkzNDlzbTJ6eXJlZjFmbGVxcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/NYTdrdMCIjHJmZqdg5/giphy.gif",
+  foxHeart:     "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDVqaTFienU2OHE0Mm85Nnh0anAxMzVjZjd4ajRmZGcwM3BnN210NiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/qzUhz13M1IMhzVruV8/200.gif",
+  foxCelebrate: "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDVqaTFienU2OHE0Mm85Nnh0anAxMzVjZjd4ajRmZGcwM3BnN210NiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/q4G4j13jzqiRoz9ChS/giphy.gif",
+
+  // extra unique gifs so the SAME gif never appears twice on the page
+  pandaSad2:      "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExa2Q0ZHo2dmIyOHl0d2RiZDBra3E5YTNtMGwzb2N0a2Y2bHg1NDNzbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/txY42AvgOB0gS7L2Qg/giphy.gif",
+  pandaFlowers2:  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm8zbXM0bXN2Y3l2MGxyeXFiN2NwMTJpa21oeDdndmhzMWNubmdpZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/x00c6sgrI39y9xlDAs/giphy.gif",
+  pandaHug2:      "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDhzZTc1OWl5MjhrMGRjdnZ5NHl0bjc0bDR1dDFjeWkzaHV6YWJzaCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/U3TwCOuG8pipyr00nF/giphy.gif",
+  foxCute2:       "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm5sZzJ6a2E2YTEwcDhhM2FlZ25oM295aDAxcGowa3NvM2VwaTFuNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/vmQ3wUu89umOS8Tr67/giphy.gif",
+  foxHeart2:      "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDdjeTlpcWJxcGg4c2djdzZoazYzazNwMWI0YmdvZWJvZ3o3aXh4dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/Q7QoHwlvCLpJdRPzt2/giphy.gif",
+  foxHeart3:      "https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzJnazNlem1iMjBkaWp5bnltYzZxcGN3bGlpcTI5Z3ExNmFuNHVjNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/E2bFEkKBHNrJNol8ww/giphy.gif",
+  pandaWaiting:   "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExbnFqdHF4bnZuMXVzeHYyYWV5Y3VweWdqOG82bHEzeDdudjR1d3Z4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/YpxbIjWXTEiPSBYy4m/giphy.gif"
+};
+
+// set page title + footer credit dynamically from CONFIG
+document.getElementById("page-title").textContent = CONFIG.receiverName
+  ? "For " + CONFIG.receiverName + " 🐼❤️"
+  : "For You 🐼❤️";
+document.getElementById("site-footer").innerHTML = CONFIG.brandName
+  ? `Made with 🐼 &amp; ❤️ on <strong>${CONFIG.brandName}</strong>`
+  : `Made with 🐼 &amp; ❤️`;
+
+// wire up every [data-char] image; if URL is a placeholder, trigger fallback deliberately
+document.querySelectorAll("img[data-char]").forEach(img=>{
+  const key = img.getAttribute("data-char");
+  const url = CONFIG[key];
+  if(!url || url.startsWith("PASTE_")){
+    img.dispatchEvent(new Event("error"));
+  } else {
+    img.src = url;
+  }
+});
+
+/* ============================================================
+   REUSABLE WORD-BY-WORD TYPING ENGINE
+   ============================================================ */
+function splitTokens(text){
+  // splits into words while keeping trailing punctuation attached
+  return text.split(/\s+/).filter(Boolean);
+}
+
+function pauseFor(word){
+  if(/\.\.\.$/.test(word)) return 520;
+  if(/[.!?]$/.test(word)) return 380;
+  if(/,$/.test(word)) return 200;
+  return 0;
+}
+
+/**
+ * typeWords(element, text, options)
+ * Renders `text` into `element` one word at a time.
+ * text may contain \n\n for paragraph breaks (rendered as separate <span class="type-line">).
+ * Returns a Promise that resolves when typing completes.
+ */
+function typeWords(element, text, options={}){
+  const speed = options.speed || 110;
+  const paragraphPause = options.paragraphPause ?? 600;
+  const runOnceKey = options.runOnceKey;
+
+  if(runOnceKey){
+    if(element.dataset.typed === runOnceKey){
+      return Promise.resolve(); // already typed, do nothing
+    }
+  }
+
+  // cancellation protection: give this run a token id
+  const token = Symbol();
+  element._typeToken = token;
+  element.innerHTML = "";
+
+  const cursor = document.createElement("span");
+  cursor.className = "type-cursor";
+  cursor.textContent = "|";
+  cursor.setAttribute("aria-hidden","true");
+
+  const paragraphs = text.split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean);
+
+  return new Promise(resolve=>{
+    let pIndex = 0;
+
+    function typeParagraph(){
+      if(element._typeToken !== token) return; // cancelled
+      if(pIndex >= paragraphs.length){
+        cursor.remove();
+        if(runOnceKey) element.dataset.typed = runOnceKey;
+        resolve();
+        return;
+      }
+      const line = document.createElement("span");
+      line.className = "type-line";
+      element.appendChild(line);
+      line.appendChild(cursor);
+
+      const words = splitTokens(paragraphs[pIndex]);
+      let wIndex = 0;
+
+      function typeWord(){
+        if(element._typeToken !== token) return; // cancelled mid-run
+        if(wIndex >= words.length){
+          pIndex++;
+          setTimeout(typeParagraph, paragraphPause);
+          return;
+        }
+        const w = document.createElement("span");
+        w.className = "word";
+        w.textContent = words[wIndex] + (wIndex < words.length-1 ? " " : "");
+        line.insertBefore(w, cursor);
+        // force reflow then show, for a clean transition
+        requestAnimationFrame(()=> requestAnimationFrame(()=> w.classList.add("show")));
+
+        const extra = pauseFor(words[wIndex]);
+        wIndex++;
+        setTimeout(typeWord, speed + extra);
+      }
+      typeWord();
+    }
+    typeParagraph();
+  });
+}
+
+function wait(ms){ return new Promise(r=>setTimeout(r,ms)); }
+
+/* ============================================================
+   INTERSECTION OBSERVER — trigger-once section typing
+   ============================================================ */
+const triggeredSections = new Set();
+function onceVisible(el, callback, threshold=0.35){
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !triggeredSections.has(el)){
+        triggeredSections.add(el);
+        callback();
+        obs.unobserve(el);
+      }
+    });
+  }, {threshold});
+  obs.observe(el);
+}
+
+/* generic scroll reveal (non-typing elements) */
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add("in");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold:0.2});
+document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+
+/* ============================================================
+   PARTICLES (hearts + sparkles), reduced on low power / mobile
+   ============================================================ */
+function initParticles(){
+  const layer = document.getElementById("particle-layer");
+  const isSmall = window.innerWidth < 640;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce) return;
+  const count = isSmall ? 12 : 22;
+  const glyphs = ["♥","✦","·","♡","✧"];
+  for(let i=0;i<count;i++){
+    const p = document.createElement("span");
+    p.className = "particle";
+    p.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    const size = 10 + Math.random()*16;
+    const isGold = Math.random() > 0.55;
+    p.style.left = Math.random()*100 + "vw";
+    p.style.fontSize = size + "px";
+    if(isGold) p.style.color = "var(--gold)";
+    p.style.setProperty("--drift", (Math.random()*80-40)+"px");
+    p.style.animationDuration = (10 + Math.random()*10) + "s";
+    p.style.animationDelay = (Math.random()*10) + "s";
+    p.style.filter = `blur(${Math.random()>0.7?1:0}px)`;
+    layer.appendChild(p);
+  }
+}
+initParticles();
+
+/* ============================================================
+   SCROLL PROGRESS + BACK TO TOP
+   ============================================================ */
+const progressBar = document.getElementById("progress-bar");
+const backToTop = document.getElementById("back-to-top");
+window.addEventListener("scroll", ()=>{
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = scrolled + "%";
+  backToTop.classList.toggle("show", h.scrollTop > 500);
+}, {passive:true});
+backToTop.addEventListener("click", ()=> window.scrollTo({top:0, behavior:"smooth"}));
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+async function runLoader(){
+  const loaderText = document.getElementById("loader-text");
+  await typeWords(loaderText, "Ek chhota sa message taiyar ho raha hai, bas do second... 🐼❤️", {speed:95, runOnceKey:"loader"});
+  await wait(600);
+  document.getElementById("loader").classList.add("hide");
+  startHero();
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+async function startHero(){
+  const heading = document.getElementById("hero-heading");
+  const body = document.getElementById("hero-body");
+  const cta = document.getElementById("hero-cta");
+
+  await typeWords(heading, "Wait, Just One Second 🥺", {speed:110, runOnceKey:"hero-h"});
+  await wait(300);
+  await typeWords(body,
+    "Shayad tum abhi bhi gussa ho, aur honestly uski wajah bhi hai.\n\nMain bas normal sa ek sorry nahi bhejna chahta tha.\n\nIsliye thoda alag tareeke se keh raha hoon. 🐼💗",
+    {speed:110, paragraphPause:450, runOnceKey:"hero-b"});
+  cta.classList.add("show");
+}
+
+document.getElementById("hero-cta").addEventListener("click", (e)=>{
+  heartBurstAt(e.clientX, e.clientY, 6);
+  const btn = e.currentTarget;
+  btn.style.transform = "scale(.95)";
+  setTimeout(()=>{ btn.style.transform = ""; }, 150);
+  document.getElementById("panda-msg").scrollIntoView({behavior:"smooth"});
+});
+
+/* ============================================================
+   PANDA MESSAGE (scroll-triggered)
+   ============================================================ */
+onceVisible(document.getElementById("panda-msg"), async ()=>{
+  await typeWords(document.getElementById("panda-heading"), "Just Two Minutes, Please 🐼❤️", {runOnceKey:"panda-h"});
+  await wait(250);
+  await typeWords(document.getElementById("panda-body"),
+    "Main jaanta hoon sirf 'sorry' bol dena har baar kaafi nahi hota.\n\nPar tum mere liye kaafi important ho, aur ye baat pehle bhi hai.\n\nIsliye ego side mein rakhkar, seedha dil se keh raha hoon. ❤️",
+    {paragraphPause:450, runOnceKey:"panda-b"});
+});
+
+/* ============================================================
+   ENVELOPE SECTION
+   ============================================================ */
+onceVisible(document.getElementById("envelope-section"), async ()=>{
+  await typeWords(document.getElementById("env-heading"), "A Letter I Wanted You To Read 💌", {runOnceKey:"env-h"});
+  await wait(150);
+  await typeWords(document.getElementById("env-sub"), "Tap the envelope to open it.", {runOnceKey:"env-s"});
+}, 0.2);
+
+const envelopeWrap = document.getElementById("envelope-wrap");
+const envelope = document.getElementById("envelope");
+let envelopeOpened = false;
+
+function openEnvelope(){
+  if(envelopeOpened) return;
+  envelopeOpened = true;
+  envelope.classList.add("shake");
+  setTimeout(()=>{
+    envelope.classList.remove("shake");
+    envelope.classList.add("open");
+  }, 400);
+
+  setTimeout(async ()=>{
+    const paper = document.getElementById("letter-paper");
+    paper.classList.add("show");
+    await wait(300);
+    await typeWords(document.getElementById("letter-body"),
+`Suno...
+
+Jo hua uske baare mein soch raha tha, aur laga ki likh kar keh dena zyada sahi rahega.
+
+Tumhara gussa hona genuinely samajh aata hai. Koi random reaction nahi tha, wajah thi.
+
+Main yahan koi safai nahi de raha, na hi apni side justify kar raha hoon.
+
+Bas ye keh raha hoon ki jo bhi hua uska matlab ye nahi tha ki tum mere liye important nahi ho.
+
+Kabhi kabhi hum us waqt cheezein utni seriously nahi lete jitni saamne wale ke liye woh hoti hain.
+
+Aur baad mein realise hota hai ki galti kahan hui.
+
+Mujhe pata hai sirf words se sab kuch theek nahi ho jata.
+
+Toh main tumse ye promise nahi kar raha ki sab kuch instantly badal jayega.
+
+Bas itna keh sakta hoon ki isko lightly nahi le raha, aur behtar karne ki koshish karunga.
+
+Tumhe manane ki jaldi bhi nahi hai mujhe.
+
+Agar time chahiye tumhe process karne ke liye, toh woh bhi bilkul theek hai.
+
+Main bas nahi chahta tha ki chup reh jaayein aur baat waise hi reh jaaye.
+
+Tumhare saath jo bhi hai, wo mere liye kisi ek galti se zyada bada hai.
+
+Iska matlab ye nahi ki galti chhoti thi, bas itna hai ki main isse aise chhodna nahi chahta.
+
+Jab bhi tumhe theek lage, baat kar lena. Main yahin hoon. 🐼🤍`,
+      {speed:105, paragraphPause:520, runOnceKey:"letter"});
+  }, 950);
+}
+envelopeWrap.addEventListener("click", openEnvelope);
+envelopeWrap.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter" || e.key === " "){ e.preventDefault(); openEnvelope(); }
+});
+
+/* ============================================================
+   FOUR CUTE CARDS (sequential entrance + typed text)
+   ============================================================ */
+onceVisible(document.getElementById("cards-section"), async ()=>{
+  const cards = Array.from(document.querySelectorAll(".mini-card"));
+  for(const card of cards){
+    card.classList.add("in");
+    const title = card.querySelector(".card-title");
+    const sub = card.querySelector(".card-sub");
+    await typeWords(title, title.dataset.text, {speed:95, runOnceKey:"card-t-"+card.dataset.idx});
+    await typeWords(sub, sub.dataset.text, {speed:90, runOnceKey:"card-s-"+card.dataset.idx});
+    await wait(200);
+  }
+}, 0.15);
+
+/* ============================================================
+   FOUR IMPORTANT THINGS
+   ============================================================ */
+onceVisible(document.getElementById("important-section"), async ()=>{
+  await typeWords(document.getElementById("important-heading"), "A Few Things I Want You To Know ❤️", {runOnceKey:"imp-h"});
+  await wait(250);
+  const list = document.getElementById("important-list");
+  const lines = [
+    "Tumhari baat important hai, chahe mujhe usi waqt samajh aaye ya thodi der baad. ❤️",
+    "Tumhara gussa ignore karna koi solution nahi hai, ye main samajh chuka hoon.",
+    "Chhote messages bhi notice hote hain, chahe reply turant na karun. 🫶",
+    "Tumhari hasi genuinely miss ho rahi hai, ye jhooth nahi hai. 🥺",
+    "Har chhota pal jo saath bita hai, wo yaad rehta hai. 🐼🦊",
+    "Aur tum jab normal ho jaati ho, mera din bhi thoda behtar lagta hai. 💗"
+  ];
+  for(let i=0;i<lines.length;i++){
+    const row = document.createElement("div");
+    row.className = "important-item";
+    const dot = document.createElement("span");
+    dot.className = "important-dot";
+    const textSpan = document.createElement("span");
+    row.appendChild(dot);
+    row.appendChild(textSpan);
+    list.appendChild(row);
+    await typeWords(textSpan, lines[i], {speed:100, runOnceKey:"imp-"+i});
+    await wait(350);
+  }
+});
+
+/* ============================================================
+   PANDA + FOX CHAT
+   ============================================================ */
+onceVisible(document.getElementById("chat-section"), async ()=>{
+  await wait(400);
+  const wrap = document.getElementById("chat-wrap");
+
+  async function sendMessage(who, text){
+    const row = document.createElement("div");
+    row.className = "chat-row " + (who === "fox" ? "right" : "left");
+    const avatar = document.createElement("div");
+    avatar.className = "chat-avatar";
+    avatar.textContent = who === "fox" ? "🦊" : "🐼";
+    const dots = document.createElement("div");
+    dots.className = "typing-dots";
+    dots.innerHTML = "<span></span><span></span><span></span>";
+    row.appendChild(avatar);
+    row.appendChild(dots);
+    wrap.appendChild(row);
+    requestAnimationFrame(()=> row.classList.add("in"));
+
+    await wait(700);
+    const bubble = document.createElement("div");
+    bubble.className = "chat-bubble";
+    row.replaceChild(bubble, dots);
+    await typeWords(bubble, text, {speed:90, runOnceKey:"chat-"+wrap.children.length});
+    await wait(350);
+  }
+
+  await sendMessage("panda", "Bhai, abhi bhi reply nahi aaya 😰");
+  await sendMessage("fox", "Hmm... lagta hai case thoda serious hai 😅");
+  await sendMessage("panda", "Ab main kya karun yaar");
+  await sendMessage("fox", "Ek baar aur, par is baar dhang se bol 😂");
+  await sendMessage("panda", "Matlab? Maine dhang se hi bola tha na 😭");
+  await sendMessage("fox", "Sorry bolna alag baat hai, samajhna alag 🦊");
+  await sendMessage("panda", "Ye tu itna wise kab se ho gaya");
+  await sendMessage("fox", "Bas tere jaisi galtiyan dekh dekh ke 😂❤️");
+  await sendMessage("panda", "Chal theek hai, seriously try karta hoon");
+  await sendMessage("fox", "Aur haan, jaldi mat karna use manane ki");
+  await sendMessage("panda", "Time dena padega, samajh gaya");
+  await sendMessage("fox", "Bilkul. Bas genuine reh, natak nahi 🙏");
+  await sendMessage("panda", "Agar phir bhi baat na kare toh? 😰");
+  await sendMessage("fox", "Toh main hoon na, saath mein figure out karenge 💪");
+  await wait(300);
+  document.getElementById("big-shout").classList.add("in");
+  heartBurstAt(window.innerWidth/2, window.innerHeight/2, 10);
+}, 0.55);
+
+/* ============================================================
+   FORGIVENESS SECTION
+   ============================================================ */
+onceVisible(document.getElementById("forgive-section"), async ()=>{
+  await typeWords(document.getElementById("forgive-heading"), "So... Will You Forgive Me? 🥺🌸", {runOnceKey:"forgive-h"});
+  document.getElementById("choice-row").style.display = "flex";
+}, 0.25);
+
+/* --- funny NO button that dodges up to 3 times --- */
+const btnNo = document.getElementById("btn-no");
+const choiceRow = document.getElementById("choice-row");
+const noMsg = document.getElementById("no-msg");
+let noAttempts = 0;
+const noLines = ["Arey ruko 😭", "Itna bhi gussa? 🐼🥺", "Chalo ek try toh sahi 😂❤️"];
+
+function dodge(){
+  const rowRect = choiceRow.getBoundingClientRect();
+  const btnRect = btnNo.getBoundingClientRect();
+  const maxX = Math.max(0, rowRect.width - btnRect.width - 8);
+  const dx = (Math.random()*maxX) - (btnNo.offsetLeft||0)*0.2;
+  const clampedDx = Math.max(-rowRect.width*0.3, Math.min(rowRect.width*0.3, dx));
+  const dy = (Math.random()*20 - 10);
+  btnNo.style.transform = `translate(${clampedDx}px, ${dy}px)`;
+}
+
+async function handleNoAttempt(e){
+  if(noAttempts < 3){
+    e.preventDefault();
+    dodge();
+    await typeWords(noMsg, noLines[noAttempts], {speed:90});
+    noAttempts++;
+    if(noAttempts >= 3){
+      // settle back into place and become normally clickable
+      setTimeout(()=>{ btnNo.style.transform = ""; }, 400);
+    }
+    return;
+  }
+  showNoResponse();
+}
+btnNo.addEventListener("click", handleNoAttempt);
+btnNo.addEventListener("touchstart", (e)=>{ /* allow tap without double firing */ }, {passive:true});
+
+document.getElementById("btn-yes").addEventListener("click", (e)=>{
+  showYesResponse(e);
+});
+
+function heartBurstAt(x,y,count=8){
+  const hearts = ["❤️","💗","💕","✨"];
+  for(let i=0;i<count;i++){
+    const h = document.createElement("span");
+    h.className = "burst-heart";
+    h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+    h.style.left = x+"px";
+    h.style.top = y+"px";
+    const angle = Math.random()*Math.PI*2;
+    const dist = 60 + Math.random()*90;
+    h.style.setProperty("--dx", Math.cos(angle)*dist+"px");
+    h.style.setProperty("--dy", (Math.sin(angle)*dist - 60)+"px");
+    h.style.setProperty("--rot", (Math.random()*240-120)+"deg");
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 1200);
+  }
+}
+
+function confettiBurst(count=36){
+  const glyphs = ["❤️","💗","💕","🌸","✨"];
+  const w = window.innerWidth;
+  for(let i=0;i<count;i++){
+    const c = document.createElement("span");
+    c.className = "confetti-piece";
+    c.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    c.style.left = Math.random()*w + "px";
+    c.style.top = "-30px";
+    c.style.setProperty("--dx", (Math.random()*160-80)+"px");
+    c.style.setProperty("--rot", (Math.random()*720-360)+"deg");
+    c.style.animationDelay = (Math.random()*0.4)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(), 2800);
+  }
+}
+
+async function showYesResponse(e){
+  choiceRow.style.display = "none";
+  noMsg.textContent = "";
+  if(e) heartBurstAt(e.clientX, e.clientY, 10);
+  confettiBurst(40);
+
+  const result = document.getElementById("forgive-result");
+  result.innerHTML = "";
+
+  const chars = document.createElement("div");
+  chars.style.display = "flex";
+  chars.style.gap = "14px";
+  chars.innerHTML = `<span style="font-size:44px;" class="float-anim">🐼</span><span style="font-size:44px;" class="float-anim">🦊</span>`;
+  result.appendChild(chars);
+
+  const yay = document.createElement("h2");
+  yay.className = "heading";
+  result.appendChild(yay);
+  await typeWords(yay, "Okayyy! 🥹❤️🐼", {speed:100});
+  await wait(300);
+
+  const body = document.createElement("div");
+  body.className = "body-text";
+  result.appendChild(body);
+  await typeWords(body,
+    "Thank you, sach mein. ❤️\n\nAb bas ek smile chahiye tumse.\n\nGussa wali tum se zyada, smile wali tum pasand hai mujhe. 😂🐼💗",
+    {paragraphPause:450});
+  await wait(300);
+
+  const successRow = document.createElement("div");
+  successRow.style.display = "flex";
+  successRow.style.flexDirection = "column";
+  successRow.style.alignItems = "center";
+  successRow.style.gap = "12px";
+  successRow.innerHTML = `<div class="check-wrap"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>`;
+  const tag = document.createElement("p");
+  tag.className = "body-text";
+  successRow.appendChild(tag);
+  result.appendChild(successRow);
+  await typeWords(tag, "Theek hai, sab sort ho gaya ✅😂❤️", {speed:90});
+}
+
+async function showNoResponse(){
+  choiceRow.style.display = "none";
+  noMsg.textContent = "";
+
+  const result = document.getElementById("forgive-result");
+  result.innerHTML = "";
+
+  const chars = document.createElement("div");
+  chars.style.display = "flex";
+  chars.style.gap = "14px";
+  chars.innerHTML = `<span style="font-size:40px;">🐼</span><span style="font-size:40px;">🦊</span>`;
+  result.appendChild(chars);
+
+  const body = document.createElement("div");
+  body.className = "body-text";
+  result.appendChild(body);
+  await typeWords(body,
+    "Theek hai, samajh sakta hoon. 🥺\n\nForce nahi karunga tumhe.\n\nTumhara gussa valid hai, usko rush nahi karna chahta.\n\nJab ready ho, tab baat kar lena.\n\nMain yahin hoon. 🐼❤️",
+    {paragraphPause:480});
+  await wait(300);
+
+  const chanceBtn = document.createElement("button");
+  chanceBtn.className = "btn-yes";
+  chanceBtn.textContent = "Theek Hai, Ek Chance Deti Hoon ❤️";
+  chanceBtn.addEventListener("click", (e)=>{
+    result.innerHTML = "";
+    showYesResponse(e);
+  });
+  result.appendChild(chanceBtn);
+}
+
+/* ============================================================
+   FINAL SECTION
+   ============================================================ */
+onceVisible(document.getElementById("final-section"), async ()=>{
+  await typeWords(document.getElementById("final-heading"), "For You ❤️", {runOnceKey:"final-h"});
+  await wait(300);
+  await typeWords(document.getElementById("final-body"),
+`Har connection mein kabhi hasi hoti hai, kabhi argument, kabhi misunderstanding.
+
+Lekin jab koi genuinely important ho, toh ego ko har baat se bada bana dena sahi nahi lagta.
+
+Tumhare saath jo bhi hai, uski wajah se hi ye sab likhne baitha.
+
+Baat karna miss ho raha hai, aur din normal se thoda kam feel hota hai bina us baat ke.
+
+So, once again...
+
+Main genuinely sorry hoon. 🥺❤️🐼
+
+Aur jab bhi mann kare, baat kar lena.
+
+Waise bhi, thodi si smile achhi lagegi tumpe. 😊${CONFIG.senderName ? "\n\n— " + CONFIG.senderName : ""}`,
+    {speed:105, paragraphPause:480, runOnceKey:"final-b"});
+}, 0.2);
+
+/* ============================================================
+   LATE MESSAGE — Isko Dekho
+   ============================================================ */
+onceVisible(document.getElementById("late-section"), async ()=>{
+  await typeWords(document.getElementById("late-heading"), "One More Thing 👀❤️", {runOnceKey:"late-h"});
+  await wait(300);
+  await typeWords(document.getElementById("late-body"),
+`Ek chhoti si baat aur.
+
+Ye sab banane aur bhejne mein jitna time laga, wo bhi sahi nahi tha.
+
+Ismein banane wala time toh tha hi, par delay ko excuse ki tarah use nahi kar raha.
+
+Tumhe wait karwana, wo bhi jab tum pehle se upset ho, galat tha mera.
+
+Bas itna chahta hoon ki jo bhi likha hai, tum use poora padh lo.
+
+Late sahi, par jo bhi isme hai, wo genuine hai. 🐼❤️`,
+    {speed:105, paragraphPause:480, runOnceKey:"late-b"});
+}, 0.35);
+
+/* ============================================================
+   MUSIC CONTROL (no autoplay)
+   ============================================================ */
+const musicBtn = document.getElementById("music-btn");
+const audio = document.getElementById("bg-audio");
+let musicReady = false;
+let isPlaying = false;
+
+function ensureAudioSrc(){
+  if(!musicReady && CONFIG.backgroundMusic && !CONFIG.backgroundMusic.startsWith("PASTE_")){
+    audio.src = CONFIG.backgroundMusic;
+    musicReady = true;
+  }
+}
+
+musicBtn.addEventListener("click", ()=>{
+  ensureAudioSrc();
+  if(!musicReady){
+    musicBtn.textContent = "🎵";
+    musicBtn.setAttribute("aria-label","Add a music URL in CONFIG to enable playback");
+    return;
+  }
+  if(isPlaying){
+    audio.pause();
+    isPlaying = false;
+    musicBtn.textContent = "▶";
+    musicBtn.classList.remove("playing");
+    musicBtn.setAttribute("aria-pressed","false");
+  } else {
+    audio.play().catch(()=>{});
+    isPlaying = true;
+    musicBtn.textContent = "⏸";
+    musicBtn.classList.add("playing");
+    musicBtn.setAttribute("aria-pressed","true");
+  }
+});
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+runLoader();
+
+})();
+</script>
+</body>
+</html>
